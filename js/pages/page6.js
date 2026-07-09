@@ -167,6 +167,14 @@ const PDF_SECTIONS = [
   "Encerramento",
 ];
 
+const EDNEY_BIO = [
+  "Formado em Marketing.",
+  "Especialista em Marketing e Vendas no setor automotivo, com mais de 20 anos de experiência no mercado.",
+  "Criador do Departamento de Vendas Web e House de Marketing e Eventos da Automob, gerenciando 17 marcas e mais de 70 concessionárias.",
+  "Foi peça-chave em uma das startups pioneiras que revolucionaram o mercado de compra e venda de veículos no Brasil, com crescimento de 25% nas vendas ao mês e conversão de 70% de leads em oportunidades concretas.",
+  "Fundador do projeto que transforma eventos em experiências de alto impacto.",
+];
+
 function buildPdfTemplate(ctx) {
   const fragment = document.createDocumentFragment();
   const theme = ctx.company.theme;
@@ -208,9 +216,10 @@ function pdfPage({ className = "", vars, motifUrl, ctx, num, total, chrome = tru
       </div>`
     : "";
 
-  const watermark = `<div class="pdf-page__watermark">${String(num).padStart(2, "0")}</div>`;
+  const watermark = chrome ? `<div class="pdf-page__watermark">${String(num).padStart(2, "0")}</div>` : "";
+  const spine = chrome ? `<div class="pdf-page__spine"></div>` : "";
 
-  div.innerHTML = `${watermark}${topmark}<div class="pdf-page__body ${className}">${bodyHtml}</div>${footer}`;
+  div.innerHTML = `${watermark}${spine}${topmark}<div class="pdf-page__body ${className}">${bodyHtml}</div>${footer}`;
   return div;
 }
 
@@ -224,6 +233,9 @@ function pdfCover({ ctx, vars, motifUrl, num, total }) {
     total,
     chrome: false,
     bodyHtml: `
+      <div class="pdf-cover__bracket pdf-cover__bracket--tl"></div>
+      <div class="pdf-cover__bracket pdf-cover__bracket--br"></div>
+      <div class="pdf-cover__dotgrid">${"<span></span>".repeat(8)}</div>
       <div class="pdf-cover__eyebrow">Grupo GPV apresenta</div>
       <div class="pdf-cover__logos">
         <img class="pdf-cover__logo" src="${ctx.company.logo}" alt="${ctx.company.name}" />
@@ -253,8 +265,10 @@ function pdfEdneyOne({ ctx, vars, motifUrl, num, total }) {
         <div class="pdf-page__eyebrow">Grupo GPV</div>
         <div class="pdf-page__title">Edney Ulisses</div>
         <div class="pdf-divider"></div>
-        <p class="pdf-edney__text">Fundador e especialista à frente das soluções do Grupo GPV, referência em aceleração comercial no mercado brasileiro.</p>
-        <div class="pdf-edney__brands">
+        <ul class="pdf-edney__bio-list">
+          ${EDNEY_BIO.map((item) => `<li>${item}</li>`).join("")}
+        </ul>
+        <div class="pdf-edney__brands pdf-edney__brands--compact">
           ${ctx.allBrandLogos.map((b) => `<img src="${b.logo}" alt="${b.name}" />`).join("")}
         </div>
       </div>
@@ -280,8 +294,9 @@ function pdfEdneyTwo({ ctx, vars, motifUrl, num, total }) {
         <div class="pdf-page__title">Autoridade Comercial</div>
         <div class="pdf-divider"></div>
         <p class="pdf-edney__text">Trajetória consolidada em treinamento, consultoria e desenvolvimento comercial para equipes de alta performance, com atuação direta na aceleração de resultados das marcas do Grupo GPV.</p>
+        <div class="pdf-edney__tags-label">Especialidades</div>
         <div class="pdf-edney__tags">
-          ${["Treinamento", "Consultoria", "Desenvolvimento comercial", "Alta performance"].map((t) => `<span class="pdf-edney__tag">${t}</span>`).join("")}
+          ${["Treinamento", "Consultoria", "Desenvolvimento comercial", "Alta performance"].map((t) => `<span class="pdf-edney__tag"><span class="pdf-edney__tag-dot"></span>${t}</span>`).join("")}
         </div>
       </div>
     `,
@@ -342,13 +357,14 @@ function pdfInvestment({ ctx, vars, motifUrl, num, total }) {
       <div class="pdf-divider"></div>
       <div class="pdf-investment">
         <div class="pdf-investment__hero">
+          <div class="pdf-investment__badge">Investimento total</div>
           <div class="pdf-investment__value">${com.proposalValue.formatted}</div>
-          <div class="pdf-investment__value-label">valor total do investimento</div>
+          <div class="pdf-investment__value-label">para o escopo descrito nesta proposta</div>
         </div>
         ${com.notes ? `<div class="pdf-investment__notes">${com.notes}</div>` : ""}
         <div class="pdf-investment__stats">
-          ${com.deliveryDeadline ? `<div><div class="pdf-investment__stat-label">Prazo de entrega</div><div class="pdf-investment__stat-value">${com.deliveryDeadline}</div></div>` : ""}
-          <div><div class="pdf-investment__stat-label">Validade da proposta</div><div class="pdf-investment__stat-value">${com.proposalValidity}</div></div>
+          ${com.deliveryDeadline ? `<div class="pdf-investment__stat"><div class="pdf-investment__stat-icon"></div><div class="pdf-investment__stat-label">Prazo de entrega</div><div class="pdf-investment__stat-value">${com.deliveryDeadline}</div></div>` : ""}
+          <div class="pdf-investment__stat"><div class="pdf-investment__stat-icon"></div><div class="pdf-investment__stat-label">Validade da proposta</div><div class="pdf-investment__stat-value">${com.proposalValidity}</div></div>
         </div>
       </div>
     `,
@@ -365,16 +381,20 @@ function pdfClosing({ ctx, vars, motifUrl, num, total }) {
     num,
     total,
     bodyHtml: `
+      <div class="pdf-closing__quote">&rdquo;</div>
       <div class="pdf-page__eyebrow">Encerramento</div>
       <div class="pdf-page__title">Vamos acelerar seus resultados</div>
       <div class="pdf-divider"></div>
       <div class="pdf-closing__thanks">Agradecemos a oportunidade de apresentar esta proposta. Seguimos à disposição para esclarecer qualquer detalhe.</div>
-      <div class="pdf-closing__issuer">
-        <strong>${issuer.name}</strong>
-        <span>${issuer.role}</span>
-        <span>${issuer.phone} &middot; ${issuer.email}</span>
+      <div class="pdf-closing__signature-card">
+        <div class="pdf-closing__avatar">${(issuer.name || "?").trim().charAt(0).toUpperCase()}</div>
+        <div class="pdf-closing__issuer">
+          <strong>${issuer.name}</strong>
+          <span>${issuer.role}</span>
+          <span>${issuer.phone} &middot; ${issuer.email}</span>
+        </div>
       </div>
-      <div class="pdf-closing__validity">Válida por <strong>${ctx.commercial.proposalValidity}</strong></div>
+      <div class="pdf-closing__validity">Proposta válida por <strong>${ctx.commercial.proposalValidity}</strong></div>
     `,
   });
 }

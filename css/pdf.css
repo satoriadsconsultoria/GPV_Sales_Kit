@@ -54,6 +54,17 @@
   user-select: none;
 }
 
+.pdf-page__spine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 7px;
+  background: var(--pdf-accent, #5BBFC8);
+  opacity: 0.75;
+  z-index: 1;
+}
+
 .pdf-topmark {
   position: absolute;
   top: 40px;
@@ -153,18 +164,61 @@
   display: flex;
   align-items: center;
   gap: 52px;
-  margin-bottom: 44px;
+  margin-bottom: 48px;
 }
 
 .pdf-cover__logo,
 .pdf-cover__client-logo {
-  height: 156px;
-  width: 268px;
+  height: 190px;
+  width: 320px;
   object-fit: contain;
-  padding: 22px 28px;
-  border-radius: 16px;
+  padding: 26px 32px;
+  border-radius: 18px;
   box-sizing: border-box;
-  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.34);
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.36);
+}
+
+/* Elementos decorativos da capa */
+.pdf-cover__bracket {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-color: var(--pdf-accent, #5BBFC8);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0.85;
+}
+
+.pdf-cover__bracket--tl {
+  top: 46px;
+  left: 46px;
+  border-top-width: 3px;
+  border-left-width: 3px;
+}
+
+.pdf-cover__bracket--br {
+  bottom: 46px;
+  right: 46px;
+  border-bottom-width: 3px;
+  border-right-width: 3px;
+}
+
+.pdf-cover__dotgrid {
+  position: absolute;
+  top: 64px;
+  right: 70px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+}
+
+.pdf-cover__dotgrid span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pdf-accent, #5BBFC8);
+  opacity: 0.55;
+  display: block;
 }
 
 .pdf-cover__logo {
@@ -270,11 +324,45 @@
   text-align: justify;
 }
 
+.pdf-edney__bio-list {
+  list-style: none;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--pdf-text, #ffffff);
+}
+
+.pdf-edney__bio-list li {
+  position: relative;
+  padding: 4px 0 4px 22px;
+  text-align: justify;
+}
+
+.pdf-edney__bio-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 13px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pdf-accent, #5BBFC8);
+}
+
+.pdf-edney__tags-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--pdf-accent, #5BBFC8);
+  margin-top: 30px;
+  margin-bottom: 4px;
+}
+
 .pdf-edney__tags {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
-  margin-top: 32px;
+  margin-top: 14px;
 }
 
 .pdf-edney__tag {
@@ -282,7 +370,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: 46px;
+  height: 48px;
   font-size: 13px;
   font-weight: 600;
   padding: 0 16px;
@@ -293,11 +381,28 @@
   box-sizing: border-box;
 }
 
+.pdf-edney__tag-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--pdf-accent, #5BBFC8);
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
 .pdf-edney__brands {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 14px;
   margin-top: 36px;
+}
+
+.pdf-edney__brands--compact {
+  margin-top: 20px;
+}
+
+.pdf-edney__brands--compact img {
+  height: 50px;
 }
 
 .pdf-edney__brands img {
@@ -322,36 +427,54 @@
 }
 
 .pdf-scope__section {
-  margin-bottom: 26px;
+  margin-bottom: 34px;
   break-inside: avoid;
 }
 
 .pdf-scope__section h4 {
-  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--pdf-accent, #5BBFC8);
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   font-weight: 700;
 }
 
+.pdf-scope__section h4::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  background: var(--pdf-accent, #5BBFC8);
+  opacity: 0.85;
+}
+
 .pdf-scope__list {
-  font-size: 16px;
-  line-height: 1.85;
+  font-size: 17px;
+  line-height: 1.7;
   text-align: justify;
 }
 
 .pdf-scope__list li {
-  padding: 5px 0 5px 20px;
+  padding: 10px 0 10px 26px;
+  margin-bottom: 4px;
   position: relative;
   break-inside: avoid;
 }
 
 .pdf-scope__list li::before {
-  content: "—";
+  content: "";
   position: absolute;
-  left: 0;
-  color: var(--pdf-accent, #5BBFC8);
+  left: 2px;
+  top: 19px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pdf-accent, #5BBFC8);
 }
 
 /* Investimento */
@@ -363,14 +486,28 @@
 }
 
 .pdf-investment__hero {
+  position: relative;
   display: flex;
   align-items: flex-end;
-  gap: 24px;
-  margin-bottom: 40px;
+  gap: 26px;
+  margin-bottom: 46px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.pdf-investment__badge {
+  position: absolute;
+  top: -14px;
+  left: 0;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pdf-accent, #5BBFC8);
 }
 
 .pdf-investment__value {
-  font-size: 84px;
+  font-size: 96px;
   font-weight: 800;
   color: var(--pdf-accent, #5BBFC8);
   line-height: 1;
@@ -378,27 +515,45 @@
 }
 
 .pdf-investment__value-label {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--pdf-muted, #A5A09C);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .pdf-investment__notes {
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--pdf-text, #fff);
-  max-width: 720px;
-  margin-bottom: 40px;
-  padding: 20px 26px;
+  max-width: 760px;
+  margin-bottom: 44px;
+  padding: 22px 28px;
   text-align: justify;
   border-left: 3px solid var(--pdf-accent, #5BBFC8);
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 0 12px 12px 0;
+  border-radius: 0 14px 14px 0;
 }
 
 .pdf-investment__stats {
   display: flex;
-  gap: 64px;
+  gap: 28px;
+}
+
+.pdf-investment__stat {
+  flex: 1;
+  max-width: 260px;
+  padding: 24px 26px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.pdf-investment__stat-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--pdf-accent, #5BBFC8);
+  opacity: 0.85;
+  margin-bottom: 16px;
 }
 
 .pdf-investment__stat-label {
@@ -406,12 +561,12 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--pdf-muted, #A5A09C);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-weight: 600;
 }
 
 .pdf-investment__stat-value {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
 }
 
@@ -423,24 +578,58 @@
   justify-content: center;
 }
 
+.pdf-closing__quote {
+  font-size: 90px;
+  font-weight: 800;
+  color: var(--pdf-accent, #5BBFC8);
+  opacity: 0.35;
+  line-height: 1;
+  margin-bottom: -18px;
+}
+
 .pdf-closing__thanks {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
   color: var(--pdf-text, #fff);
-  max-width: 640px;
-  line-height: 1.5;
-  margin-bottom: 48px;
+  max-width: 680px;
+  line-height: 1.55;
+  margin-bottom: 44px;
   text-align: justify;
+}
+
+.pdf-closing__signature-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 34px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  width: fit-content;
+}
+
+.pdf-closing__avatar {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: var(--pdf-accent, #5BBFC8);
+  color: var(--pdf-bg, #14181a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 800;
+  flex-shrink: 0;
 }
 
 .pdf-closing__issuer {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .pdf-closing__issuer strong {
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 800;
 }
 
@@ -453,11 +642,12 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-top: 28px;
-  padding: 10px 20px;
+  margin-top: 30px;
+  padding: 12px 24px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.22);
-  font-size: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 15px;
   width: fit-content;
 }
 
