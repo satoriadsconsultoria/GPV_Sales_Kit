@@ -51,6 +51,12 @@ Na construção em HTML/CSS/JavaScript, os logos devem seguir:
 }
 ```
 
+Tipografia padrão do sistema:
+
+```css
+font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+```
+
 Também deve ser preservado:
 
 - Proporção original.
@@ -78,13 +84,29 @@ stroke: var(--primary-color);
 
 | Marca | Regra |
 |---|---|
-| Grupo GPV | Usar logo original sem alteração de cor |
+| Grupo GPV | Usar logo branco original sobre fundo escuro da paleta oficial |
 | Grand Prix de Vendas | Usar logo original sem alteração de cor |
 | Champions Festival | Usar logo original sem alteração de cor |
 | VELOCE | Usar logo original sem alteração de cor |
 | Projeto Conquista | Usar logo original sem alteração de cor |
 | Edney Ulisses | Usar logo original sem alteração de cor |
 | Cliente | Usar logo enviado sem alteração de cor |
+
+---
+
+## Arquivos oficiais do Grupo GPV
+
+| Uso | Arquivo |
+|---|---|
+| Logo branco padrão | `assets/logos/grupo-gpv-negativo.png` |
+| Referência/acervo | `assets/logos/grupo-gpv-positivo.png` |
+| Apoio visual / régua | `assets/logos/grupo-gpv.svg` |
+
+Regra aprovada:
+
+```txt
+Usar sempre o logo branco do Grupo GPV com fundo escuro dentro da paleta de cores.
+```
 
 ---
 
