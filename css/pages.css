@@ -104,13 +104,14 @@
 }
 
 .side-panel__logo {
-  height: 68px;
-  max-width: 200px;
+  width: 188px;
+  height: 92px;
   object-fit: contain;
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 8px;
-  padding: 10px 16px;
-  box-sizing: content-box;
+  background-color: var(--chip-color);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-sizing: border-box;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
 .side-panel__brand h3 {
@@ -154,7 +155,7 @@
   height: 52px;
   border-radius: 8px;
   object-fit: contain;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--chip-color);
   flex-shrink: 0;
 }
 

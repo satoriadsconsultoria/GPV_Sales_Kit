@@ -19,3 +19,8 @@ export function setMotifForCompany(companyId) {
 export function setMotifVisible(visible) {
   motifEl.classList.toggle("is-visible", visible);
 }
+
+export function getMotifPath(companyId) {
+  const motif = MOTIF_BY_COMPANY[companyId];
+  return motif ? `assets/backgrounds/motif-${motif}.jpg` : null;
+}
