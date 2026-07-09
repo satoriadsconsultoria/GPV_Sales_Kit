@@ -208,7 +208,9 @@ function pdfPage({ className = "", vars, motifUrl, ctx, num, total, chrome = tru
       </div>`
     : "";
 
-  div.innerHTML = `${topmark}<div class="pdf-page__body ${className}">${bodyHtml}</div>${footer}`;
+  const watermark = `<div class="pdf-page__watermark">${String(num).padStart(2, "0")}</div>`;
+
+  div.innerHTML = `${watermark}${topmark}<div class="pdf-page__body ${className}">${bodyHtml}</div>${footer}`;
   return div;
 }
 
