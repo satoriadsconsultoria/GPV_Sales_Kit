@@ -206,5 +206,31 @@
       "Prospecção dos clientes captados pela campanha de tráfego pago.",
       "Otimização diária de todas as campanhas de performance."
     ]
+  },
+  {
+    "id": "projeto-conquista",
+    "companyId": "conquista",
+    "name": "Projeto Conquista",
+    "selectionLabel": "Projeto Conquista",
+    "description": "Serviço personalizado do Projeto Conquista para propostas comerciais imobiliárias, com escopo definido manualmente conforme a necessidade do cliente.",
+    "selectionType": "single-checkbox-custom",
+    "offeredServicesTitle": "Serviços Oferecidos",
+    "offeredServices": [],
+    "customServices": {
+      "enabled": true,
+      "required": true,
+      "fieldType": "textarea",
+      "fieldLabel": "Serviços do Projeto Conquista",
+      "placeholder": "Digite os serviços que serão incluídos na proposta do Projeto Conquista.",
+      "minLength": 5
+    },
+    "pageThreeBehavior": {
+      "showOnlyOneOption": true,
+      "showDetailsAfterSelection": true,
+      "allowCustomServicesInput": true,
+      "detailsSections": [
+        "customServices"
+      ]
+    }
   }
 ]
