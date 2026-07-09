@@ -43,8 +43,9 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 - Campo para prazo de entrega, obrigatório somente para VELOCE.
 - Tela de conferência com prévia da proposta.
 - Opção de edição por bloco na conferência.
-- Renderização da proposta.
-- Exportação em PDF.
+- Proposta final interativa e animada.
+- Exportação em PDF executivo.
+- PDF com layout diferente da página interativa.
 - Página institucional final com dados do responsável.
 
 ### Fora da V1
@@ -68,7 +69,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 4. Página 3 — Serviços: seleção dos serviços ou planos conforme empresa selecionada.
 5. Página 4 — Comercial: valor da proposta, observações e prazo de entrega.
 6. Página 5 — Conferência: prévia da proposta e edição por bloco.
-7. Página 6 — Proposta e exportação em PDF.
+7. Página 6 — Proposta final interativa e exportação PDF.
 
 ---
 
@@ -94,12 +95,15 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RF016 | Permitir edição por bloco na conferência | Alta |
 | RF017 | Retornar para a tela correta ao clicar em editar | Alta |
 | RF018 | Preservar dados preenchidos ao editar | Alta |
-| RF019 | Renderizar proposta final | Alta |
-| RF020 | Exportar proposta em PDF | Alta |
-| RF021 | Exibir página institucional final | Alta |
-| RF022 | Usar config JSON para dados do responsável | Alta |
-| RF023 | Preservar as cores originais de todos os logos | Alta |
-| RF024 | Usar tipografia padrão do sistema | Alta |
+| RF019 | Renderizar proposta final interativa | Alta |
+| RF020 | Aplicar animações suaves na proposta interativa | Média |
+| RF021 | Disponibilizar download em PDF | Alta |
+| RF022 | Gerar PDF executivo diferente da página interativa | Alta |
+| RF023 | Gerar PDF com layout premium, elegante e otimizado para envio ao cliente | Alta |
+| RF024 | Exibir página institucional final | Alta |
+| RF025 | Usar config JSON para dados do responsável | Alta |
+| RF026 | Preservar as cores originais de todos os logos | Alta |
+| RF027 | Usar tipografia padrão do sistema | Alta |
 
 ---
 
@@ -117,6 +121,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RNF008 | Hospedagem | Compatível com Netlify |
 | RNF009 | Integridade visual de marca | Logos não podem ser recoloridos, distorcidos ou tratados por filtros |
 | RNF010 | Privacidade local | Dados e arquivos do cliente devem permanecer no navegador na V1 |
+| RNF011 | PDF | Documento final deve ser legível, paginado e adequado para envio digital |
 
 ---
 
@@ -265,7 +270,59 @@ Sua função é gerar uma prévia da proposta para validação interna antes da 
 
 ---
 
-## 12. Regra de navegação agrupada
+## 12. Página 6 — Proposta Final e Exportação PDF
+
+A Página 6 deve abrir após a confirmação da Página 5.
+
+Ela possui duas saídas distintas:
+
+1. Proposta final interativa, visual e animada dentro do sistema.
+2. PDF executivo, estático, paginado e otimizado para envio ao cliente.
+
+### Proposta interativa
+
+A proposta interativa deve ser personalizada com a identidade visual da marca selecionada.
+
+Requisitos:
+
+- Visual premium, elegante e executivo.
+- Animações suaves.
+- Transições discretas entre blocos.
+- Cards e seções com hierarquia visual clara.
+- Exibição do logo da marca selecionada sem alteração visual.
+- Exibição do logo do cliente sem alteração visual.
+- Exibição de marca, cliente, serviços/planos, escopo e dados comerciais.
+- Botão para download do PDF.
+
+### PDF executivo
+
+O PDF deve ser diferente da página interativa.
+
+Requisitos:
+
+- Layout estático, paginado e limpo.
+- Design premium, elegante e executivo.
+- Otimização para leitura e envio ao cliente.
+- Sem botões, animações ou elementos interativos.
+- Capa institucional.
+- Seções organizadas por contexto, escopo, investimento e encerramento.
+- Logos preservados sem recoloração, filtro ou distorção.
+- Nome de arquivo amigável no padrão `proposta-[marca]-[cliente].pdf`.
+
+### Diferença obrigatória entre interativo e PDF
+
+| Item | Proposta interativa | PDF executivo |
+|---|---|---|
+| Finalidade | Visualização no sistema | Envio ao cliente |
+| Formato | Tela navegável | Documento paginado |
+| Animações | Sim, suaves | Não |
+| Botões | Sim | Não |
+| Layout | Dinâmico e visual | Estático e documental |
+| Leitura | Experiência digital | Clareza executiva |
+
+---
+
+## 13. Regra de navegação agrupada
 
 A navegação da Página 1 deve ser carregada a partir de:
 
@@ -292,7 +349,7 @@ O logo do Grand Prix de Vendas deve funcionar como agrupador para duas soluçõe
 
 ---
 
-## 13. Regra global de uso dos logos
+## 14. Regra global de uso dos logos
 
 Todos os logos do sistema são **assets imutáveis de marca**.
 
@@ -319,7 +376,7 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 
 ---
 
-## 14. Decisões técnicas oficiais
+## 15. Decisões técnicas oficiais
 
 | Tema | Decisão |
 |---|---|
@@ -336,6 +393,7 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 | Página 3 | Seleção de serviços e planos |
 | Página 4 | Dados comerciais |
 | Página 5 | Conferência e prévia da proposta |
+| Página 6 | Proposta final interativa e PDF executivo |
 | Navegação da Página 1 | `data/navigation.json` |
 | Seleção da empresa | Logos das marcas clicáveis |
 | Grand Prix de Vendas | Logo agrupador com submenu |
@@ -350,11 +408,12 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 | Comercial | Valor, observações e prazo |
 | Prazo VELOCE | Obrigatório somente para VELOCE |
 | Conferência | Prévia com edição por bloco |
+| PDF | Documento diferente da interface, executivo e paginado |
 | Assinatura | Configurável via JSON |
 
 ---
 
-## 15. Critérios gerais de aceite
+## 16. Critérios gerais de aceite
 
 - O sistema roda localmente sem backend.
 - O sistema pode ser hospedado no Netlify.
@@ -374,6 +433,11 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 - A Página 5 gera prévia consolidada da proposta.
 - A Página 5 permite editar marca, cliente, serviços e comercial.
 - A edição por bloco retorna para a tela correta mantendo os dados preenchidos.
+- A Página 6 gera proposta final interativa, visual e animada.
+- A Página 6 disponibiliza download em PDF.
+- O PDF é diferente da proposta interativa.
+- O PDF possui design premium, elegante e executivo.
+- O PDF é adequado para envio ao cliente.
 - Nenhum logo é recolorido, filtrado, distorcido ou convertido para outra versão visual não aprovada.
 - A identidade visual muda conforme a empresa selecionada a partir da Página 2.
 - O usuário consegue gerar proposta completa em PDF.
