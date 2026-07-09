@@ -41,7 +41,8 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 - Campo para valor da proposta em formato `R$`.
 - Campo livre para observações.
 - Campo para prazo de entrega, obrigatório somente para VELOCE.
-- Tela de conferência.
+- Tela de conferência com prévia da proposta.
+- Opção de edição por bloco na conferência.
 - Renderização da proposta.
 - Exportação em PDF.
 - Página institucional final com dados do responsável.
@@ -66,7 +67,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 3. Página 2 — Cliente: cadastro de nome, telefone, e-mail e logo do cliente.
 4. Página 3 — Serviços: seleção dos serviços ou planos conforme empresa selecionada.
 5. Página 4 — Comercial: valor da proposta, observações e prazo de entrega.
-6. Página 5 — Conferência.
+6. Página 5 — Conferência: prévia da proposta e edição por bloco.
 7. Página 6 — Proposta e exportação em PDF.
 
 ---
@@ -89,13 +90,16 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RF012 | Permitir inserir observações opcionais | Média |
 | RF013 | Permitir inserir prazo de entrega | Média |
 | RF014 | Tornar prazo de entrega obrigatório somente para VELOCE | Alta |
-| RF015 | Exibir conferência completa | Alta |
-| RF016 | Renderizar proposta final | Alta |
-| RF017 | Exportar proposta em PDF | Alta |
-| RF018 | Exibir página institucional final | Alta |
-| RF019 | Usar config JSON para dados do responsável | Alta |
-| RF020 | Preservar as cores originais de todos os logos | Alta |
-| RF021 | Usar tipografia padrão do sistema | Alta |
+| RF015 | Exibir conferência completa da proposta | Alta |
+| RF016 | Permitir edição por bloco na conferência | Alta |
+| RF017 | Retornar para a tela correta ao clicar em editar | Alta |
+| RF018 | Preservar dados preenchidos ao editar | Alta |
+| RF019 | Renderizar proposta final | Alta |
+| RF020 | Exportar proposta em PDF | Alta |
+| RF021 | Exibir página institucional final | Alta |
+| RF022 | Usar config JSON para dados do responsável | Alta |
+| RF023 | Preservar as cores originais de todos os logos | Alta |
+| RF024 | Usar tipografia padrão do sistema | Alta |
 
 ---
 
@@ -234,7 +238,34 @@ appState.commercial = {
 
 ---
 
-## 11. Regra de navegação agrupada
+## 11. Página 5 — Conferência
+
+A Página 5 deve abrir após a validação da Página 4.
+
+Sua função é gerar uma prévia da proposta para validação interna antes da geração final.
+
+### Blocos exibidos
+
+| Bloco | Origem | Ação de edição |
+|---|---|---|
+| Marca selecionada | Página 1 | Editar volta para Página 1 |
+| Dados do cliente | Página 2 | Editar volta para Página 2 |
+| Serviços/planos selecionados | Página 3 | Editar volta para Página 3 |
+| Dados comerciais | Página 4 | Editar volta para Página 4 |
+
+### Regras principais
+
+- Cada bloco deve exibir uma opção de edição.
+- Ao clicar em editar, o sistema deve voltar para a tela correspondente.
+- Ao voltar para edição, os campos devem abrir preenchidos com os dados atuais.
+- Todos os dados já preenchidos devem ser preservados no `appState`.
+- Após editar e validar novamente, o usuário deve conseguir retornar à Página 5.
+- A Página 5 não deve gerar PDF; apenas valida a prévia.
+- A geração final ocorre somente na Página 6.
+
+---
+
+## 12. Regra de navegação agrupada
 
 A navegação da Página 1 deve ser carregada a partir de:
 
@@ -261,7 +292,7 @@ O logo do Grand Prix de Vendas deve funcionar como agrupador para duas soluçõe
 
 ---
 
-## 12. Regra global de uso dos logos
+## 13. Regra global de uso dos logos
 
 Todos os logos do sistema são **assets imutáveis de marca**.
 
@@ -288,7 +319,7 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 
 ---
 
-## 13. Decisões técnicas oficiais
+## 14. Decisões técnicas oficiais
 
 | Tema | Decisão |
 |---|---|
@@ -304,6 +335,7 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 | Página 2 | Cadastro do cliente |
 | Página 3 | Seleção de serviços e planos |
 | Página 4 | Dados comerciais |
+| Página 5 | Conferência e prévia da proposta |
 | Navegação da Página 1 | `data/navigation.json` |
 | Seleção da empresa | Logos das marcas clicáveis |
 | Grand Prix de Vendas | Logo agrupador com submenu |
@@ -317,11 +349,12 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 | Serviços | Desacoplados da interface via `data/services.json` |
 | Comercial | Valor, observações e prazo |
 | Prazo VELOCE | Obrigatório somente para VELOCE |
+| Conferência | Prévia com edição por bloco |
 | Assinatura | Configurável via JSON |
 
 ---
 
-## 14. Critérios gerais de aceite
+## 15. Critérios gerais de aceite
 
 - O sistema roda localmente sem backend.
 - O sistema pode ser hospedado no Netlify.
@@ -338,6 +371,9 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 - A Página 3 carrega serviços conforme empresa selecionada.
 - A Página 4 coleta valor da proposta em `R$`, observações e prazo de entrega.
 - O prazo de entrega é obrigatório somente para VELOCE.
+- A Página 5 gera prévia consolidada da proposta.
+- A Página 5 permite editar marca, cliente, serviços e comercial.
+- A edição por bloco retorna para a tela correta mantendo os dados preenchidos.
 - Nenhum logo é recolorido, filtrado, distorcido ou convertido para outra versão visual não aprovada.
 - A identidade visual muda conforme a empresa selecionada a partir da Página 2.
 - O usuário consegue gerar proposta completa em PDF.
