@@ -15,7 +15,7 @@ Todas as páginas devem conter:
 - Transições suaves entre etapas.
 - Animações discretas de entrada dos blocos.
 - Microinterações em cards, botões, inputs e seleções.
-- Feedback visual claro para hover, foco, seleção e clique.
+- Feedback visual claro para hover, foco, seleção, clique, upload e erro.
 - Visual premium, elegante e executivo.
 - Performance leve, sem excesso de movimento.
 
@@ -47,6 +47,7 @@ A identidade visual da marca selecionada começa oficialmente na Página 2 e per
 - Transição de sombra.
 - Feedback de clique.
 - Progressão visual entre etapas.
+- Skeleton/placeholder visual para assets pendentes, quando necessário.
 
 ---
 
@@ -68,6 +69,8 @@ Na Página 1, ao passar o mouse sobre uma marca abaixo do logo institucional do 
 
 Essa pré-seleção deve usar a cor da linha superior da marca no logo institucional do Grupo GPV.
 
+As cores devem vir de `data/navigation.json`, no campo `hoverColor`.
+
 ### Cores de hover da Página 1
 
 | Marca | Cor de hover |
@@ -86,21 +89,29 @@ Nas páginas seguintes, devem ser usadas as cores oficiais cadastradas em `data/
 
 ## Regra de logo no hover da Página 1
 
-Na Página 1, é permitida uma exceção controlada para indicar pré-seleção visual no hover.
+O hover da Página 1 deve ser aplicado no **container/card** da marca, não no arquivo do logo.
 
-O sistema pode aplicar destaque visual temporário ao card/logo da marca, desde que:
+### Permitido
 
-- O arquivo original do logo não seja alterado.
-- O efeito exista somente durante hover/foco.
-- O efeito seja removido ao tirar o mouse.
-- O efeito não impacte as páginas seguintes.
-- O PDF e a proposta final usem os logos originais.
+- Borda colorida.
+- Glow discreto.
+- Linha superior colorida.
+- Fundo auxiliar sutil.
+- Sombra leve.
+- Escala leve do card.
+
+### Proibido
+
+- Recolorir o logo.
+- Aplicar filtro no logo.
+- Alterar opacidade do logo.
+- Usar `mix-blend-mode` no logo.
+- Substituir o logo por versão colorida artificialmente.
 
 Recomendação técnica:
 
-- Priorizar borda, glow, linha superior, fundo auxiliar ou overlay sutil no container.
-- Evitar filtro agressivo diretamente sobre o logo.
-- Se houver tint visual no logo, ele deve ser apenas estado temporário de hover da Página 1.
+- Usar `--hover-color` no container.
+- Manter `.logo { filter: none; opacity: 1; mix-blend-mode: normal; }`.
 
 ---
 
@@ -115,6 +126,7 @@ Recomendação técnica:
 | Upload de logo | Preview e feedback de arquivo carregado |
 | Blocos de conferência | Botão editar com retorno para etapa correta |
 | Proposta interativa | Navegação visual, cards animados e botão de PDF |
+| Template PDF | Sem animação, sem hover, sem botão e sem elemento interativo |
 
 ---
 
@@ -125,6 +137,7 @@ As animações e interações serão consideradas aprovadas se:
 - Todas as páginas tiverem animações leves e coerentes.
 - Todas as páginas tiverem feedback visual de interação.
 - A Página 1 usar hover colorido por marca antes do clique.
+- O hover da Página 1 for aplicado no container/card, não no logo.
 - As páginas 2 a 6 seguirem a identidade visual da marca selecionada.
 - As animações não prejudicarem leitura, performance ou exportação.
 - O PDF final permanecer estático, limpo e sem elementos interativos.
