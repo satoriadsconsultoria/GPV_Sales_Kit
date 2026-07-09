@@ -61,17 +61,15 @@ GPV_Sales_Kit/
 └── libs/
 ```
 
-## Pendência antes da construção visual final
+## Assets validados
 
-Subir as fotos finais do Edney Ulisses nos caminhos:
+Fotos finais do Edney Ulisses validadas nos caminhos:
 
 ```txt
 assets/images/edney/edney-institucional-01.png
 assets/images/edney/edney-institucional-02.png
 ```
 
-Enquanto esses arquivos não forem enviados, o sistema deve usar placeholder visual temporário.
-
 ## Status
 
-PRD e arquitetura funcional em fase final de validação. Documentação consolidada para início da construção em HTML, CSS e JavaScript.
+PRD, arquitetura funcional, dados, diretrizes visuais e assets principais validados. Projeto pronto para início da construção em HTML, CSS e JavaScript no VS Code + Claude Code.
