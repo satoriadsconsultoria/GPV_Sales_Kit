@@ -9,7 +9,11 @@ import { initPage5 } from "./pages/page5.js";
 import { initPage6 } from "./pages/page6.js";
 
 function loadStylesheets() {
-  ["css/premium-redesign.css", "css/institutional-first-page.css"].forEach((href) => {
+  [
+    "css/premium-redesign.css",
+    "css/institutional-first-page.css",
+    "css/experience-polish.css",
+  ].forEach((href) => {
     if (document.querySelector(`link[href="${href}"]`)) return;
 
     const link = document.createElement("link");
