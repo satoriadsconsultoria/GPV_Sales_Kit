@@ -29,6 +29,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 
 - Página inicial institucional com predominância da marca Grupo GPV.
 - Seleção da empresa por meio dos logos clicáveis das marcas.
+- Submenu no logo Grand Prix de Vendas para seleção entre Grand Prix de Vendas e Champions Festival.
 - Carregamento automático da identidade visual da empresa selecionada a partir da Página 2.
 - Cadastro do cliente.
 - Upload do logotipo do cliente.
@@ -57,11 +58,12 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 ## 4. Fluxo funcional
 
 1. Portal institucional Grupo GPV com seleção da marca.
-2. Cadastro do cliente.
-3. Seleção dos serviços.
-4. Dados comerciais.
-5. Conferência.
-6. Proposta e exportação em PDF.
+2. Quando o usuário interagir com o logo Grand Prix de Vendas, abrir opções: Grand Prix de Vendas ou Champions Festival.
+3. Cadastro do cliente.
+4. Seleção dos serviços.
+5. Dados comerciais.
+6. Conferência.
+7. Proposta e exportação em PDF.
 
 ---
 
@@ -71,18 +73,19 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 |---|---|---|
 | RF001 | Exibir página inicial institucional com identidade visual do Grupo GPV | Alta |
 | RF002 | Permitir seleção da empresa por logos clicáveis | Alta |
-| RF003 | Carregar identidade visual da empresa selecionada a partir da Página 2 | Alta |
-| RF004 | Carregar serviços conforme empresa | Alta |
-| RF005 | Permitir cadastro do cliente | Alta |
-| RF006 | Permitir upload do logo do cliente | Média |
-| RF007 | Permitir seleção múltipla de serviços | Alta |
-| RF008 | Exibir conferência completa | Alta |
-| RF009 | Renderizar proposta final | Alta |
-| RF010 | Exportar proposta em PDF | Alta |
-| RF011 | Exibir página institucional final | Alta |
-| RF012 | Usar config JSON para dados do responsável | Alta |
-| RF013 | Preservar as cores originais de todos os logos | Alta |
-| RF014 | Usar tipografia padrão do sistema | Alta |
+| RF003 | Exibir submenu Grand Prix de Vendas / Champions Festival ao interagir com o logo Grand Prix | Alta |
+| RF004 | Carregar identidade visual da empresa selecionada a partir da Página 2 | Alta |
+| RF005 | Carregar serviços conforme empresa | Alta |
+| RF006 | Permitir cadastro do cliente | Alta |
+| RF007 | Permitir upload do logo do cliente | Média |
+| RF008 | Permitir seleção múltipla de serviços | Alta |
+| RF009 | Exibir conferência completa | Alta |
+| RF010 | Renderizar proposta final | Alta |
+| RF011 | Exportar proposta em PDF | Alta |
+| RF012 | Exibir página institucional final | Alta |
+| RF013 | Usar config JSON para dados do responsável | Alta |
+| RF014 | Preservar as cores originais de todos os logos | Alta |
+| RF015 | Usar tipografia padrão do sistema | Alta |
 
 ---
 
@@ -92,7 +95,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 |---|---|---|
 | RNF001 | Performance | Carregamento inicial inferior a 3 segundos |
 | RNF002 | Responsividade | Desktop, tablet e mobile |
-| RNF003 | Escalabilidade | Empresas e serviços via JSON |
+| RNF003 | Escalabilidade | Empresas, serviços e navegação via JSON |
 | RNF004 | Manutenibilidade | Código modular |
 | RNF005 | Compatibilidade | Chrome, Edge e Safari modernos |
 | RNF006 | Design | Padrão premium e executivo |
@@ -120,7 +123,34 @@ As cores institucionais devem ser aplicadas em fundos, botões, bordas, textos, 
 
 ---
 
-## 8. Regra global de uso dos logos
+## 8. Regra de navegação agrupada
+
+A navegação da Página 1 deve ser carregada a partir de:
+
+```txt
+data/navigation.json
+```
+
+O logo do Grand Prix de Vendas deve funcionar como agrupador para duas soluções:
+
+| Opção | `companyId` | Tipo |
+|---|---|---|
+| Grand Prix de Vendas | `grand-prix` | Evento físico |
+| Champions Festival | `champions` | Evento digital |
+
+### Desktop
+
+- Hover sobre o logo Grand Prix abre submenu.
+- Clique em uma opção seleciona a empresa e avança para a Página 2.
+
+### Mobile
+
+- Primeiro toque no logo Grand Prix abre submenu.
+- Toque em uma opção seleciona a empresa e avança para a Página 2.
+
+---
+
+## 9. Regra global de uso dos logos
 
 Todos os logos do sistema são **assets imutáveis de marca**.
 
@@ -143,19 +173,11 @@ Todos os logos do sistema são **assets imutáveis de marca**.
 - Distorcer proporção.
 - Cortar área útil do logo.
 
-Essa regra vale para:
-
-- Grupo GPV.
-- Grand Prix de Vendas.
-- Champions Festival.
-- VELOCE.
-- Projeto Conquista.
-- Edney Ulisses — Acelerador de Vendas.
-- Logo do cliente enviado na proposta.
+Essa regra vale para todas as marcas e para o logo do cliente.
 
 ---
 
-## 9. Decisões técnicas oficiais
+## 10. Decisões técnicas oficiais
 
 | Tema | Decisão |
 |---|---|
@@ -168,7 +190,10 @@ Essa regra vale para:
 | Repositório | GPV_Sales_Kit |
 | Desenvolvimento | VS Code + Claude Code |
 | Página 1 | Portal institucional do Grupo GPV |
+| Navegação da Página 1 | `data/navigation.json` |
 | Seleção da empresa | Logos das marcas clicáveis |
+| Grand Prix de Vendas | Logo agrupador com submenu |
+| Champions Festival | Opção dentro do agrupamento Grand Prix |
 | Identidade visual da Página 1 | Grupo GPV, cor principal `#252324` |
 | Logo GPV padrão | Branco sobre fundo escuro |
 | Tipografia | Padrão do sistema |
@@ -179,7 +204,7 @@ Essa regra vale para:
 
 ---
 
-## 10. Critérios gerais de aceite
+## 11. Critérios gerais de aceite
 
 - O sistema roda localmente sem backend.
 - O sistema pode ser hospedado no Netlify.
@@ -188,9 +213,10 @@ Essa regra vale para:
 - A Página 1 usa `#A5A09C` como cor secundária institucional.
 - A Página 1 usa tipografia padrão do sistema.
 - A Página 1 usa o logo branco do Grupo GPV sobre fundo escuro.
-- Os logos das empresas funcionam como botões de seleção.
+- O logo Grand Prix abre submenu com Grand Prix de Vendas e Champions Festival.
+- O clique em Grand Prix de Vendas seleciona `grand-prix`.
+- O clique em Champions Festival seleciona `champions`.
 - Nenhum logo é recolorido, filtrado, distorcido ou convertido para outra versão visual não aprovada.
-- O clique na marca seleciona a empresa e avança para a Página 2.
 - A identidade visual muda conforme a empresa selecionada a partir da Página 2.
 - O usuário consegue gerar proposta completa em PDF.
 - Os serviços podem ser editados via JSON.
