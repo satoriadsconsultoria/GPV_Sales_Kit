@@ -18,17 +18,26 @@ export function formatPhoneInput(value) {
 }
 
 export function parseCurrencyToNumber(value) {
-  const digits = String(value).replace(/[^\d]/g, "");
-  if (!digits) return 0;
-  return Number(digits) / 100;
+  const text = String(value).trim();
+  if (!text) return 0;
+
+  const normalized = text.replace(/\s/g, "").replace(/^R\$/i, "");
+  if (normalized.includes(",")) {
+    const decimal = normalized.replace(/\./g, "").replace(",", ".").replace(/[^\d.]/g, "");
+    return Number(decimal) || 0;
+  }
+
+  const digits = normalized.replace(/\D/g, "");
+  return digits ? Number(digits) : 0;
 }
 
 export function formatCurrencyInput(value) {
   const raw = parseCurrencyToNumber(value);
+  if (!raw) return "";
   return raw.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
-// Usuário digita só o número; o campo formata automaticamente como "1 dia" / "N dias".
+// Usuario digita so o numero; o campo formata automaticamente como "1 dia" / "N dias".
 export function formatDaysInput(value) {
   const digits = String(value).replace(/\D/g, "");
   if (!digits) return "";
