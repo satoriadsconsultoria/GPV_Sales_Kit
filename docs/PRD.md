@@ -29,8 +29,10 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 
 - Página inicial institucional com predominância da marca Grupo GPV.
 - Seleção da empresa por meio dos logos clicáveis das marcas.
+- Hover colorido de pré-seleção na Página 1.
 - Submenu no logo Grand Prix de Vendas para seleção entre Grand Prix de Vendas e Champions Festival.
 - Carregamento automático da identidade visual da empresa selecionada a partir da Página 2.
+- Todas as páginas com animações, microinterações e feedback visual.
 - Cadastro do cliente.
 - Nome do cliente.
 - Telefone do cliente com DDD.
@@ -41,12 +43,15 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 - Campo para valor da proposta em formato `R$`.
 - Campo livre para observações.
 - Campo para prazo de entrega, obrigatório somente para VELOCE.
+- Campo para validade da proposta.
+- Campos do emissor da proposta: nome, função, telefone e e-mail.
 - Tela de conferência com prévia da proposta.
 - Opção de edição por bloco na conferência.
 - Proposta final interativa e animada.
+- Dois slides/páginas institucionais sobre Edney Ulisses na proposta final.
 - Exportação em PDF executivo.
 - PDF com layout diferente da página interativa.
-- Página institucional final com dados do responsável.
+- Página final com validade, dados do emissor e logo da marca selecionada.
 
 ### Fora da V1
 
@@ -63,13 +68,12 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 
 ## 4. Fluxo funcional
 
-1. Portal institucional Grupo GPV com seleção da marca.
-2. Quando o usuário interagir com o logo Grand Prix de Vendas, abrir opções: Grand Prix de Vendas ou Champions Festival.
-3. Página 2 — Cliente: cadastro de nome, telefone, e-mail e logo do cliente.
-4. Página 3 — Serviços: seleção dos serviços ou planos conforme empresa selecionada.
-5. Página 4 — Comercial: valor da proposta, observações e prazo de entrega.
-6. Página 5 — Conferência: prévia da proposta e edição por bloco.
-7. Página 6 — Proposta final interativa e exportação PDF.
+1. Página 1 — Portal institucional Grupo GPV com seleção da marca.
+2. Página 2 — Cliente: cadastro de nome, telefone, e-mail e logo do cliente.
+3. Página 3 — Serviços: seleção dos serviços ou planos conforme empresa selecionada.
+4. Página 4 — Comercial: valor, observações, prazo, validade e dados do emissor.
+5. Página 5 — Conferência: prévia da proposta e edição por bloco.
+6. Página 6 — Proposta final interativa e exportação PDF.
 
 ---
 
@@ -79,31 +83,37 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 |---|---|---|
 | RF001 | Exibir página inicial institucional com identidade visual do Grupo GPV | Alta |
 | RF002 | Permitir seleção da empresa por logos clicáveis | Alta |
-| RF003 | Exibir submenu Grand Prix de Vendas / Champions Festival ao interagir com o logo Grand Prix | Alta |
-| RF004 | Carregar identidade visual da empresa selecionada a partir da Página 2 | Alta |
-| RF005 | Carregar serviços conforme empresa | Alta |
-| RF006 | Permitir cadastro do nome do cliente | Alta |
-| RF007 | Permitir cadastro do telefone do cliente com DDD | Alta |
-| RF008 | Permitir cadastro do e-mail do cliente | Alta |
-| RF009 | Permitir upload e preview do logo do cliente | Alta |
-| RF010 | Permitir seleção de serviços ou planos conforme empresa | Alta |
-| RF011 | Permitir inserir valor da proposta em formato monetário `R$` | Alta |
-| RF012 | Permitir inserir observações opcionais | Média |
-| RF013 | Permitir inserir prazo de entrega | Média |
-| RF014 | Tornar prazo de entrega obrigatório somente para VELOCE | Alta |
-| RF015 | Exibir conferência completa da proposta | Alta |
-| RF016 | Permitir edição por bloco na conferência | Alta |
-| RF017 | Retornar para a tela correta ao clicar em editar | Alta |
-| RF018 | Preservar dados preenchidos ao editar | Alta |
-| RF019 | Renderizar proposta final interativa | Alta |
-| RF020 | Aplicar animações suaves na proposta interativa | Média |
-| RF021 | Disponibilizar download em PDF | Alta |
-| RF022 | Gerar PDF executivo diferente da página interativa | Alta |
-| RF023 | Gerar PDF com layout premium, elegante e otimizado para envio ao cliente | Alta |
-| RF024 | Exibir página institucional final | Alta |
-| RF025 | Usar config JSON para dados do responsável | Alta |
-| RF026 | Preservar as cores originais de todos os logos | Alta |
-| RF027 | Usar tipografia padrão do sistema | Alta |
+| RF003 | Aplicar hover colorido de pré-seleção nas marcas da Página 1 | Alta |
+| RF004 | Exibir submenu Grand Prix de Vendas / Champions Festival ao interagir com o logo Grand Prix | Alta |
+| RF005 | Carregar identidade visual da empresa selecionada a partir da Página 2 | Alta |
+| RF006 | Aplicar animações e interações em todas as páginas | Alta |
+| RF007 | Permitir cadastro do nome do cliente | Alta |
+| RF008 | Permitir cadastro do telefone do cliente com DDD | Alta |
+| RF009 | Permitir cadastro do e-mail do cliente | Alta |
+| RF010 | Permitir upload e preview do logo do cliente | Alta |
+| RF011 | Permitir seleção de serviços ou planos conforme empresa | Alta |
+| RF012 | Permitir inserir valor da proposta em formato monetário `R$` | Alta |
+| RF013 | Permitir inserir observações opcionais | Média |
+| RF014 | Permitir inserir prazo de entrega | Média |
+| RF015 | Tornar prazo de entrega obrigatório somente para VELOCE | Alta |
+| RF016 | Permitir inserir validade da proposta | Alta |
+| RF017 | Tornar validade da proposta obrigatória | Alta |
+| RF018 | Permitir inserir dados do emissor: nome, função, telefone e e-mail | Alta |
+| RF019 | Tornar dados do emissor obrigatórios | Alta |
+| RF020 | Exibir conferência completa da proposta | Alta |
+| RF021 | Permitir edição por bloco na conferência | Alta |
+| RF022 | Retornar para a tela correta ao clicar em editar | Alta |
+| RF023 | Preservar dados preenchidos ao editar | Alta |
+| RF024 | Renderizar proposta final interativa | Alta |
+| RF025 | Aplicar animações suaves na proposta interativa | Média |
+| RF026 | Incluir dois slides/páginas institucionais sobre Edney Ulisses | Alta |
+| RF027 | Adaptar slides de Edney às cores e elementos da marca selecionada | Alta |
+| RF028 | Disponibilizar download em PDF | Alta |
+| RF029 | Gerar PDF executivo diferente da página interativa | Alta |
+| RF030 | Gerar PDF com layout premium, elegante e otimizado para envio ao cliente | Alta |
+| RF031 | Usar config JSON para dados institucionais quando aplicável | Alta |
+| RF032 | Preservar os logos originais fora do hover temporário da Página 1 | Alta |
+| RF033 | Usar tipografia padrão do sistema | Alta |
 
 ---
 
@@ -119,35 +129,79 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RNF006 | Design | Padrão premium e executivo |
 | RNF007 | Segurança | Sem envio de dados para servidor |
 | RNF008 | Hospedagem | Compatível com Netlify |
-| RNF009 | Integridade visual de marca | Logos não podem ser recoloridos, distorcidos ou tratados por filtros |
+| RNF009 | Integridade visual de marca | Logos não podem ser alterados permanentemente |
 | RNF010 | Privacidade local | Dados e arquivos do cliente devem permanecer no navegador na V1 |
 | RNF011 | PDF | Documento final deve ser legível, paginado e adequado para envio digital |
+| RNF012 | Animações | Devem ser leves, elegantes e não prejudicar leitura/performance |
 
 ---
 
-## 7. Identidade visual oficial da Página 1
+## 7. Diretriz global de animações e interações
 
-| Elemento | Definição |
+Todas as páginas devem ser animadas e interativas.
+
+### Regras
+
+- Página 1 usa identidade visual do Grupo GPV.
+- Páginas 2 a 6 usam identidade visual da marca selecionada.
+- Todas as páginas devem possuir feedback visual de hover, foco, clique, seleção e erro.
+- As animações devem ser suaves e premium.
+- O PDF final não deve conter animações, botões ou elementos interativos.
+
+### Animações permitidas
+
+- Fade-in.
+- Slide-up suave.
+- Scale leve.
+- Hover sutil.
+- Glow discreto.
+- Transição de borda, fundo, sombra e opacidade.
+
+### Proibido
+
+- Movimento excessivo.
+- Efeitos piscando.
+- Parallax pesado.
+- Efeitos que prejudiquem leitura.
+- Animação agressiva.
+
+Documento complementar:
+
+```txt
+docs/DIRETRIZES_ANIMACOES_INTERACOES.md
+```
+
+---
+
+## 8. Página 1 — Portal Grupo GPV
+
+A Página 1 deve usar o Grupo GPV como marca dominante.
+
+### Hover das marcas
+
+Ao passar o mouse sobre uma marca abaixo do logo do Grupo GPV, o sistema deve mostrar pré-seleção visual antes do clique.
+
+As cores de hover são as cores da linha superior da marca no logo institucional do Grupo GPV.
+
+| Marca | Cor de hover Página 1 |
 |---|---|
-| Marca dominante | Grupo GPV |
-| Logo padrão | `assets/logos/grupo-gpv-negativo.png` |
-| Logo de referência/acervo | `assets/logos/grupo-gpv-positivo.png` |
-| Cor institucional principal | `#252324` |
-| Cor secundária | `#A5A09C` |
-| Texto principal | Branco `#FFFFFF` |
-| Tipografia | `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif` |
+| Grand Prix de Vendas | `#FA0115` |
+| Champions Festival | `#95C223` |
+| VELOCE | `#32D9D9` |
+| Projeto Conquista | `#FFFFFF` |
+| Edney Ulisses — Acelerador de Vendas | `#D8DBD3` |
 
-A Página 1 deve usar sempre o **logo branco** do Grupo GPV sobre fundo escuro dentro da paleta institucional.
+Essas cores são usadas somente na Página 1.
 
-As cores institucionais devem ser aplicadas em fundos, botões, bordas, textos, linhas, cards e elementos gráficos. Elas não devem alterar as cores do logo.
+Nas páginas seguintes, usar a paleta oficial de cada marca cadastrada em `data/companies.json`.
 
 ---
 
-## 8. Página 2 — Cliente
+## 9. Página 2 — Cliente
 
 A Página 2 deve abrir imediatamente após a seleção da empresa na Página 1.
 
-A partir da Página 2, a identidade visual predominante deve ser a da empresa selecionada, não mais a do Grupo GPV.
+A partir da Página 2, a identidade visual predominante deve ser a da empresa selecionada.
 
 ### Campos obrigatórios
 
@@ -170,20 +224,9 @@ appState.client = {
 }
 ```
 
-### Validações principais
-
-| Campo | Regra |
-|---|---|
-| Nome | Mínimo de 2 caracteres |
-| Telefone | Deve conter DDD e pelo menos 10 dígitos numéricos |
-| E-mail | Deve possuir formato básico de e-mail |
-| Logo | Aceitar PNG, JPG, JPEG, WEBP ou SVG, até 5 MB |
-
-O logo do cliente deve ser preservado exatamente como enviado, sem recoloração, filtro, opacidade alterada, corte ou distorção.
-
 ---
 
-## 9. Página 3 — Serviços
+## 10. Página 3 — Serviços
 
 A Página 3 deve carregar os serviços e planos a partir de:
 
@@ -205,7 +248,7 @@ A exibição deve ser filtrada pelo `companyId` da marca selecionada.
 
 ---
 
-## 10. Página 4 — Comercial
+## 11. Página 4 — Comercial
 
 A Página 4 deve abrir após a validação da Página 3.
 
@@ -218,6 +261,11 @@ A identidade visual deve continuar sendo a da empresa selecionada.
 | Valor da proposta | Moeda `R$` | Sim |
 | Observações | Texto longo | Não |
 | Prazo de entrega | Texto ou data | Obrigatório somente para VELOCE |
+| Validade da proposta | Texto ou data | Sim |
+| Nome do emissor | Texto | Sim |
+| Função do emissor | Texto | Sim |
+| Telefone do emissor | Telefone | Sim |
+| E-mail do emissor | E-mail | Sim |
 
 ### Estado esperado
 
@@ -228,26 +276,22 @@ appState.commercial = {
     formatted: ""
   },
   notes: "",
-  deliveryDeadline: ""
+  deliveryDeadline: "",
+  proposalValidity: "",
+  issuer: {
+    name: "",
+    role: "",
+    phone: "",
+    email: ""
+  }
 }
 ```
 
-### Regras principais
-
-- Valor da proposta deve ser obrigatório para todas as marcas.
-- Valor da proposta deve ser formatado em Real brasileiro, com prefixo `R$`.
-- Observações devem ser opcionais.
-- Prazo de entrega deve ser exibido para todas as marcas.
-- Prazo de entrega deve ser obrigatório somente quando `companyId` for `veloce`.
-- Nas demais marcas, prazo de entrega pode ficar vazio.
-
 ---
 
-## 11. Página 5 — Conferência
+## 12. Página 5 — Conferência
 
-A Página 5 deve abrir após a validação da Página 4.
-
-Sua função é gerar uma prévia da proposta para validação interna antes da geração final.
+A Página 5 deve gerar uma prévia da proposta para validação interna antes da geração final.
 
 ### Blocos exibidos
 
@@ -260,17 +304,15 @@ Sua função é gerar uma prévia da proposta para validação interna antes da 
 
 ### Regras principais
 
-- Cada bloco deve exibir uma opção de edição.
-- Ao clicar em editar, o sistema deve voltar para a tela correspondente.
+- Cada bloco deve exibir opção de edição.
+- Ao clicar em editar, voltar para a tela correspondente.
 - Ao voltar para edição, os campos devem abrir preenchidos com os dados atuais.
-- Todos os dados já preenchidos devem ser preservados no `appState`.
-- Após editar e validar novamente, o usuário deve conseguir retornar à Página 5.
-- A Página 5 não deve gerar PDF; apenas valida a prévia.
+- Todos os dados preenchidos devem ser preservados no `appState`.
 - A geração final ocorre somente na Página 6.
 
 ---
 
-## 12. Página 6 — Proposta Final e Exportação PDF
+## 13. Página 6 — Proposta Final e Exportação PDF
 
 A Página 6 deve abrir após a confirmação da Página 5.
 
@@ -279,20 +321,28 @@ Ela possui duas saídas distintas:
 1. Proposta final interativa, visual e animada dentro do sistema.
 2. PDF executivo, estático, paginado e otimizado para envio ao cliente.
 
-### Proposta interativa
+### Estrutura obrigatória da proposta final
 
-A proposta interativa deve ser personalizada com a identidade visual da marca selecionada.
+| Ordem | Página/slide | Conteúdo |
+|---|---|---|
+| 1 | Capa | Logo da marca selecionada, logo do cliente e título da proposta |
+| 2 | Edney Ulisses — Institucional 01 | Apresentação de Edney Ulisses como fundador/especialista |
+| 3 | Edney Ulisses — Institucional 02 | Formação, experiência e autoridade comercial |
+| 4 | Proposta comercial | Serviço/plano selecionado, escopo, entregáveis e condições |
+| 5 | Investimento e condições | Valor, observações, prazo de entrega e validade da proposta |
+| 6 | Encerramento / emissor | Validade, dados do emissor e logo da marca selecionada |
 
-Requisitos:
+### Regra dos slides Edney
 
-- Visual premium, elegante e executivo.
-- Animações suaves.
-- Transições discretas entre blocos.
-- Cards e seções com hierarquia visual clara.
-- Exibição do logo da marca selecionada sem alteração visual.
-- Exibição do logo do cliente sem alteração visual.
-- Exibição de marca, cliente, serviços/planos, escopo e dados comerciais.
-- Botão para download do PDF.
+Os dois prints anexados pelo usuário são referência visual estrutural.
+
+As cores e elementos dos slides de Edney devem ser adaptados à marca selecionada na Página 1.
+
+Exemplo:
+
+- VELOCE selecionada: slides Edney usam estética VELOCE.
+- Projeto Conquista selecionado: slides Edney usam estética Projeto Conquista.
+- Champions selecionado: slides Edney usam estética Champions.
 
 ### PDF executivo
 
@@ -305,24 +355,15 @@ Requisitos:
 - Otimização para leitura e envio ao cliente.
 - Sem botões, animações ou elementos interativos.
 - Capa institucional.
-- Seções organizadas por contexto, escopo, investimento e encerramento.
-- Logos preservados sem recoloração, filtro ou distorção.
+- Dois slides/páginas sobre Edney Ulisses.
+- Página de proposta/escopo.
+- Página de investimento e condições.
+- Página final com validade, emissor e logo da marca.
 - Nome de arquivo amigável no padrão `proposta-[marca]-[cliente].pdf`.
-
-### Diferença obrigatória entre interativo e PDF
-
-| Item | Proposta interativa | PDF executivo |
-|---|---|---|
-| Finalidade | Visualização no sistema | Envio ao cliente |
-| Formato | Tela navegável | Documento paginado |
-| Animações | Sim, suaves | Não |
-| Botões | Sim | Não |
-| Layout | Dinâmico e visual | Estático e documental |
-| Leitura | Experiência digital | Clareza executiva |
 
 ---
 
-## 13. Regra de navegação agrupada
+## 14. Regra de navegação agrupada
 
 A navegação da Página 1 deve ser carregada a partir de:
 
@@ -337,21 +378,11 @@ O logo do Grand Prix de Vendas deve funcionar como agrupador para duas soluçõe
 | Grand Prix de Vendas | `grand-prix` | Evento físico |
 | Champions Festival | `champions` | Evento digital |
 
-### Desktop
-
-- Hover sobre o logo Grand Prix abre submenu.
-- Clique em uma opção seleciona a empresa e avança para a Página 2.
-
-### Mobile
-
-- Primeiro toque no logo Grand Prix abre submenu.
-- Toque em uma opção seleciona a empresa e avança para a Página 2.
-
 ---
 
-## 14. Regra global de uso dos logos
+## 15. Regra global de uso dos logos
 
-Todos os logos do sistema são **assets imutáveis de marca**.
+Todos os logos do sistema são assets imutáveis de marca, exceto pelo destaque temporário de hover da Página 1.
 
 ### Permitido
 
@@ -360,15 +391,15 @@ Todos os logos do sistema são **assets imutáveis de marca**.
 - Usar `object-fit: contain`.
 - Posicionar em containers, cards, cabeçalhos e capas.
 - Aplicar cores do tema somente ao fundo, bordas, textos, botões e elementos visuais externos ao logo.
+- Aplicar destaque temporário de hover na Página 1.
 
 ### Proibido
 
-- Recolorir logos.
-- Aplicar filtros CSS em logos.
-- Usar `mix-blend-mode` nos logos.
-- Alterar opacidade dos logos.
+- Recolorir permanentemente logos.
+- Aplicar filtros fora do hover temporário da Página 1.
+- Alterar opacidade fora do hover temporário da Página 1.
 - Converter logos para monocromático.
-- Substituir cores internas pelo tema da empresa.
+- Substituir cores internas pelo tema da empresa nas páginas 2 a 6.
 - Distorcer proporção.
 - Cortar área útil do logo.
 
@@ -376,7 +407,7 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 
 ---
 
-## 15. Decisões técnicas oficiais
+## 16. Decisões técnicas oficiais
 
 | Tema | Decisão |
 |---|---|
@@ -391,55 +422,51 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 | Página 1 | Portal institucional do Grupo GPV |
 | Página 2 | Cadastro do cliente |
 | Página 3 | Seleção de serviços e planos |
-| Página 4 | Dados comerciais |
+| Página 4 | Dados comerciais, validade e emissor |
 | Página 5 | Conferência e prévia da proposta |
 | Página 6 | Proposta final interativa e PDF executivo |
 | Navegação da Página 1 | `data/navigation.json` |
 | Seleção da empresa | Logos das marcas clicáveis |
 | Grand Prix de Vendas | Logo agrupador com submenu |
 | Champions Festival | Opção dentro do agrupamento Grand Prix |
-| Identidade visual da Página 1 | Grupo GPV, cor principal `#252324` |
+| Identidade visual da Página 1 | Grupo GPV |
+| Hover Página 1 | Cores da linha superior das marcas no Grupo GPV |
 | Identidade visual da Página 2 em diante | Empresa selecionada |
-| Logo GPV padrão | Branco sobre fundo escuro |
 | Tipografia | Padrão do sistema |
-| Tratamento dos logos | Preservar cores originais; nunca recolorir |
+| Tratamento dos logos | Preservar cores originais; exceção temporária apenas no hover da Página 1 |
 | Upload do logo do cliente | Local no navegador, sem backend |
 | Serviços | Desacoplados da interface via `data/services.json` |
-| Comercial | Valor, observações e prazo |
+| Comercial | Valor, observações, prazo, validade e emissor |
 | Prazo VELOCE | Obrigatório somente para VELOCE |
 | Conferência | Prévia com edição por bloco |
 | PDF | Documento diferente da interface, executivo e paginado |
-| Assinatura | Configurável via JSON |
 
 ---
 
-## 16. Critérios gerais de aceite
+## 17. Critérios gerais de aceite
 
 - O sistema roda localmente sem backend.
 - O sistema pode ser hospedado no Netlify.
+- Todas as páginas possuem animações e microinterações.
 - A Página 1 apresenta o Grupo GPV como marca dominante.
-- A Página 1 usa `#252324` como cor institucional principal.
-- A Página 1 usa `#A5A09C` como cor secundária institucional.
-- A Página 1 usa tipografia padrão do sistema.
-- A Página 1 usa o logo branco do Grupo GPV sobre fundo escuro.
+- A Página 1 usa hover colorido de pré-seleção por marca.
 - O logo Grand Prix abre submenu com Grand Prix de Vendas e Champions Festival.
-- O clique em Grand Prix de Vendas seleciona `grand-prix`.
-- O clique em Champions Festival seleciona `champions`.
 - A Página 2 abre com a identidade visual da empresa selecionada.
 - A Página 2 coleta nome, telefone com DDD, e-mail e logo do cliente.
 - A Página 3 carrega serviços conforme empresa selecionada.
-- A Página 4 coleta valor da proposta em `R$`, observações e prazo de entrega.
+- A Página 4 coleta valor, observações, prazo, validade e dados do emissor.
 - O prazo de entrega é obrigatório somente para VELOCE.
+- A validade da proposta é obrigatória para todas as marcas.
+- Os dados do emissor são obrigatórios.
 - A Página 5 gera prévia consolidada da proposta.
 - A Página 5 permite editar marca, cliente, serviços e comercial.
 - A edição por bloco retorna para a tela correta mantendo os dados preenchidos.
 - A Página 6 gera proposta final interativa, visual e animada.
+- A Página 6 inclui capa, dois slides de Edney, proposta, investimento e encerramento.
 - A Página 6 disponibiliza download em PDF.
 - O PDF é diferente da proposta interativa.
 - O PDF possui design premium, elegante e executivo.
 - O PDF é adequado para envio ao cliente.
-- Nenhum logo é recolorido, filtrado, distorcido ou convertido para outra versão visual não aprovada.
+- O PDF não possui botões, animações ou elementos interativos.
 - A identidade visual muda conforme a empresa selecionada a partir da Página 2.
-- O usuário consegue gerar proposta completa em PDF.
 - Os serviços podem ser editados via JSON.
-- O layout possui aparência premium, institucional e executiva.
