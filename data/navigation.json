@@ -1,0 +1,44 @@
+{
+  "pageOneNavigation": [
+    {
+      "id": "grand-prix-family",
+      "label": "Grand Prix de Vendas",
+      "logo": "assets/logos/grand-prix.png",
+      "type": "dropdown",
+      "hoverBehavior": "show-options",
+      "options": [
+        {
+          "companyId": "grand-prix",
+          "label": "Grand Prix de Vendas",
+          "description": "Evento físico de aceleração comercial automotiva"
+        },
+        {
+          "companyId": "champions",
+          "label": "Champions Festival",
+          "description": "Evento digital de aceleração comercial automotiva"
+        }
+      ]
+    },
+    {
+      "id": "veloce",
+      "label": "VELOCE",
+      "logo": "assets/logos/veloce.png",
+      "type": "direct",
+      "companyId": "veloce"
+    },
+    {
+      "id": "conquista",
+      "label": "Projeto Conquista",
+      "logo": "assets/logos/projeto-conquista.png",
+      "type": "direct",
+      "companyId": "conquista"
+    },
+    {
+      "id": "edney",
+      "label": "Edney Ulisses — Acelerador de Vendas",
+      "logo": "assets/logos/edney-ulisses.png",
+      "type": "direct",
+      "companyId": "edney"
+    }
+  ]
+}
