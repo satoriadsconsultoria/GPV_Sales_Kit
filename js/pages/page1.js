@@ -5,6 +5,7 @@ import { goToNextPage } from "../navigation.js";
 import { updateBrandHeaders } from "./shared.js";
 import { renderServices } from "./page3.js";
 import { refreshCommercialRules } from "./page4.js";
+import { setMotifForCompany } from "../motif.js";
 
 export function initPage1(data) {
   const grid = document.getElementById("brand-grid");
@@ -16,6 +17,23 @@ export function initPage1(data) {
     } else {
       grid.appendChild(buildDirectCard(item, data));
     }
+  });
+}
+
+// Leve inclinação 3D que acompanha o cursor — reforça a sensação premium/interativa
+// da tela de entrada sem exagerar (rotação limitada a poucos graus).
+function attachTilt(card) {
+  const MAX_DEG = 7;
+
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = `perspective(700px) rotateX(${(-py * MAX_DEG).toFixed(2)}deg) rotateY(${(px * MAX_DEG).toFixed(2)}deg) translateY(-4px) scale(1.02)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "";
   });
 }
 
@@ -39,6 +57,7 @@ function buildDirectCard(item, data) {
       select();
     }
   });
+  attachTilt(card);
 
   return card;
 }
@@ -101,6 +120,7 @@ function buildDropdownCard(item, data) {
   card.addEventListener("mouseleave", () => {
     if (!card.classList.contains("is-open")) card.style.setProperty("--card-hover-color", "");
   });
+  attachTilt(card);
 
   wrapper.appendChild(card);
   wrapper.appendChild(submenu);
@@ -113,6 +133,7 @@ function selectCompany(companyId, data) {
 
   appState.company = company;
   applyTheme(company.theme);
+  setMotifForCompany(company.id);
   updateBrandHeaders(company);
   renderServices(company.id, data);
   refreshCommercialRules();

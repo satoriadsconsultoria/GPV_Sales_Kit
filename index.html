@@ -16,16 +16,19 @@
 
 <div id="toast-root" class="toast-root" aria-live="polite"></div>
 
+<div id="page-motif" class="page-motif" aria-hidden="true"></div>
+
 <div id="app">
 
   <nav id="progress-nav" class="progress-nav is-hidden" aria-label="Progresso da proposta">
-    <ol class="progress-nav__list">
-      <li class="progress-nav__item" data-step="2"><span class="progress-nav__dot"></span><span class="progress-nav__label">Cliente</span></li>
-      <li class="progress-nav__item" data-step="3"><span class="progress-nav__dot"></span><span class="progress-nav__label">Serviços</span></li>
-      <li class="progress-nav__item" data-step="4"><span class="progress-nav__dot"></span><span class="progress-nav__label">Comercial</span></li>
-      <li class="progress-nav__item" data-step="5"><span class="progress-nav__dot"></span><span class="progress-nav__label">Conferência</span></li>
-      <li class="progress-nav__item" data-step="6"><span class="progress-nav__dot"></span><span class="progress-nav__label">Proposta</span></li>
-    </ol>
+    <div class="progress-nav__list">
+      <div class="progress-nav__track"><div id="progress-fill" class="progress-nav__fill"></div></div>
+      <div class="progress-nav__item" data-step="2"><span class="progress-nav__dot"></span><span class="progress-nav__label">Cliente</span></div>
+      <div class="progress-nav__item" data-step="3"><span class="progress-nav__dot"></span><span class="progress-nav__label">Serviços</span></div>
+      <div class="progress-nav__item" data-step="4"><span class="progress-nav__dot"></span><span class="progress-nav__label">Comercial</span></div>
+      <div class="progress-nav__item" data-step="5"><span class="progress-nav__dot"></span><span class="progress-nav__label">Conferência</span></div>
+      <div class="progress-nav__item" data-step="6"><span class="progress-nav__dot"></span><span class="progress-nav__label">Proposta</span></div>
+    </div>
   </nav>
 
   <main id="page-root">
@@ -39,6 +42,30 @@
         <p class="institutional__subtitle animate-fade-in-up">Escolha a empresa do Grupo GPV para iniciar a proposta comercial.</p>
 
         <div id="brand-grid" class="brand-grid"></div>
+
+        <div class="feature-strip stagger">
+          <div class="feature-strip__item">
+            <span class="feature-strip__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <span class="feature-strip__title">Padronizada</span>
+            <span class="feature-strip__description">Identidade visual e estrutura consistentes em toda proposta.</span>
+          </div>
+          <div class="feature-strip__item">
+            <span class="feature-strip__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
+            </span>
+            <span class="feature-strip__title">Rápida</span>
+            <span class="feature-strip__description">Proposta comercial executiva pronta em poucos minutos.</span>
+          </div>
+          <div class="feature-strip__item">
+            <span class="feature-strip__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 15 9l7 1-5 5 1.5 7-6.5-3.5L5.5 22 7 15 2 10l7-1z"/></svg>
+            </span>
+            <span class="feature-strip__title">Premium</span>
+            <span class="feature-strip__description">Design executivo com exportação em PDF pronta para envio.</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -53,43 +80,65 @@
           </div>
         </header>
 
-        <form id="form-client" class="form-card animate-fade-in-up" novalidate>
-          <div class="form-field">
-            <label for="client-name">Nome do cliente <span class="required">*</span></label>
-            <input type="text" id="client-name" name="name" autocomplete="off" required />
-            <span class="form-error" data-error-for="client-name"></span>
-          </div>
-
-          <div class="form-field">
-            <label for="client-phone">Telefone com DDD <span class="required">*</span></label>
-            <input type="tel" id="client-phone" name="phone" placeholder="(00) 00000-0000" required />
-            <span class="form-error" data-error-for="client-phone"></span>
-          </div>
-
-          <div class="form-field">
-            <label for="client-email">E-mail <span class="required">*</span></label>
-            <input type="email" id="client-email" name="email" required />
-            <span class="form-error" data-error-for="client-email"></span>
-          </div>
-
-          <div class="form-field">
-            <label for="client-logo">Logotipo do cliente <span class="required">*</span></label>
-            <div class="upload-box" id="upload-box">
-              <input type="file" id="client-logo" name="logo" accept="image/*" required />
-              <div class="upload-box__hint">
-                <span class="upload-box__icon">⬆</span>
-                <span>Clique ou arraste o logo do cliente (PNG, JPG ou SVG)</span>
-              </div>
-              <img id="client-logo-preview" class="upload-box__preview is-hidden" alt="Prévia do logo do cliente" />
+        <div class="split-layout">
+          <form id="form-client" class="form-card animate-fade-in-up" novalidate>
+            <div class="form-field">
+              <label for="client-name">Nome do cliente <span class="required">*</span></label>
+              <input type="text" id="client-name" name="name" autocomplete="off" required />
+              <span class="form-error" data-error-for="client-name"></span>
             </div>
-            <span class="form-error" data-error-for="client-logo"></span>
-          </div>
 
-          <div class="form-actions">
-            <button type="button" class="btn btn--ghost" data-nav-back>Voltar</button>
-            <button type="submit" class="btn btn--primary">Continuar</button>
-          </div>
-        </form>
+            <div class="form-field">
+              <label for="client-phone">Telefone com DDD <span class="required">*</span></label>
+              <input type="tel" id="client-phone" name="phone" placeholder="(00) 00000-0000" required />
+              <span class="form-error" data-error-for="client-phone"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="client-email">E-mail <span class="required">*</span></label>
+              <input type="email" id="client-email" name="email" required />
+              <span class="form-error" data-error-for="client-email"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="client-logo">Logotipo do cliente <span class="required">*</span></label>
+              <div class="upload-box" id="upload-box">
+                <input type="file" id="client-logo" name="logo" accept="image/*" required />
+                <div class="upload-box__hint">
+                  <span class="upload-box__icon">⬆</span>
+                  <span>Clique ou arraste o logo do cliente (PNG, JPG ou SVG)</span>
+                </div>
+                <img id="client-logo-preview" class="upload-box__preview is-hidden" alt="Prévia do logo do cliente" />
+              </div>
+              <span class="form-error" data-error-for="client-logo"></span>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn--ghost" data-nav-back>Voltar</button>
+              <button type="submit" class="btn btn--primary">Continuar</button>
+            </div>
+          </form>
+
+          <aside class="side-panel animate-fade-in-up" id="page2-side-panel">
+            <div class="side-panel__brand">
+              <img id="side-panel-logo" class="side-panel__logo" src="" alt="" />
+              <h3 id="side-panel-name"></h3>
+              <p id="side-panel-description"></p>
+            </div>
+            <div class="side-panel__divider"></div>
+            <div>
+              <span class="side-panel__label">Prévia do cliente</span>
+              <div class="side-panel__card">
+                <img id="side-client-logo" class="side-panel__card-logo is-hidden" alt="Logo do cliente" />
+                <span id="side-client-placeholder" class="side-panel__card-placeholder"></span>
+                <div class="side-panel__card-text">
+                  <strong id="side-client-name">Nome do cliente</strong>
+                  <span id="side-client-contact">Preencha os dados ao lado</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
 
@@ -124,6 +173,7 @@
           </div>
         </header>
 
+        <div class="split-layout">
         <form id="form-commercial" class="form-card animate-fade-in-up" novalidate>
           <div class="form-grid">
             <div class="form-field">
@@ -179,6 +229,19 @@
             <button type="submit" class="btn btn--primary">Continuar</button>
           </div>
         </form>
+
+          <aside class="side-panel animate-fade-in-up" id="page4-side-panel">
+            <div class="side-panel__brand">
+              <img id="page4-side-logo" class="side-panel__logo" src="" alt="" />
+              <h3 id="page4-side-name"></h3>
+            </div>
+            <div class="side-panel__divider"></div>
+            <div>
+              <span class="side-panel__label">Resumo da proposta</span>
+              <div id="page4-summary-rows"></div>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
 

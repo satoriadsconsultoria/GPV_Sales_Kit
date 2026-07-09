@@ -1,5 +1,6 @@
 import { appState } from "../state.js";
 import { goToNextPage } from "../navigation.js";
+import { getSelectedService } from "./page3.js";
 import {
   isValidEmail,
   isValidPhone,
@@ -28,10 +29,18 @@ export function initPage4() {
 
   valueInput.addEventListener("input", () => {
     valueInput.value = formatCurrencyInput(valueInput.value);
+    updateSummary();
   });
 
   issuerPhoneInput.addEventListener("input", () => {
     issuerPhoneInput.value = formatPhoneInput(issuerPhoneInput.value);
+  });
+
+  deadlineInput.addEventListener("input", updateSummary);
+  document.getElementById("proposal-validity").addEventListener("input", updateSummary);
+
+  document.addEventListener("gpv:page-enter", (e) => {
+    if (e.detail.page === 4) updateSummary();
   });
 
   form.addEventListener("submit", (e) => {
@@ -62,6 +71,28 @@ export function refreshCommercialRules() {
   const field = document.getElementById("delivery-deadline-field");
   field.dataset.required = String(isVeloce);
   document.getElementById("delivery-deadline").required = isVeloce;
+  updateSummary();
+}
+
+function summaryRow(label, value) {
+  return `<div class="side-panel__summary-row"><span>${label}</span><span>${value}</span></div>`;
+}
+
+function updateSummary() {
+  const container = document.getElementById("page4-summary-rows");
+  if (!container) return;
+
+  const service = getSelectedService();
+  const value = document.getElementById("proposal-value").value.trim();
+  const deadline = document.getElementById("delivery-deadline").value.trim();
+  const validity = document.getElementById("proposal-validity").value.trim();
+
+  let html = summaryRow("Serviço/Plano", service ? service.selectionLabel : "—");
+  html += summaryRow("Valor", value || "—");
+  if (deadline) html += summaryRow("Prazo", deadline);
+  if (validity) html += summaryRow("Validade", validity);
+
+  container.innerHTML = html;
 }
 
 function validatePage4() {

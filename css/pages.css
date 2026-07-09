@@ -1,7 +1,15 @@
 /* Ajustes finos específicos de cada página que não cabem em components/layout */
 
 .services-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  align-items: start;
+  gap: var(--space-sm);
   margin-bottom: var(--space-md);
+}
+
+.services-container .service-card {
+  margin-bottom: 0;
 }
 
 .review-blocks {
@@ -18,4 +26,184 @@
 
 .brand-card__logo--group {
   height: 44px;
+}
+
+.investment-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.feature-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin-top: var(--space-lg);
+}
+
+.feature-strip__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.feature-strip__icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--color-accent);
+}
+
+.feature-strip__title {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.feature-strip__description {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+/* Layout em duas colunas — formulário + painel lateral de contexto/prévia */
+.split-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  align-items: start;
+  gap: var(--space-md);
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(6px);
+}
+
+.side-panel__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+}
+
+.side-panel__logo {
+  height: 56px;
+  max-width: 180px;
+  object-fit: contain;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 8px 14px;
+  box-sizing: content-box;
+}
+
+.side-panel__brand h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.side-panel__brand p {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.side-panel__divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.side-panel__label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.side-panel__card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+  transition: border-color var(--duration-base) var(--ease-premium);
+}
+
+.side-panel__card-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.95);
+  flex-shrink: 0;
+}
+
+.side-panel__card-logo.is-hidden {
+  display: none;
+}
+
+.side-panel__card-placeholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.side-panel__card-text strong {
+  display: block;
+  font-size: 0.9rem;
+}
+
+.side-panel__card-text span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-top: 0.15rem;
+}
+
+.side-panel__summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.side-panel__summary-row:last-child {
+  border-bottom: none;
+}
+
+.side-panel__summary-row span:first-child {
+  color: var(--color-muted);
+}
+
+.side-panel__summary-row span:last-child {
+  font-weight: 700;
+  text-align: right;
+}
+
+@media (max-width: 880px) {
+  .split-layout {
+    grid-template-columns: 1fr;
+  }
 }

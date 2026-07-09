@@ -6,14 +6,21 @@ const FIELD_IDS = ["client-name", "client-phone", "client-email", "client-logo"]
 
 export function initPage2() {
   const form = document.getElementById("form-client");
+  const nameInput = document.getElementById("client-name");
   const phoneInput = document.getElementById("client-phone");
+  const emailInput = document.getElementById("client-email");
   const uploadBox = document.getElementById("upload-box");
   const fileInput = document.getElementById("client-logo");
   const preview = document.getElementById("client-logo-preview");
   const hint = uploadBox.querySelector(".upload-box__hint");
 
+  [nameInput, phoneInput, emailInput].forEach((input) => {
+    input.addEventListener("input", updateSidePreview);
+  });
+
   phoneInput.addEventListener("input", () => {
     phoneInput.value = formatPhoneInput(phoneInput.value);
+    updateSidePreview();
   });
 
   fileInput.addEventListener("change", () => {
@@ -60,8 +67,32 @@ function handleLogoFile(file, preview, hint) {
     preview.src = reader.result;
     preview.classList.remove("is-hidden");
     hint.classList.add("is-hidden");
+    updateSidePreview();
   };
   reader.readAsDataURL(file);
+}
+
+// Painel lateral reage em tempo real ao que o usuário digita, reforçando a
+// sensação de "prévia ao vivo" da proposta.
+function updateSidePreview() {
+  const name = document.getElementById("client-name").value.trim();
+  const phone = document.getElementById("client-phone").value.trim();
+  const email = document.getElementById("client-email").value.trim();
+
+  document.getElementById("side-client-name").textContent = name || "Nome do cliente";
+  document.getElementById("side-client-contact").textContent =
+    [phone, email].filter(Boolean).join(" · ") || "Preencha os dados ao lado";
+
+  const logoEl = document.getElementById("side-client-logo");
+  const placeholderEl = document.getElementById("side-client-placeholder");
+  if (appState.client.logoPreviewUrl) {
+    logoEl.src = appState.client.logoPreviewUrl;
+    logoEl.classList.remove("is-hidden");
+    placeholderEl.style.display = "none";
+  } else {
+    logoEl.classList.add("is-hidden");
+    placeholderEl.style.display = "";
+  }
 }
 
 function validatePage2() {

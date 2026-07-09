@@ -13,10 +13,30 @@ export function buildProposal(data) {
   const ctx = collectProposalContext(data);
   document.getElementById("proposal-viewer").innerHTML = "";
   document.getElementById("proposal-viewer").appendChild(buildInteractiveProposal(ctx));
+  animateInvestmentCounter(ctx.commercial.proposalValue.raw);
 
   const pdfRoot = document.getElementById("pdf-template-root");
   pdfRoot.innerHTML = "";
   pdfRoot.appendChild(buildPdfTemplate(ctx));
+}
+
+// Conta do zero até o valor da proposta — pequeno toque de interatividade
+// no momento de maior impacto da proposta final.
+function animateInvestmentCounter(target) {
+  const el = document.getElementById("investment-value-counter");
+  if (!el || !target) return;
+
+  const duration = 900;
+  const start = performance.now();
+
+  function tick(now) {
+    const elapsed = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - elapsed, 3);
+    el.textContent = (target * eased).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    if (elapsed < 1) requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
 }
 
 function collectProposalContext(data) {
@@ -76,7 +96,7 @@ function buildInteractiveProposal(ctx) {
   wrapper.appendChild(section(
     "Investimento e Condições",
     `<div class="form-card">
-      <div style="font-size:2rem;font-weight:800;color:var(--color-accent);">${ctx.commercial.proposalValue.formatted}</div>
+      <div id="investment-value-counter" class="investment-value">R$ 0,00</div>
       ${ctx.commercial.notes ? `<p style="margin-top:12px;">${ctx.commercial.notes}</p>` : ""}
       ${ctx.commercial.deliveryDeadline ? row("Prazo de entrega", ctx.commercial.deliveryDeadline) : ""}
       ${row("Validade da proposta", ctx.commercial.proposalValidity)}

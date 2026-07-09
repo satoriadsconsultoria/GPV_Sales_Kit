@@ -1,12 +1,51 @@
 #app {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   width: 100%;
 }
 
 .page {
+  position: relative;
   min-height: 100vh;
   width: 100%;
 }
+
+/* Camada decorativa de fundo — foto temática real por marca (F1, prédios, gráficos).
+   Uma camada escura sobre a foto garante que o conteúdo continue perfeitamente legível. */
+.page-motif {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-premium), background-image var(--duration-slow) var(--ease-premium);
+}
+
+.page-motif.is-visible {
+  opacity: 1;
+}
+
+.page-motif--f1 {
+  background-image: linear-gradient(160deg, rgba(6, 7, 9, 0.86) 0%, rgba(6, 7, 9, 0.55) 45%, rgba(6, 7, 9, 0.88) 100%),
+                     url("../assets/backgrounds/motif-f1.jpg");
+}
+
+.page-motif--buildings {
+  background-image: linear-gradient(160deg, rgba(6, 7, 9, 0.85) 0%, rgba(6, 7, 9, 0.5) 45%, rgba(6, 7, 9, 0.88) 100%),
+                     url("../assets/backgrounds/motif-buildings.jpg");
+  background-position: bottom center;
+}
+
+.page-motif--charts {
+  background-image: linear-gradient(160deg, rgba(6, 7, 9, 0.82) 0%, rgba(6, 7, 9, 0.5) 45%, rgba(6, 7, 9, 0.86) 100%),
+                     url("../assets/backgrounds/motif-charts.jpg");
+  background-position: top right;
+}
+
 
 .page-shell {
   max-width: var(--max-content-width);
@@ -110,6 +149,7 @@
 }
 
 .progress-nav__list {
+  position: relative;
   display: flex;
   justify-content: center;
   gap: var(--space-md);
@@ -117,7 +157,28 @@
   margin: 0 auto;
 }
 
+.progress-nav__track {
+  position: absolute;
+  top: 4px;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  z-index: 0;
+}
+
+.progress-nav__fill {
+  height: 100%;
+  width: 0%;
+  background: var(--color-accent);
+  border-radius: 2px;
+  transition: width var(--duration-slow) var(--ease-premium);
+}
+
 .progress-nav__item {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -137,16 +198,18 @@
   height: 8px;
   border-radius: 50%;
   background: var(--color-muted);
-  transition: background-color var(--duration-fast) var(--ease-premium);
-}
-
-.progress-nav__item.is-active .progress-nav__dot {
-  background: var(--color-accent);
+  transition: background-color var(--duration-fast) var(--ease-premium), box-shadow var(--duration-fast) var(--ease-premium), transform var(--duration-fast) var(--ease-premium);
 }
 
 .progress-nav__item.is-done .progress-nav__dot {
   background: var(--color-accent);
   opacity: 0.6;
+}
+
+.progress-nav__item.is-active .progress-nav__dot {
+  background: var(--color-accent);
+  transform: scale(1.35);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12);
 }
 
 /* Página 6 — Proposta final */
