@@ -1,5 +1,47 @@
 # Logos do projeto
 
+## Regra obrigatória
+
+Todos os logos do projeto devem ser tratados como **assets imutáveis de marca**.
+
+As cores informadas nos arquivos de configuração devem ser usadas em:
+
+- Fundos.
+- Cards.
+- Botões.
+- Bordas.
+- Textos.
+- Linhas.
+- Elementos gráficos.
+- Detalhes de interface.
+
+As cores informadas **não devem ser aplicadas sobre os logos**.
+
+---
+
+## Proibido
+
+- Recolorir logos.
+- Aplicar filtros CSS.
+- Aplicar `mix-blend-mode`.
+- Alterar opacidade.
+- Converter para monocromático.
+- Substituir cores internas do logo pelas cores do tema.
+- Distorcer proporção.
+- Cortar área útil do logo.
+
+---
+
+## Permitido
+
+- Redimensionar proporcionalmente.
+- Usar `object-fit: contain`.
+- Aplicar margem externa.
+- Posicionar em cards, cabeçalhos, capas e seções.
+- Aplicar cor no container externo, nunca no logo.
+
+---
+
 ## Grupo GPV
 
 Arquivo oficial definido para uso na Página 1:
@@ -28,4 +70,4 @@ assets/logos/grupo-gpv.png
 
 ## Observação técnica
 
-O arquivo `grupo-gpv.svg` foi criado como versão vetorial da régua institucional enviada pelo usuário, garantindo carregamento direto no VS Code, Claude Code e Netlify sem dependência externa.
+Durante a construção, os logos devem ser inseridos como imagens preservadas, sem `filter`, `opacity`, `mix-blend-mode`, alteração de `fill`, alteração de `stroke` ou qualquer manipulação visual interna.
