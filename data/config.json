@@ -1,0 +1,23 @@
+{
+  "responsible": {
+    "name": "Rafael",
+    "role": "Gerente Comercial",
+    "company": "Grupo GPV",
+    "phone": "",
+    "email": "",
+    "signatureImage": "assets/signatures/assinatura-rafael.png",
+    "qrCodeImage": ""
+  },
+  "pdf": {
+    "filenamePrefix": "Proposta_Comercial_GPV",
+    "format": "a4",
+    "orientation": "portrait",
+    "margin": 0,
+    "quality": 1
+  },
+  "system": {
+    "projectName": "GPV Sales Kit",
+    "repository": "GPV_Sales_Kit",
+    "version": "1.0.0"
+  }
+}
