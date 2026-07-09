@@ -2,9 +2,9 @@
 
 ## Objetivo
 
-A Página 3 será responsável pela seleção dos serviços que farão parte da proposta comercial.
+A Página 3 será responsável pela seleção dos serviços ou planos que farão parte da proposta comercial.
 
-Os serviços exibidos devem depender da marca selecionada na Página 1 e carregada a partir da Página 2.
+Os itens exibidos devem depender da marca selecionada na Página 1 e carregada a partir da Página 2.
 
 A estrutura deve ser dinâmica e baseada em `data/services.json`.
 
@@ -31,10 +31,6 @@ Ao marcar um serviço/plano, o sistema deve exibir abaixo os detalhes completos 
 Os detalhes podem incluir:
 
 - Serviços oferecidos.
-- Escopo.
-- Entregáveis.
-- Diferenciais.
-- Premissas.
 - Condições para realização.
 - Campo personalizado de serviços.
 
@@ -46,7 +42,7 @@ Os detalhes podem incluir:
 appState.selectedServices = []
 ```
 
-Ao selecionar um serviço:
+Exemplo de seleção:
 
 ```js
 appState.selectedServices = [
@@ -78,9 +74,7 @@ Grand Prix de Vendas
   - Serviços Oferecidos.
   - Condições para Realização do Evento.
 
----
-
-## Grand Prix de Vendas — Serviços Oferecidos
+### Serviços Oferecidos
 
 - Planejamento de todo evento e distribuição de equipe.
 - Criação de todas as artes para divulgação do evento, incluindo mais de 300 anúncios.
@@ -97,9 +91,7 @@ Grand Prix de Vendas
 - Controle de fluxo de loja nos dias do evento.
 - Equipe de recepção do evento.
 
----
-
-## Grand Prix de Vendas — Condições para Realização do Evento
+### Condições para Realização do Evento
 
 - Espaço para evento e treinamento.
 - Espaço para equipe do GP de Vendas no showroom.
@@ -138,53 +130,33 @@ No caso da **VELOCE**, a Página 3 deve exibir planos comerciais.
 - No Plano Diamond, ao selecionar, exibir uma caixa de texto para digitar os serviços personalizados.
 - O Plano Diamond não possui lista fixa de serviços.
 
----
-
-## VELOCE — Plano Start
-
-### Serviços Oferecidos
+### Plano Start — Serviços Oferecidos
 
 - 2 criativos por mês.
 - Tráfego pago Meta.
 - 1 reunião por mês.
 
----
-
-## VELOCE — Plano Bronze
-
-### Serviços Oferecidos
+### Plano Bronze — Serviços Oferecidos
 
 - 8 criativos por mês.
 - Tráfego pago Meta.
 - 1 reunião por mês.
 
----
-
-## VELOCE — Plano Prata
-
-### Serviços Oferecidos
+### Plano Prata — Serviços Oferecidos
 
 - 20 criativos por mês.
 - Tráfego pago Meta e Google.
 - 12 posts orgânicos por mês — Motion, post único ou carrossel.
 - 2 reuniões por mês.
 
----
-
-## VELOCE — Plano Ouro
-
-### Serviços Oferecidos
+### Plano Ouro — Serviços Oferecidos
 
 - 50 criativos por mês.
 - Tráfego pago Meta, TikTok, LinkedIn e Google.
 - 12 posts orgânicos por mês — Motion, post único ou carrossel.
 - 3 reuniões por mês.
 
----
-
-## VELOCE — Plano Diamond
-
-### Serviços Oferecidos
+### Plano Diamond — Serviços Oferecidos
 
 O Plano Diamond é personalizado.
 
@@ -221,9 +193,7 @@ Champions Festival
 - Ao marcar o serviço, abrir abaixo os detalhes completos.
 - Os detalhes devem exibir a seção Serviços Oferecidos.
 
----
-
-## Champions Festival — Serviços Oferecidos
+### Serviços Oferecidos
 
 - Planejamento, estratégia e execução das campanhas de performance e captação dos leads.
 - Criação de todas as artes para divulgação do evento, incluindo mais de 350 anúncios.
@@ -261,6 +231,38 @@ Placeholder sugerido:
 
 ```txt
 Digite os serviços que serão incluídos na proposta do Projeto Conquista.
+```
+
+---
+
+## Regra específica — Edney Ulisses — Acelerador de Vendas
+
+No caso do **Edney Ulisses — Acelerador de Vendas**, existe somente uma opção disponível na Página 3.
+
+### Serviço exibido
+
+```txt
+Edney Ulisses - Acelerador de Vendas
+```
+
+### Comportamento
+
+- Exibir apenas uma opção de seleção.
+- A opção deve funcionar como checkbox/fleg.
+- Ao marcar Edney Ulisses - Acelerador de Vendas, abrir uma caixa de texto para digitar os serviços da proposta.
+- O conteúdo digitado será usado como escopo personalizado do Edney Ulisses - Acelerador de Vendas.
+- O sistema deve impedir avanço se o campo estiver vazio.
+
+Campo obrigatório:
+
+```txt
+Serviços do Edney Ulisses - Acelerador de Vendas
+```
+
+Placeholder sugerido:
+
+```txt
+Digite os serviços que serão incluídos na proposta do Edney Ulisses - Acelerador de Vendas.
 ```
 
 ---
@@ -315,6 +317,9 @@ Digite os serviços que serão incluídos na proposta do Projeto Conquista.
 | P3-RF20 | No Projeto Conquista, exibir somente a opção Projeto Conquista |
 | P3-RF21 | Ao selecionar Projeto Conquista, exibir textarea para serviços personalizados |
 | P3-RF22 | No Projeto Conquista, impedir avanço se o campo personalizado estiver vazio |
+| P3-RF23 | No Edney Ulisses, exibir somente a opção Edney Ulisses - Acelerador de Vendas |
+| P3-RF24 | Ao selecionar Edney Ulisses - Acelerador de Vendas, exibir textarea para serviços personalizados |
+| P3-RF25 | No Edney Ulisses, impedir avanço se o campo personalizado estiver vazio |
 
 ---
 
@@ -335,6 +340,7 @@ Digite os serviços que serão incluídos na proposta do Projeto Conquista.
 | Nenhum serviço encontrado para a empresa | Nenhum serviço cadastrado para esta marca. |
 | Plano Diamond sem serviços digitados | Informe os serviços personalizados do Plano Diamond. |
 | Projeto Conquista sem serviços digitados | Informe os serviços do Projeto Conquista. |
+| Edney Ulisses sem serviços digitados | Informe os serviços do Edney Ulisses - Acelerador de Vendas. |
 
 ---
 
@@ -351,6 +357,8 @@ A Página 3 será considerada aprovada se:
 - No Champions Festival, exibir Serviços Oferecidos após seleção.
 - No Projeto Conquista, exibir somente a opção Projeto Conquista.
 - No Projeto Conquista, exibir campo livre para digitar os serviços personalizados.
+- No Edney Ulisses, exibir somente a opção Edney Ulisses - Acelerador de Vendas.
+- No Edney Ulisses, exibir campo livre para digitar os serviços personalizados.
 - Permitir marcar/flegar o serviço ou plano.
 - Salvar a seleção em `appState.selectedServices`.
 - Impedir avanço sem serviço/plano selecionado.
