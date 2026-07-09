@@ -6,6 +6,8 @@
     "tag": "Evento Físico Automotivo",
     "logo": "assets/logos/grand-prix.png",
     "background": "assets/backgrounds/grand-prix-bg.jpg",
+    "backgroundRequired": false,
+    "backgroundFallback": "theme-gradient",
     "navigationGroupId": "grand-prix-family",
     "theme": {
       "primaryColor": "#FA0115",
@@ -24,6 +26,8 @@
     "tag": "Evento Digital Automotivo",
     "logo": "assets/logos/champions-festival.png",
     "background": "assets/backgrounds/champions-bg.jpg",
+    "backgroundRequired": false,
+    "backgroundFallback": "theme-gradient",
     "navigationGroupId": "grand-prix-family",
     "parentBrandId": "grand-prix",
     "theme": {
@@ -50,6 +54,8 @@
     "tag": "Marketing e Vendas Automotivo",
     "logo": "assets/logos/veloce.png",
     "background": "assets/backgrounds/veloce-bg.jpg",
+    "backgroundRequired": false,
+    "backgroundFallback": "theme-gradient",
     "theme": {
       "primaryColor": "#32D9D9",
       "secondaryColor": "#222828",
@@ -67,6 +73,8 @@
     "tag": "Evento Comercial Imobiliário",
     "logo": "assets/logos/projeto-conquista.png",
     "background": "assets/backgrounds/conquista-bg.jpg",
+    "backgroundRequired": false,
+    "backgroundFallback": "theme-gradient",
     "theme": {
       "primaryColor": "#0A0A0A",
       "secondaryColor": "#FFFFFF",
@@ -84,6 +92,8 @@
     "tag": "Acelerador de Vendas",
     "logo": "assets/logos/edney-ulisses.png",
     "background": "assets/backgrounds/edney-bg.jpg",
+    "backgroundRequired": false,
+    "backgroundFallback": "theme-gradient",
     "theme": {
       "primaryColor": "#D8DBD3",
       "secondaryColor": "#1B221D",
