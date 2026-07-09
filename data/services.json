@@ -182,5 +182,29 @@
         "customServices"
       ]
     }
+  },
+  {
+    "id": "champions-festival",
+    "companyId": "champions",
+    "name": "Champions Festival",
+    "selectionLabel": "Champions Festival",
+    "description": "Evento digital de aceleração comercial automotiva com foco em captação de leads, prospecção, agendamento e performance comercial.",
+    "objective": "Planejar, executar e otimizar a operação digital do Champions Festival, integrando campanhas de performance, criativos, automação, prospecção e agendamento.",
+    "selectionType": "single-checkbox",
+    "pageThreeBehavior": {
+      "showOnlyOneOption": true,
+      "showDetailsAfterSelection": true,
+      "detailsSections": [
+        "offeredServices"
+      ]
+    },
+    "offeredServicesTitle": "Serviços Oferecidos",
+    "offeredServices": [
+      "Planejamento, estratégia e execução das campanhas de performance e captação dos leads.",
+      "Criação de todas as artes para divulgação do evento, incluindo mais de 350 anúncios.",
+      "Setup de automação de prospecção e agendamento.",
+      "Prospecção dos clientes captados pela campanha de tráfego pago.",
+      "Otimização diária de todas as campanhas de performance."
+    ]
   }
 ]
