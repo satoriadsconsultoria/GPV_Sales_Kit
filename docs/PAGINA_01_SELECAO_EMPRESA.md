@@ -56,6 +56,37 @@ assets/logos/grupo-gpv.svg
 
 ---
 
+## Navegação das marcas
+
+A Página 1 deve carregar a navegação a partir de:
+
+```txt
+data/navigation.json
+```
+
+### Regra especial — Grand Prix de Vendas / Champions Festival
+
+No logo institucional do Grupo GPV existe somente o ícone do **Grand Prix de Vendas**.
+
+Por isso, na Página 1, o logo do **Grand Prix de Vendas** deve funcionar como um item agrupador.
+
+### Comportamento obrigatório
+
+Ao passar o mouse sobre o logo do **Grand Prix de Vendas**, o sistema deve abrir um submenu com duas opções:
+
+| Opção | Destino |
+|---|---|
+| Grand Prix de Vendas | `companyId: grand-prix` |
+| Champions Festival | `companyId: champions` |
+
+Ao clicar em uma das opções, o sistema deve seguir o fluxo normalmente para a Página 2, carregando a identidade visual, os serviços e a estrutura da proposta da opção selecionada.
+
+### Regra mobile
+
+Em dispositivos mobile, como não existe hover, o primeiro toque no logo do Grand Prix de Vendas deve abrir as opções. O segundo toque em uma opção deve selecionar a empresa e avançar para a Página 2.
+
+---
+
 ## Regra obrigatória de preservação de logos
 
 Os logos devem ser exibidos exatamente como foram fornecidos.
@@ -109,11 +140,10 @@ Essa regra vale para:
 
 Exibir os logos clicáveis:
 
-1. Grand Prix de Vendas.
-2. Champions Festival.
-3. VELOCE.
-4. Projeto Conquista.
-5. Edney Ulisses — Acelerador de Vendas.
+1. Grand Prix de Vendas — com submenu Grand Prix de Vendas / Champions Festival.
+2. VELOCE.
+3. Projeto Conquista.
+4. Edney Ulisses — Acelerador de Vendas.
 
 ---
 
@@ -145,11 +175,11 @@ Proibido no logo:
 - Recoloração.
 - Blend mode.
 
-### Clique em uma marca
+### Clique em uma marca/opção
 
-Ao clicar em uma marca, o sistema deve:
+Ao clicar em uma marca direta ou em uma opção do submenu, o sistema deve:
 
-1. Identificar a empresa pelo `id`.
+1. Identificar a empresa pelo `companyId`.
 2. Salvar a empresa em `appState.selectedCompany`.
 3. Pré-carregar os serviços vinculados ao `companyId`.
 4. Carregar a identidade visual da empresa selecionada para as próximas páginas.
@@ -165,14 +195,17 @@ Ao clicar em uma marca, o sistema deve:
 | P1-RF02 | Aplicar `#252324` como base visual da Página 1 |
 | P1-RF03 | Usar `#A5A09C` como cor secundária institucional |
 | P1-RF04 | Usar tipografia padrão do sistema |
-| P1-RF05 | Exibir os logos das empresas cadastradas no `companies.json` |
-| P1-RF06 | Tornar cada logo de empresa clicável |
-| P1-RF07 | Permitir seleção de apenas uma empresa |
-| P1-RF08 | Salvar empresa selecionada no `appState.selectedCompany` |
-| P1-RF09 | Carregar serviços vinculados ao `companyId` |
-| P1-RF10 | Aplicar identidade visual da empresa selecionada a partir da Página 2 |
-| P1-RF11 | Avançar automaticamente para a Página 2 após clique na marca |
-| P1-RF12 | Preservar as cores originais de todos os logos |
+| P1-RF05 | Carregar os itens de navegação a partir de `data/navigation.json` |
+| P1-RF06 | Exibir o logo Grand Prix como agrupador de Grand Prix de Vendas e Champions Festival |
+| P1-RF07 | Abrir submenu no hover do logo Grand Prix em desktop |
+| P1-RF08 | Abrir submenu no toque do logo Grand Prix em mobile |
+| P1-RF09 | Selecionar `grand-prix` ao clicar em Grand Prix de Vendas |
+| P1-RF10 | Selecionar `champions` ao clicar em Champions Festival |
+| P1-RF11 | Salvar empresa selecionada no `appState.selectedCompany` |
+| P1-RF12 | Carregar serviços vinculados ao `companyId` |
+| P1-RF13 | Aplicar identidade visual da empresa selecionada a partir da Página 2 |
+| P1-RF14 | Avançar automaticamente para a Página 2 após clique na opção |
+| P1-RF15 | Preservar as cores originais de todos os logos |
 
 ---
 
@@ -186,8 +219,8 @@ A Página 1 será considerada aprovada se:
 - A cor secundária institucional é `#A5A09C`.
 - A tipografia segue o padrão do sistema.
 - As cores de apoio são usadas somente como detalhe visual externo ao logo.
-- Todos os logos das marcas são clicáveis.
+- O logo Grand Prix abre submenu com Grand Prix de Vendas e Champions Festival.
+- O clique em Grand Prix de Vendas salva `grand-prix` e avança para a Página 2.
+- O clique em Champions Festival salva `champions` e avança para a Página 2.
 - Nenhum logo sofre alteração de cor, filtro, opacidade ou proporção.
-- O clique em uma marca salva a empresa selecionada.
-- O clique em uma marca avança automaticamente para a Página 2.
 - A identidade visual da empresa selecionada é aplicada somente a partir da Página 2.
