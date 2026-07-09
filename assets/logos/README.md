@@ -44,16 +44,29 @@ As cores informadas **não devem ser aplicadas sobre os logos**.
 
 ## Grupo GPV
 
-Arquivo oficial definido para uso na Página 1:
+Arquivos oficiais previstos para uso no projeto:
+
+```txt
+assets/logos/grupo-gpv-negativo.png
+assets/logos/grupo-gpv-positivo.png
+```
+
+Regra operacional aprovada:
+
+```txt
+Usar sempre o logo branco do Grupo GPV sobre fundo escuro dentro da paleta institucional.
+```
+
+Logo padrão do sistema:
+
+```txt
+assets/logos/grupo-gpv-negativo.png
+```
+
+Arquivo auxiliar legado já definido no repositório:
 
 ```txt
 assets/logos/grupo-gpv.svg
-```
-
-Referência raster opcional, caso seja necessário substituir por PNG durante a construção:
-
-```txt
-assets/logos/grupo-gpv.png
 ```
 
 ## Identidade visual
@@ -67,6 +80,12 @@ assets/logos/grupo-gpv.png
 | Vermelho de apoio | `#E31838` |
 | Amarelo de apoio | `#F5C32C` |
 | Azul de apoio | `#2F3D8E` |
+
+## Tipografia
+
+```css
+font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+```
 
 ## Observação técnica
 
