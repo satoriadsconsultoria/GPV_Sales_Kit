@@ -1,4 +1,15 @@
 {
+  "groupBrand": {
+    "name": "Grupo GPV",
+    "logo": "assets/logos/grupo-gpv.png",
+    "theme": {
+      "primaryColor": "",
+      "secondaryColor": "",
+      "accentColor": "",
+      "backgroundColor": "",
+      "textColor": "#FFFFFF"
+    }
+  },
   "responsible": {
     "name": "Rafael",
     "role": "Gerente Comercial",
