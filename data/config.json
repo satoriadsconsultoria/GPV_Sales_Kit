@@ -24,10 +24,17 @@
       "substituir cores internas do logo pelas cores do tema"
     ]
   },
+  "typography": {
+    "fontFamily": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif",
+    "fontPolicy": "usar tipografia padrão do sistema, sem dependência externa de fonte"
+  },
   "groupBrand": {
     "name": "Grupo GPV",
-    "logo": "assets/logos/grupo-gpv.svg",
-    "logoRasterReference": "assets/logos/grupo-gpv.png",
+    "logo": "assets/logos/grupo-gpv-negativo.png",
+    "logoWhite": "assets/logos/grupo-gpv-negativo.png",
+    "logoPositiveReference": "assets/logos/grupo-gpv-positivo.png",
+    "preferredLogoUsage": "usar sempre o logo branco sobre fundo escuro dentro da paleta institucional",
+    "legacyBarReference": "assets/logos/grupo-gpv.svg",
     "theme": {
       "primaryColor": "#252324",
       "secondaryColor": "#A5A09C",
