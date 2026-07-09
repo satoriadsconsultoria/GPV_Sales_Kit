@@ -1,0 +1,709 @@
+/* Premium redesign layer for GPV Sales Kit.
+   This file is intentionally loaded after the original CSS. It preserves the
+   six-page product flow and uses the active brand CSS variables on every page. */
+
+:root {
+  --premium-radius: 8px;
+  --premium-radius-sm: 6px;
+  --premium-panel: rgba(8, 10, 12, 0.76);
+  --premium-panel-strong: rgba(255, 255, 255, 0.105);
+  --premium-line: rgba(255, 255, 255, 0.15);
+  --premium-line-strong: rgba(255, 255, 255, 0.24);
+  --premium-grid: rgba(255, 255, 255, 0.045);
+  --premium-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  --premium-shadow-tight: 0 14px 34px rgba(0, 0, 0, 0.24);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    radial-gradient(circle at 14% 16%, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 32%),
+    linear-gradient(145deg, color-mix(in srgb, var(--color-bg) 92%, #000 8%) 0%, #111315 100%);
+  background-size: 56px 56px, 56px 56px, auto, auto;
+}
+
+img[class*="logo"],
+.logo-chip,
+.pdf-topmark__logo,
+.pdf-cover__logo-circle img,
+.pdf-edney__brands img {
+  filter: none !important;
+  opacity: 1 !important;
+  object-fit: contain;
+}
+
+.page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--premium-grid) 1px, transparent 1px),
+    linear-gradient(0deg, var(--premium-grid) 1px, transparent 1px),
+    radial-gradient(circle at 82% 12%, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent 30%);
+  background-size: 54px 54px, 54px 54px, auto;
+  opacity: 0.72;
+}
+
+.page-shell {
+  width: min(var(--max-content-width), calc(100% - 40px));
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.page-header {
+  position: relative;
+  align-items: center;
+  padding: 20px 0 26px;
+  margin-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--premium-line);
+}
+
+.page-header::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: min(220px, 38vw);
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+.page-header__logo,
+.side-panel__logo,
+.brand-card__logo,
+.logo-chip,
+.pdf-topmark__logo,
+.pdf-edney__brands img {
+  border-radius: var(--premium-radius);
+  background: var(--chip-color, #f6f5f2);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+}
+
+.page-header__text h2 {
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-shadow: none;
+}
+
+.page-header__text p {
+  max-width: 720px;
+  color: color-mix(in srgb, var(--color-muted) 88%, #fff 12%);
+  text-shadow: none;
+}
+
+.progress-nav {
+  padding: 0.85rem var(--space-lg);
+  background: rgba(7, 8, 10, 0.78);
+  border-bottom: 1px solid var(--premium-line);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.20);
+}
+
+.progress-nav__list {
+  gap: clamp(0.6rem, 2vw, var(--space-md));
+}
+
+.progress-nav__track {
+  top: 50%;
+  left: 6%;
+  right: 6%;
+  transform: translateY(-50%);
+  height: 3px;
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.progress-nav__fill {
+  background: linear-gradient(90deg, var(--color-accent), color-mix(in srgb, var(--color-accent) 40%, #fff 60%));
+}
+
+.progress-nav__item {
+  min-height: 34px;
+  padding: 0 10px;
+  border-radius: var(--premium-radius);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-text);
+}
+
+.progress-nav__item.is-active {
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.progress-nav__item.is-active .progress-nav__dot {
+  background: var(--color-on-accent);
+  box-shadow: none;
+}
+
+.progress-nav__dot {
+  width: 8px;
+  height: 8px;
+}
+
+.institutional__backdrop {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    radial-gradient(circle at 15% 18%, rgba(91, 191, 200, 0.22), transparent 32%),
+    radial-gradient(circle at 78% 76%, rgba(227, 24, 56, 0.14), transparent 34%),
+    #171719;
+  background-size: 58px 58px, 58px 58px, auto, auto, auto;
+}
+
+.institutional__content {
+  width: min(1180px, calc(100% - 40px));
+  min-height: 100vh;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.institutional__logo {
+  height: clamp(86px, 8vw, 128px);
+}
+
+.institutional__title {
+  max-width: 900px;
+  font-size: clamp(2.4rem, 6vw, 5.8rem);
+  line-height: 0.94;
+  letter-spacing: 0;
+}
+
+.institutional__subtitle {
+  max-width: 660px;
+  font-size: 1.08rem;
+  color: color-mix(in srgb, var(--color-muted) 86%, #fff 14%);
+}
+
+.brand-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 1180px;
+  margin-top: var(--space-md);
+}
+
+.brand-card-wrapper,
+.brand-card {
+  min-width: 0;
+}
+
+.brand-card {
+  min-height: 190px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 22px;
+  overflow: hidden;
+  border-radius: var(--premium-radius);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045)),
+    rgba(255, 255, 255, 0.04);
+  border-color: var(--premium-line);
+  box-shadow: var(--premium-shadow-tight);
+}
+
+.brand-card::before {
+  left: 0;
+  right: auto;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  height: auto;
+  border-radius: 0;
+  opacity: 0.95;
+  background: var(--card-hover-color, var(--color-accent));
+}
+
+.brand-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -50px -58px auto;
+  width: 150px;
+  height: 150px;
+  border: 1px solid color-mix(in srgb, var(--card-hover-color, var(--color-accent)) 65%, transparent);
+  border-radius: 50%;
+  opacity: 0.55;
+}
+
+.brand-card:hover,
+.brand-card:focus-visible,
+.brand-card.is-open {
+  transform: translateY(-5px) scale(1.012);
+  box-shadow: 0 0 0 1px var(--card-hover-color, var(--color-accent)) inset, var(--premium-shadow);
+}
+
+.brand-card__logo {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  width: 148px;
+  height: 70px;
+  padding: 12px 14px;
+}
+
+.brand-card__label {
+  font-size: 1.12rem;
+  line-height: 1.18;
+  text-align: left;
+}
+
+.brand-card__hint,
+.brand-card__tag {
+  color: color-mix(in srgb, var(--color-muted) 88%, #fff 12%);
+  text-align: left;
+}
+
+.brand-submenu__options {
+  justify-content: stretch;
+}
+
+.brand-suboption {
+  flex: 1 1 150px;
+  border-radius: var(--premium-radius);
+  background: rgba(255, 255, 255, 0.075);
+}
+
+.feature-strip {
+  max-width: 1180px;
+  margin-top: 14px;
+  gap: 14px;
+}
+
+.feature-strip__item {
+  align-items: flex-start;
+  text-align: left;
+  padding: 18px;
+  border-radius: var(--premium-radius);
+  border: 1px solid var(--premium-line);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.feature-strip__icon {
+  border-radius: var(--premium-radius-sm);
+}
+
+.split-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(330px, 390px);
+  gap: 24px;
+}
+
+.form-card,
+.side-panel,
+.review-block,
+.service-card {
+  border-radius: var(--premium-radius);
+  border-color: var(--premium-line);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035)),
+    var(--premium-panel);
+  box-shadow: var(--premium-shadow);
+}
+
+.form-card,
+.side-panel {
+  padding: clamp(1.5rem, 3vw, 3rem);
+}
+
+.form-card,
+.review-block,
+.service-card,
+.side-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.form-card::before,
+.review-block::before,
+.service-card::before,
+.side-panel::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--color-accent);
+  opacity: 0.92;
+}
+
+.form-field label,
+.side-panel__label,
+.review-block__header h3,
+.service-detail-section h4 {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.form-field input,
+.form-field textarea,
+.service-card textarea {
+  border-radius: var(--premium-radius);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: #f7f5f0;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.025);
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.service-card textarea:focus {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 28%, transparent);
+}
+
+.upload-box,
+.side-panel__card {
+  border-radius: var(--premium-radius);
+  border-color: var(--premium-line-strong);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.upload-box:hover,
+.upload-box.is-dragover {
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+}
+
+.side-panel__brand {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.side-panel__logo {
+  width: 190px;
+  height: 92px;
+}
+
+.side-panel__brand h3 {
+  font-size: 1.55rem;
+  line-height: 1.08;
+}
+
+.side-panel__summary-row,
+.review-row {
+  align-items: center;
+  min-height: 48px;
+}
+
+.services-container {
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 16px;
+}
+
+.service-card {
+  min-height: 210px;
+  padding: clamp(1.4rem, 2.8vw, 2.4rem);
+  margin-bottom: 0;
+}
+
+.service-card:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 68%, #fff 32%);
+  transform: translateY(-4px);
+}
+
+.service-card.is-selected {
+  border-color: var(--color-accent);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 18%, transparent), rgba(255, 255, 255, 0.045)),
+    var(--premium-panel);
+}
+
+.service-card__header {
+  align-items: flex-start;
+}
+
+.service-card__checkbox {
+  border-radius: var(--premium-radius-sm);
+  margin-top: 2px;
+}
+
+.service-card__title {
+  font-size: 1.35rem;
+  line-height: 1.08;
+}
+
+.service-card__description {
+  margin-top: 0.45rem;
+  color: color-mix(in srgb, var(--color-muted) 86%, #fff 14%);
+}
+
+.review-block {
+  padding: clamp(1.25rem, 2vw, 2rem);
+}
+
+.review-block__edit {
+  border-radius: var(--premium-radius);
+}
+
+.review-block__edit:hover {
+  color: var(--color-on-accent);
+}
+
+.btn {
+  min-height: 48px;
+  border-radius: var(--premium-radius);
+  letter-spacing: 0;
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: 0 12px 34px color-mix(in srgb, var(--color-accent) 28%, transparent);
+}
+
+.btn--ghost {
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.proposal-toolbar {
+  top: 64px;
+  padding: 1rem var(--space-lg);
+  background: rgba(7, 8, 10, 0.82);
+  border-bottom: 1px solid var(--premium-line);
+}
+
+.proposal-viewer {
+  width: min(var(--max-content-width), calc(100% - 40px));
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.proposal-viewer > .stagger {
+  display: grid;
+  gap: 24px;
+}
+
+.proposal-viewer > .stagger > section {
+  position: relative;
+  min-height: 360px;
+  padding: clamp(1.4rem, 3vw, 2.7rem);
+  border: 1px solid var(--premium-line);
+  border-radius: var(--premium-radius);
+  background:
+    linear-gradient(90deg, var(--premium-grid) 1px, transparent 1px),
+    linear-gradient(0deg, var(--premium-grid) 1px, transparent 1px),
+    linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 18%, transparent), rgba(255, 255, 255, 0.05) 42%, rgba(0, 0, 0, 0.22));
+  background-size: 42px 42px, 42px 42px, auto;
+  box-shadow: var(--premium-shadow);
+  overflow: hidden;
+}
+
+.proposal-viewer > .stagger > section::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--color-accent);
+}
+
+.proposal-viewer > .stagger > section::after {
+  content: counter(proposal-slide, decimal-leading-zero);
+  counter-increment: proposal-slide;
+  position: absolute;
+  right: 24px;
+  bottom: -16px;
+  font-size: clamp(5rem, 14vw, 9rem);
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.proposal-viewer > .stagger {
+  counter-reset: proposal-slide;
+}
+
+.proposal-viewer > .stagger > section > h3,
+.proposal-viewer > .stagger > section > h3[style] {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 18px !important;
+  color: var(--color-accent) !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.13em !important;
+}
+
+.proposal-viewer .form-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(8, 10, 12, 0.64);
+  box-shadow: none;
+}
+
+.proposal-viewer .form-card h2[style] {
+  font-size: clamp(2rem, 4vw, 4.3rem) !important;
+  line-height: 0.96 !important;
+}
+
+.proposal-viewer .logo-chip {
+  border-radius: var(--premium-radius);
+}
+
+.investment-value {
+  color: var(--color-accent);
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  letter-spacing: 0;
+}
+
+/* PDF dedicated template */
+.pdf-page {
+  border: none;
+  background-color: var(--pdf-bg, #14181a);
+}
+
+.pdf-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    radial-gradient(circle at 82% 12%, color-mix(in srgb, var(--pdf-accent, #5BBFC8) 20%, transparent), transparent 32%);
+  background-size: 46px 46px, 46px 46px, auto;
+  pointer-events: none;
+}
+
+.pdf-page__body,
+.pdf-topmark,
+.pdf-footer {
+  z-index: 2;
+}
+
+.pdf-page__spine {
+  width: 9px;
+  opacity: 1;
+}
+
+.pdf-topmark__logo {
+  height: 38px;
+  border-radius: 7px;
+}
+
+.pdf-topmark__label {
+  color: color-mix(in srgb, var(--pdf-muted, #A5A09C) 78%, #fff 22%);
+}
+
+.pdf-page__watermark {
+  color: rgba(255, 255, 255, 0.075);
+}
+
+.pdf-page__title,
+.pdf-cover__title,
+.pdf-investment__value {
+  letter-spacing: 0;
+}
+
+.pdf-cover__logo-circle {
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.pdf-cover__ring {
+  border-radius: 42px;
+  transform: translate(-50%, -50%) rotate(10deg);
+}
+
+.pdf-cover__ring--inner {
+  transform: translate(-50%, -50%) rotate(-8deg);
+}
+
+.pdf-cover__bracket {
+  width: 120px;
+  height: 120px;
+}
+
+.pdf-edney__photo-wrap::before {
+  border-radius: 8px;
+}
+
+.pdf-edney__photo {
+  border-radius: 8px;
+}
+
+.pdf-edney__icon-item,
+.pdf-investment__stat,
+.pdf-investment__notes,
+.pdf-closing__signature-card {
+  border-radius: 8px;
+}
+
+.pdf-edney__icon-badge,
+.pdf-investment__stat-icon {
+  border-radius: 6px;
+}
+
+.pdf-scope__section h4::before {
+  border-radius: 5px;
+}
+
+.pdf-investment__hero {
+  border-bottom-color: rgba(255, 255, 255, 0.20);
+}
+
+.pdf-investment__value {
+  font-size: 74px;
+  text-shadow: 0 14px 42px rgba(0, 0, 0, 0.36);
+}
+
+@media (max-width: 1080px) {
+  .brand-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .split-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .page-shell,
+  .proposal-viewer,
+  .institutional__content {
+    width: min(100% - 28px, var(--max-content-width));
+  }
+
+  .brand-grid,
+  .feature-strip,
+  .services-container {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-nav {
+    padding-inline: 0.75rem;
+  }
+
+  .progress-nav__label {
+    display: none;
+  }
+
+  .progress-nav__item {
+    min-width: 34px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .page-header__logo {
+    width: 150px;
+    height: 76px;
+  }
+
+  .form-actions {
+    gap: 10px;
+  }
+
+  .proposal-toolbar {
+    top: 50px;
+    flex-direction: column;
+    gap: 10px;
+    padding-inline: 14px;
+  }
+}
