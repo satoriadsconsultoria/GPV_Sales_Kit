@@ -8,18 +8,19 @@ import { initPage4 } from "./pages/page4.js";
 import { initPage5 } from "./pages/page5.js";
 import { initPage6 } from "./pages/page6.js";
 
-function loadPremiumRedesign() {
-  const href = "css/premium-redesign.css";
-  if (document.querySelector(`link[href="${href}"]`)) return;
+function loadStylesheets() {
+  ["css/premium-redesign.css", "css/institutional-first-page.css"].forEach((href) => {
+    if (document.querySelector(`link[href="${href}"]`)) return;
 
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = href;
-  document.head.appendChild(link);
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.appendChild(link);
+  });
 }
 
 async function bootstrap() {
-  loadPremiumRedesign();
+  loadStylesheets();
 
   const data = await loadData();
 
