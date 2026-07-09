@@ -49,6 +49,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 - Opção de edição por bloco na conferência.
 - Proposta final interativa e animada.
 - Dois slides/páginas institucionais sobre Edney Ulisses na proposta final.
+- Fotos finais validadas do Edney Ulisses para os slides institucionais.
 - Slide institucional com marcas oficiais do Grupo GPV.
 - Exportação em PDF executivo.
 - PDF com layout diferente da página interativa.
@@ -111,17 +112,18 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RF024 | Renderizar proposta final interativa | Alta |
 | RF025 | Aplicar animações suaves na proposta interativa | Média |
 | RF026 | Incluir dois slides/páginas institucionais sobre Edney Ulisses | Alta |
-| RF027 | Adaptar slides de Edney às cores e elementos da marca selecionada | Alta |
-| RF028 | Exibir somente marcas oficiais do Grupo GPV no slide institucional 01 de Edney | Alta |
-| RF029 | Disponibilizar download em PDF | Alta |
-| RF030 | Gerar PDF executivo diferente da página interativa | Alta |
-| RF031 | Gerar PDF com layout premium, elegante e otimizado para envio ao cliente | Alta |
-| RF032 | Gerar PDF por template dedicado, separado da tela interativa | Alta |
-| RF033 | Usar PDF A4 landscape | Alta |
-| RF034 | Usar config JSON para dados institucionais quando aplicável | Alta |
-| RF035 | Preservar os logos originais fora do hover temporário da Página 1 | Alta |
-| RF036 | Usar tipografia padrão do sistema | Alta |
-| RF037 | Aplicar fallback visual quando backgrounds não existirem | Alta |
+| RF027 | Usar as fotos finais validadas do Edney Ulisses nos slides institucionais | Alta |
+| RF028 | Adaptar slides de Edney às cores e elementos da marca selecionada | Alta |
+| RF029 | Exibir somente marcas oficiais do Grupo GPV no slide institucional 01 de Edney | Alta |
+| RF030 | Disponibilizar download em PDF | Alta |
+| RF031 | Gerar PDF executivo diferente da página interativa | Alta |
+| RF032 | Gerar PDF com layout premium, elegante e otimizado para envio ao cliente | Alta |
+| RF033 | Gerar PDF por template dedicado, separado da tela interativa | Alta |
+| RF034 | Usar PDF A4 landscape | Alta |
+| RF035 | Usar config JSON para dados institucionais quando aplicável | Alta |
+| RF036 | Preservar os logos originais fora do hover temporário da Página 1 | Alta |
+| RF037 | Usar tipografia padrão do sistema | Alta |
+| RF038 | Aplicar fallback visual quando backgrounds não existirem | Alta |
 
 ---
 
@@ -141,7 +143,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RNF010 | Privacidade local | Dados e arquivos do cliente devem permanecer no navegador na V1 |
 | RNF011 | PDF | Documento final deve ser legível, paginado e adequado para envio digital |
 | RNF012 | Animações | Devem ser leves, elegantes e não prejudicar leitura/performance |
-| RNF013 | Robustez de assets | Sistema não pode quebrar por ausência de background ou foto do Edney |
+| RNF013 | Robustez de assets | Sistema não pode quebrar por ausência de background |
 
 ---
 
@@ -380,6 +382,15 @@ Os dois prints anexados pelo usuário são referência visual estrutural.
 
 As cores e elementos dos slides de Edney devem ser adaptados à marca selecionada na Página 1.
 
+### Fotos oficiais validadas do Edney
+
+Usar as fotos finais validadas nos caminhos:
+
+```txt
+assets/images/edney/edney-institucional-01.png
+assets/images/edney/edney-institucional-02.png
+```
+
 ### Regra obrigatória do slide 2
 
 O slide 2 deve exibir exclusivamente as marcas oficiais do GPV Sales Kit:
@@ -391,17 +402,6 @@ O slide 2 deve exibir exclusivamente as marcas oficiais do GPV Sales Kit:
 - Edney Ulisses — Acelerador de Vendas.
 
 É proibido manter marcas externas, antigas ou presentes somente no print de referência.
-
-### Assets oficiais pendentes do Edney
-
-As fotos finais do Edney devem ser enviadas posteriormente pelo usuário nos caminhos:
-
-```txt
-assets/images/edney/edney-institucional-01.png
-assets/images/edney/edney-institucional-02.png
-```
-
-Enquanto as fotos não forem enviadas, o sistema pode usar placeholder visual temporário.
 
 ### PDF executivo
 
@@ -528,7 +528,7 @@ O sistema não pode quebrar se um background não estiver disponível.
 | Comercial | Valor, observações, prazo, validade e emissor |
 | Prazo VELOCE | Obrigatório somente para VELOCE |
 | Conferência | Prévia com edição por bloco |
-| Fotos Edney | Usuário deve subir depois em `assets/images/edney/` |
+| Fotos Edney | Validadas em `assets/images/edney/` |
 | Backgrounds | Opcionais, com fallback por tema |
 
 ---
@@ -556,6 +556,7 @@ O sistema não pode quebrar se um background não estiver disponível.
 - A edição por bloco retorna para a tela correta mantendo os dados preenchidos.
 - A Página 6 gera proposta final interativa, visual e animada.
 - A Página 6 inclui capa, dois slides de Edney, proposta, investimento e encerramento.
+- A Página 6 usa as fotos finais validadas do Edney.
 - O slide 2 de Edney exibe somente marcas oficiais do GPV Sales Kit.
 - O sistema não usa marcas externas presentes no print de referência.
 - A Página 6 disponibiliza download em PDF.
@@ -566,4 +567,4 @@ O sistema não pode quebrar se um background não estiver disponível.
 - O PDF não possui botões, animações ou elementos interativos.
 - A identidade visual muda conforme a empresa selecionada a partir da Página 2.
 - Os serviços podem ser editados via JSON.
-- O sistema não quebra se backgrounds ou fotos finais do Edney ainda não estiverem disponíveis.
+- O sistema não quebra se backgrounds não estiverem disponíveis.
