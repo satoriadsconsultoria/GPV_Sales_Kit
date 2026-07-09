@@ -204,6 +204,35 @@ Digite os serviços que serão incluídos no Plano Diamond.
 
 ---
 
+## Regra específica — Champions Festival
+
+No caso do **Champions Festival**, existe somente um serviço disponível na Página 3.
+
+### Serviço exibido
+
+```txt
+Champions Festival
+```
+
+### Comportamento
+
+- Exibir apenas uma opção de seleção.
+- A opção deve funcionar como checkbox/fleg.
+- Ao marcar o serviço, abrir abaixo os detalhes completos.
+- Os detalhes devem exibir a seção Serviços Oferecidos.
+
+---
+
+## Champions Festival — Serviços Oferecidos
+
+- Planejamento, estratégia e execução das campanhas de performance e captação dos leads.
+- Criação de todas as artes para divulgação do evento, incluindo mais de 350 anúncios.
+- Setup de automação de prospecção e agendamento.
+- Prospecção dos clientes captados pela campanha de tráfego pago.
+- Otimização diária de todas as campanhas de performance.
+
+---
+
 ## Layout recomendado
 
 ### Desktop
@@ -251,6 +280,8 @@ Digite os serviços que serão incluídos no Plano Diamond.
 | P3-RF15 | Ao selecionar um plano VELOCE, exibir os serviços oferecidos do plano |
 | P3-RF16 | No Plano Diamond, exibir textarea para serviços personalizados |
 | P3-RF17 | No Plano Diamond, impedir avanço se o campo personalizado estiver vazio |
+| P3-RF18 | No Champions Festival, exibir somente o serviço Champions Festival |
+| P3-RF19 | Ao selecionar Champions Festival, exibir Serviços Oferecidos |
 
 ---
 
@@ -282,6 +313,8 @@ A Página 3 será considerada aprovada se:
 - Na VELOCE, exibir os planos Start, Bronze, Prata, Ouro e Diamond.
 - Na VELOCE, exibir os serviços de cada plano ao selecionar.
 - No Plano Diamond, exibir campo livre para digitar os serviços personalizados.
+- No Champions Festival, exibir somente o serviço Champions Festival.
+- No Champions Festival, exibir Serviços Oferecidos após seleção.
 - Permitir marcar/flegar o serviço ou plano.
 - Salvar a seleção em `appState.selectedServices`.
 - Impedir avanço sem serviço/plano selecionado.
