@@ -26,7 +26,7 @@ Se a empresa ou os dados do cliente não existirem no estado da aplicação, o s
 
 Para cada empresa, o sistema deve listar os serviços vinculados ao `companyId`.
 
-Ao marcar um serviço, o sistema deve exibir abaixo os detalhes completos daquele serviço.
+Ao marcar um serviço/plano, o sistema deve exibir abaixo os detalhes completos daquele item.
 
 Os detalhes podem incluir:
 
@@ -36,6 +36,7 @@ Os detalhes podem incluir:
 - Diferenciais.
 - Premissas.
 - Condições para realização.
+- Campo personalizado de serviços.
 
 ---
 
@@ -117,6 +118,92 @@ Grand Prix de Vendas
 
 ---
 
+## Regra específica — VELOCE
+
+No caso da **VELOCE**, a Página 3 deve exibir planos comerciais.
+
+### Planos exibidos
+
+- Plano Start.
+- Plano Bronze.
+- Plano Prata.
+- Plano Ouro.
+- Plano Diamond.
+
+### Comportamento
+
+- Cada plano deve ter uma opção de seleção/fleg.
+- A seleção deve funcionar como escolha única entre planos.
+- Ao selecionar um plano, exibir abaixo os serviços oferecidos daquele plano.
+- No Plano Diamond, ao selecionar, exibir uma caixa de texto para digitar os serviços personalizados.
+- O Plano Diamond não possui lista fixa de serviços.
+
+---
+
+## VELOCE — Plano Start
+
+### Serviços Oferecidos
+
+- 2 criativos por mês.
+- Tráfego pago Meta.
+- 1 reunião por mês.
+
+---
+
+## VELOCE — Plano Bronze
+
+### Serviços Oferecidos
+
+- 8 criativos por mês.
+- Tráfego pago Meta.
+- 1 reunião por mês.
+
+---
+
+## VELOCE — Plano Prata
+
+### Serviços Oferecidos
+
+- 20 criativos por mês.
+- Tráfego pago Meta e Google.
+- 12 posts orgânicos por mês — Motion, post único ou carrossel.
+- 2 reuniões por mês.
+
+---
+
+## VELOCE — Plano Ouro
+
+### Serviços Oferecidos
+
+- 50 criativos por mês.
+- Tráfego pago Meta, TikTok, LinkedIn e Google.
+- 12 posts orgânicos por mês — Motion, post único ou carrossel.
+- 3 reuniões por mês.
+
+---
+
+## VELOCE — Plano Diamond
+
+### Serviços Oferecidos
+
+O Plano Diamond é personalizado.
+
+Ao selecionar este plano, o sistema deve exibir uma caixa de texto para digitar manualmente os serviços incluídos na proposta.
+
+Campo obrigatório:
+
+```txt
+Serviços personalizados do Plano Diamond
+```
+
+Placeholder sugerido:
+
+```txt
+Digite os serviços que serão incluídos no Plano Diamond.
+```
+
+---
+
 ## Layout recomendado
 
 ### Desktop
@@ -127,17 +214,13 @@ Grand Prix de Vendas
 ├────────────────────────────────────────────────────┤
 │                                                    │
 │  Serviços da proposta                              │
-│  Selecione o serviço que será incluído.            │
+│  Selecione o serviço/plano que será incluído.      │
 │                                                    │
-│  [ ] Grand Prix de Vendas                          │
+│  [ ] Serviço ou Plano                              │
 │                                                    │
 │  Se selecionado:                                   │
 │                                                    │
 │  Serviços Oferecidos                               │
-│  - Item 1                                          │
-│  - Item 2                                          │
-│                                                    │
-│  Condições para Realização do Evento               │
 │  - Item 1                                          │
 │  - Item 2                                          │
 │                                                    │
@@ -158,11 +241,16 @@ Grand Prix de Vendas
 | P3-RF05 | No Grand Prix de Vendas, exibir somente o serviço Grand Prix de Vendas |
 | P3-RF06 | Ao marcar o serviço, exibir os detalhes abaixo |
 | P3-RF07 | Exibir seção Serviços Oferecidos |
-| P3-RF08 | Exibir seção Condições para Realização do Evento |
+| P3-RF08 | Exibir seção Condições para Realização do Evento quando existir |
 | P3-RF09 | Salvar seleção em `appState.selectedServices` |
 | P3-RF10 | Impedir avanço sem pelo menos um serviço selecionado |
 | P3-RF11 | Aplicar identidade visual da marca selecionada |
 | P3-RF12 | Preservar logos sem alteração visual |
+| P3-RF13 | Na VELOCE, exibir planos Start, Bronze, Prata, Ouro e Diamond |
+| P3-RF14 | Na VELOCE, permitir seleção única entre os planos |
+| P3-RF15 | Ao selecionar um plano VELOCE, exibir os serviços oferecidos do plano |
+| P3-RF16 | No Plano Diamond, exibir textarea para serviços personalizados |
+| P3-RF17 | No Plano Diamond, impedir avanço se o campo personalizado estiver vazio |
 
 ---
 
@@ -181,6 +269,7 @@ Grand Prix de Vendas
 |---|---|
 | Nenhum serviço selecionado | Selecione pelo menos um serviço para continuar. |
 | Nenhum serviço encontrado para a empresa | Nenhum serviço cadastrado para esta marca. |
+| Plano Diamond sem serviços digitados | Informe os serviços personalizados do Plano Diamond. |
 
 ---
 
@@ -190,9 +279,10 @@ A Página 3 será considerada aprovada se:
 
 - Carregar os serviços conforme a marca selecionada.
 - No Grand Prix de Vendas, exibir somente o serviço Grand Prix de Vendas.
-- Permitir marcar/flegar o serviço.
-- Exibir Serviços Oferecidos após seleção.
-- Exibir Condições para Realização do Evento após seleção.
+- Na VELOCE, exibir os planos Start, Bronze, Prata, Ouro e Diamond.
+- Na VELOCE, exibir os serviços de cada plano ao selecionar.
+- No Plano Diamond, exibir campo livre para digitar os serviços personalizados.
+- Permitir marcar/flegar o serviço ou plano.
 - Salvar a seleção em `appState.selectedServices`.
-- Impedir avanço sem serviço selecionado.
+- Impedir avanço sem serviço/plano selecionado.
 - Usar a identidade visual da marca selecionada.
