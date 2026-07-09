@@ -1,0 +1,465 @@
+/* Experience polish layer.
+   Adds richer interaction to the app and a stronger static executive look to the exported PDF. */
+
+@keyframes premiumSheen {
+  from { transform: translateX(-130%) skewX(-18deg); opacity: 0; }
+  22% { opacity: 0.7; }
+  to { transform: translateX(170%) skewX(-18deg); opacity: 0; }
+}
+
+@keyframes softFloat {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
+}
+
+@keyframes accentPulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 24%, transparent); }
+  50% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--color-accent) 0%, transparent); }
+}
+
+.page:not(.page--institutional)::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, transparent 0 42%, color-mix(in srgb, var(--color-accent) 7%, transparent) 42% 43%, transparent 43% 100%),
+    radial-gradient(circle at 18% 86%, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 28%);
+  opacity: 0.95;
+}
+
+.progress-nav__item,
+.btn,
+.brand-card,
+.brand-suboption,
+.form-card,
+.side-panel,
+.service-card,
+.review-block,
+.upload-box,
+.proposal-viewer > .stagger > section {
+  will-change: transform;
+}
+
+.progress-nav__item.is-active {
+  animation: accentPulse 2.2s ease-in-out infinite;
+}
+
+.progress-nav__item.is-done {
+  background: color-mix(in srgb, var(--color-accent) 14%, rgba(255, 255, 255, 0.045));
+  border-color: color-mix(in srgb, var(--color-accent) 38%, transparent);
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after,
+.brand-card::after,
+.service-card::after,
+.review-block::after,
+.proposal-viewer > .stagger > section::selection {
+  pointer-events: none;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: -20% auto -20% -40%;
+  width: 34%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: translateX(-130%) skewX(-18deg);
+}
+
+.btn:hover::after {
+  animation: premiumSheen 900ms ease-out;
+}
+
+.btn--primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--color-accent) 34%, transparent);
+}
+
+.btn--ghost:hover {
+  background: color-mix(in srgb, var(--color-accent) 10%, rgba(255, 255, 255, 0.055));
+}
+
+.page-header::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  width: 72px;
+  height: 3px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--color-accent) 42%, #fff 58%);
+  opacity: 0.85;
+}
+
+.page-header__logo,
+.side-panel__logo {
+  transition: transform var(--duration-base) var(--ease-premium), box-shadow var(--duration-base) var(--ease-premium);
+}
+
+.page-header:hover .page-header__logo,
+.side-panel:hover .side-panel__logo {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.36);
+}
+
+.brand-card {
+  isolation: isolate;
+}
+
+.brand-card::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -35% -45% auto auto;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--card-hover-color, var(--color-accent)) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--card-hover-color, var(--color-accent)) 55%, transparent);
+  opacity: 0.58;
+  transition: transform var(--duration-slow) var(--ease-premium), opacity var(--duration-slow) var(--ease-premium);
+}
+
+.brand-card:hover::after,
+.brand-card:focus-visible::after,
+.brand-card.is-open::after {
+  transform: scale(1.28) translate(-16px, 16px);
+  opacity: 0.9;
+}
+
+.brand-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.brand-card__logo {
+  transition: transform var(--duration-base) var(--ease-premium), box-shadow var(--duration-base) var(--ease-premium);
+}
+
+.brand-card:hover .brand-card__logo,
+.brand-card:focus-visible .brand-card__logo,
+.brand-card.is-open .brand-card__logo {
+  transform: translateY(-3px) scale(1.03);
+}
+
+.brand-suboption {
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-suboption:hover {
+  transform: translateY(-2px);
+}
+
+.form-card,
+.side-panel,
+.service-card,
+.review-block {
+  transition: transform var(--duration-base) var(--ease-premium), border-color var(--duration-base) var(--ease-premium), box-shadow var(--duration-base) var(--ease-premium), background-color var(--duration-base) var(--ease-premium);
+}
+
+.form-card:hover,
+.side-panel:hover,
+.review-block:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--color-accent) 42%, rgba(255, 255, 255, 0.12));
+}
+
+.form-card::after,
+.side-panel::after,
+.review-block::after,
+.service-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.09), transparent 38%);
+  opacity: 0.45;
+}
+
+.form-card > *,
+.side-panel > *,
+.review-block > *,
+.service-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.form-field input,
+.form-field textarea,
+.service-card textarea {
+  transition: transform var(--duration-fast) var(--ease-premium), border-color var(--duration-fast) var(--ease-premium), box-shadow var(--duration-fast) var(--ease-premium), background-color var(--duration-fast) var(--ease-premium);
+}
+
+.form-field input:hover,
+.form-field textarea:hover,
+.service-card textarea:hover {
+  transform: translateY(-1px);
+  background: #ffffff;
+}
+
+.upload-box__icon {
+  color: var(--color-accent);
+  animation: softFloat 2.8s ease-in-out infinite;
+}
+
+.upload-box:hover {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 38%, transparent);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 78px rgba(0, 0, 0, 0.38);
+}
+
+.service-card.is-selected {
+  transform: translateY(-4px);
+}
+
+.service-card__checkbox {
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 24%, transparent);
+}
+
+.service-card.is-selected .service-card__checkbox {
+  animation: accentPulse 2.4s ease-in-out infinite;
+}
+
+.review-block__header h3,
+.side-panel__label,
+.service-detail-section h4 {
+  color: color-mix(in srgb, var(--color-accent) 84%, #fff 16%);
+}
+
+.side-panel__summary-row span:last-child,
+.review-row__value {
+  color: #ffffff;
+}
+
+.toast {
+  border-radius: var(--premium-radius);
+  border-left-color: var(--color-accent);
+  background: linear-gradient(135deg, #181a1d, #101113);
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.38);
+}
+
+.proposal-toolbar {
+  gap: 14px;
+}
+
+.proposal-viewer > .stagger > section {
+  transform-origin: center top;
+  transition: transform var(--duration-base) var(--ease-premium), border-color var(--duration-base) var(--ease-premium), box-shadow var(--duration-base) var(--ease-premium);
+}
+
+.proposal-viewer > .stagger > section:hover {
+  transform: translateY(-6px) scale(1.004);
+  border-color: color-mix(in srgb, var(--color-accent) 54%, rgba(255, 255, 255, 0.16));
+  box-shadow: 0 34px 88px rgba(0, 0, 0, 0.42);
+}
+
+.proposal-viewer > .stagger > section > h3::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  border-radius: 3px;
+  background: var(--color-accent);
+  vertical-align: 1px;
+}
+
+.proposal-viewer .form-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.investment-value {
+  text-shadow: 0 16px 44px color-mix(in srgb, var(--color-accent) 28%, transparent);
+}
+
+/* Static premium PDF finish. No animations here: these styles are captured into the PDF. */
+.pdf-page {
+  background-color: var(--pdf-bg, #121416);
+  box-shadow: none;
+}
+
+.pdf-page::before {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.034) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+    radial-gradient(circle at 12% 12%, color-mix(in srgb, var(--pdf-accent, #5BBFC8) 18%, transparent), transparent 30%),
+    radial-gradient(circle at 88% 86%, rgba(255, 255, 255, 0.075), transparent 30%);
+  background-size: 42px 42px, 42px 42px, auto, auto;
+}
+
+.pdf-page::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: -170px;
+  top: -120px;
+  width: 520px;
+  height: 1040px;
+  transform: rotate(18deg);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--pdf-accent, #5BBFC8) 28%, transparent), rgba(255, 255, 255, 0.018));
+  border-left: 1px solid color-mix(in srgb, var(--pdf-accent, #5BBFC8) 42%, transparent);
+}
+
+.pdf-page__body,
+.pdf-topmark,
+.pdf-footer,
+.pdf-page__watermark,
+.pdf-page__spine {
+  position: relative;
+  z-index: 2;
+}
+
+.pdf-page__spine {
+  width: 12px;
+  background: linear-gradient(180deg, var(--pdf-accent, #5BBFC8), color-mix(in srgb, var(--pdf-accent, #5BBFC8) 42%, #fff 58%));
+}
+
+.pdf-topmark {
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.pdf-topmark__logo {
+  height: 42px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+.pdf-topmark__label {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--pdf-accent, #5BBFC8) 44%, rgba(255, 255, 255, 0.12));
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--pdf-text, #fff);
+}
+
+.pdf-page__watermark {
+  right: 16px;
+  bottom: -94px;
+  color: rgba(255, 255, 255, 0.095);
+}
+
+.pdf-page__eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--pdf-accent, #5BBFC8) 44%, rgba(255, 255, 255, 0.12));
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.pdf-divider {
+  width: 96px;
+  height: 6px;
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--pdf-accent, #5BBFC8) 36%, transparent);
+}
+
+.pdf-footer {
+  border-top-color: rgba(255, 255, 255, 0.18);
+}
+
+.pdf-cover {
+  isolation: isolate;
+}
+
+.pdf-cover__ring {
+  border-color: color-mix(in srgb, var(--pdf-accent, #5BBFC8) 36%, rgba(255, 255, 255, 0.16));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.045);
+}
+
+.pdf-cover__logo-circle {
+  border-radius: 32px;
+  background: linear-gradient(145deg, #ffffff, #ebe8e2);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.42);
+}
+
+.pdf-cover__logo-circle--client {
+  background: #ffffff;
+}
+
+.pdf-cover__title {
+  font-size: 64px;
+  text-shadow: 0 16px 42px rgba(0, 0, 0, 0.44);
+}
+
+.pdf-cover__client {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.pdf-edney__photo-wrap::before {
+  border-width: 6px;
+  box-shadow: 0 20px 44px color-mix(in srgb, var(--pdf-accent, #5BBFC8) 18%, transparent);
+}
+
+.pdf-edney__photo {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.pdf-edney__icon-item,
+.pdf-investment__stat,
+.pdf-investment__notes,
+.pdf-closing__signature-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.045));
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.pdf-edney__icon-badge,
+.pdf-investment__stat-icon {
+  background: linear-gradient(135deg, var(--pdf-accent, #5BBFC8), color-mix(in srgb, var(--pdf-accent, #5BBFC8) 42%, #fff 58%));
+}
+
+.pdf-scope__section {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.pdf-scope__columns--dense .pdf-scope__section,
+.pdf-scope__columns--ultra .pdf-scope__section {
+  padding: 8px 10px;
+}
+
+.pdf-scope__list li::before {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--pdf-accent, #5BBFC8) 18%, transparent);
+}
+
+.pdf-investment__hero {
+  padding: 26px 28px 24px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--pdf-accent, #5BBFC8) 30%, rgba(255, 255, 255, 0.12));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--pdf-accent, #5BBFC8) 14%, transparent), rgba(255, 255, 255, 0.04));
+}
+
+.pdf-investment__value {
+  font-size: 80px;
+  line-height: 1;
+}
+
+.pdf-closing__quote {
+  font-size: 110px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-nav__item.is-active,
+  .service-card.is-selected .service-card__checkbox,
+  .upload-box__icon {
+    animation: none !important;
+  }
+}
