@@ -42,13 +42,29 @@ A proposta deve adaptar:
 
 Sempre conforme a empresa selecionada na Página 1.
 
-Exemplo:
-
-- Se a marca escolhida for VELOCE, os slides usam identidade da VELOCE.
-- Se a marca escolhida for Projeto Conquista, os slides usam identidade do Projeto Conquista.
-- Se a marca escolhida for Champions Festival, os slides usam identidade do Champions Festival.
-
 Os modelos do Edney servem como referência de hierarquia, composição e narrativa institucional.
+
+---
+
+## Assets pendentes do Edney
+
+As fotos finais do Edney devem ser enviadas posteriormente pelo usuário.
+
+Caminhos oficiais previstos:
+
+```txt
+assets/images/edney/edney-institucional-01.png
+assets/images/edney/edney-institucional-02.png
+```
+
+Enquanto os arquivos não forem enviados, a implementação deve:
+
+- Manter os caminhos previstos.
+- Usar placeholder visual temporário.
+- Não quebrar a proposta.
+- Não usar os prints anexados como imagem final chapada.
+
+Os prints são referência de layout, não assets finais de produção.
 
 ---
 
@@ -96,7 +112,7 @@ A proposta final deve seguir a seguinte estrutura mínima:
 | Ordem | Página/slide | Conteúdo |
 |---|---|---|
 | 1 | Capa | Logo da marca selecionada, logo do cliente e título da proposta |
-| 2 | Edney Ulisses — Institucional 01 | Apresentação de Edney Ulisses como fundador/especialista |
+| 2 | Edney Ulisses — Institucional 01 | Apresentação de Edney Ulisses como fundador/especialista e marcas do Grupo GPV |
 | 3 | Edney Ulisses — Institucional 02 | Formação, experiência e autoridade comercial |
 | 4 | Proposta comercial | Serviço/plano selecionado, escopo, entregáveis e condições |
 | 5 | Investimento e condições | Valor, observações, prazo de entrega e validade da proposta |
@@ -133,19 +149,36 @@ Objetivo:
 
 Apresentar Edney Ulisses como fundador/especialista do ecossistema comercial do Grupo GPV.
 
-Conteúdo sugerido:
+Conteúdo obrigatório:
 
 - Nome: `Edney Ulisses`.
 - Chamada: `Fundador`.
 - Descrição: `Especialista em Marketing e Vendas no setor Automotivo`.
 - Elementos visuais inspirados no modelo anexado.
-- Logos institucionais, quando fizer sentido.
+- Marcas oficiais do ecossistema GPV.
+
+### Regra obrigatória das marcas no slide 2
+
+O slide 2 deve substituir qualquer marca presente no print de referência pelas marcas oficiais cadastradas no GPV Sales Kit.
+
+Devem aparecer exclusivamente:
+
+- Grand Prix de Vendas.
+- Champions Festival.
+- VELOCE.
+- Projeto Conquista.
+- Edney Ulisses — Acelerador de Vendas.
+
+É proibido manter marcas externas, antigas ou que apareçam somente no print de referência.
+
+Os logos devem vir dos arquivos oficiais cadastrados em `data/companies.json` e devem ser exibidos sem alteração permanente de cor, proporção ou forma.
 
 Regra visual:
 
 - Usar o modelo apenas como referência de composição.
 - Cores e elementos devem seguir a marca selecionada.
 - Evitar replicar cores fixas do modelo quando a proposta for de outra marca.
+- As marcas do grupo devem aparecer como vitrine institucional do ecossistema.
 
 ---
 
@@ -254,6 +287,7 @@ Ele deve ser organizado especificamente para envio ao cliente, priorizando clare
 
 - Design premium, elegante e executivo.
 - Layout limpo e paginado.
+- Orientação `landscape`, formato A4.
 - Melhor aproveitamento de espaço para leitura em PDF.
 - Hierarquia clara de títulos, subtítulos, cards e blocos de conteúdo.
 - Capa institucional da proposta.
@@ -266,12 +300,35 @@ Ele deve ser organizado especificamente para envio ao cliente, priorizando clare
 
 ---
 
+## Template técnico do PDF
+
+O PDF deve usar um template dedicado.
+
+Regra obrigatória:
+
+```txt
+O PDF não deve ser gerado diretamente da tela interativa animada.
+```
+
+O sistema deve montar um template PDF separado, oculto ou dedicado, usando os mesmos dados do `appState`.
+
+### Motivo técnico
+
+- Evitar cortes ruins.
+- Evitar captura de animações.
+- Evitar botões e componentes de interface no PDF.
+- Melhorar legibilidade.
+- Permitir layout paginado premium.
+
+---
+
 ## Diferença obrigatória entre interativo e PDF
 
 | Item | Proposta interativa | PDF executivo |
 |---|---|---|
 | Finalidade | Visualização dentro do sistema | Envio ao cliente |
 | Formato | Tela navegável | Documento paginado |
+| Orientação | Responsiva | A4 landscape |
 | Animações | Sim, suaves | Não |
 | Botões | Sim | Não |
 | Layout | Dinâmico e visual | Estático, limpo e executivo |
@@ -313,6 +370,7 @@ appState.commercial
 - Deve usar margens adequadas.
 - Deve gerar arquivo com nome amigável.
 - O PDF deve ter estrutura própria, diferente do HTML interativo.
+- O PDF deve usar orientação landscape.
 
 ### Nome sugerido do arquivo
 
@@ -356,6 +414,9 @@ proposta-veloce-autohaus.pdf
 | P6-RF22 | Permitir voltar para Página 5 antes ou depois da geração |
 | P6-RF23 | Incluir duas páginas/slides institucionais sobre Edney Ulisses |
 | P6-RF24 | Adaptar os slides de Edney às cores e elementos da marca selecionada |
+| P6-RF25 | No slide 2, exibir somente as marcas oficiais do Grupo GPV cadastradas no sistema |
+| P6-RF26 | Usar template PDF dedicado, separado da tela interativa |
+| P6-RF27 | Usar PDF em A4 landscape |
 
 ---
 
@@ -369,12 +430,15 @@ A Página 6 será considerada aprovada se:
 - Incluir capa com logo da marca selecionada e logo do cliente.
 - Incluir duas páginas/slides institucionais sobre Edney Ulisses.
 - Adaptar os slides de Edney conforme a marca selecionada.
+- Exibir no slide 2 somente as marcas oficiais do Grupo GPV.
+- Não exibir marcas externas presentes no print de referência.
 - Incluir página de proposta/escopo.
 - Incluir investimento, condições e validade da proposta.
 - Incluir página final com validade, dados do emissor e logo da marca.
 - Disponibilizar botão de download em PDF.
-- Gerar um PDF diferente da página interativa.
-- O PDF possuir layout paginado, limpo, premium e executivo.
+- Gerar um PDF diferente da proposta interativa.
+- Gerar o PDF a partir de template dedicado.
+- O PDF possuir layout paginado, landscape, limpo, premium e executivo.
 - O PDF for adequado para envio ao cliente.
 - O PDF preservar logos e imagens sem alteração visual.
 - O PDF não conter botões, animações ou elementos de interface.
