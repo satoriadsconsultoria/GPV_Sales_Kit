@@ -3,11 +3,17 @@
     "name": "Grupo GPV",
     "logo": "assets/logos/grupo-gpv.png",
     "theme": {
-      "primaryColor": "",
-      "secondaryColor": "",
-      "accentColor": "",
-      "backgroundColor": "",
-      "textColor": "#FFFFFF"
+      "primaryColor": "#000000",
+      "secondaryColor": "#FFFFFF",
+      "accentColor": "#5BBFC8",
+      "backgroundColor": "#000000",
+      "textColor": "#FFFFFF",
+      "supportColors": {
+        "cyan": "#5BBFC8",
+        "red": "#E31838",
+        "yellow": "#F5C32C",
+        "blue": "#2F3D8E"
+      }
     }
   },
   "responsible": {
