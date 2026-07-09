@@ -106,13 +106,15 @@ A Página 1 usa a identidade institucional do **Grupo GPV**.
 | Elemento | Definição |
 |---|---|
 | Marca dominante | Grupo GPV |
-| Logo oficial | `assets/logos/grupo-gpv.png` |
-| Cor institucional principal | Preto `#000000` |
+| Logo oficial | `assets/logos/grupo-gpv.svg` |
+| Referência raster opcional | `assets/logos/grupo-gpv.png` |
+| Cor institucional principal | `#252324` |
+| Cor secundária | `#A5A09C` |
 | Texto principal | Branco `#FFFFFF` |
 | Cor de apoio principal | Ciano `#5BBFC8` |
 | Cores auxiliares | Vermelho `#E31838`, Amarelo `#F5C32C`, Azul `#2F3D8E` |
 
-A Página 1 deve ser majoritariamente preta, com o logo do Grupo GPV em grande escala e uso controlado das cores auxiliares apenas como elementos gráficos secundários.
+A Página 1 deve usar `#252324` como base visual, `#A5A09C` como cor secundária institucional e uso controlado das cores auxiliares apenas como elementos gráficos secundários.
 
 ---
 
@@ -130,7 +132,7 @@ A Página 1 deve ser majoritariamente preta, com o logo do Grupo GPV em grande e
 | Desenvolvimento | VS Code + Claude Code |
 | Página 1 | Portal institucional do Grupo GPV |
 | Seleção da empresa | Logos das marcas clicáveis |
-| Identidade visual da Página 1 | Grupo GPV, preto institucional |
+| Identidade visual da Página 1 | Grupo GPV, cor principal `#252324` |
 | Identidade visual das páginas seguintes | Empresa selecionada |
 | Serviços | Desacoplados da interface |
 | Assinatura | Configurável via JSON |
@@ -142,7 +144,8 @@ A Página 1 deve ser majoritariamente preta, com o logo do Grupo GPV em grande e
 - O sistema roda localmente sem backend.
 - O sistema pode ser hospedado no Netlify.
 - A Página 1 apresenta o Grupo GPV como marca dominante.
-- A Página 1 usa preto como cor institucional principal.
+- A Página 1 usa `#252324` como cor institucional principal.
+- A Página 1 usa `#A5A09C` como cor secundária institucional.
 - Os logos das empresas funcionam como botões de seleção.
 - O clique na marca seleciona a empresa e avança para a Página 2.
 - A identidade visual muda conforme a empresa selecionada a partir da Página 2.
