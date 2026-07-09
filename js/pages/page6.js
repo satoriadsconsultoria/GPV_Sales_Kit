@@ -167,6 +167,25 @@ const PDF_SECTIONS = [
   "Encerramento",
 ];
 
+const EDNEY_ICONS = [
+  {
+    label: "Tecnologia",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>',
+  },
+  {
+    label: "Inteligência Artificial",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l1.8 5.3 5.3 1.8-5.3 1.8L12 16.7l-1.8-5.3-5.3-1.8 5.3-1.8L12 2.5z"/><path d="M19 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z"/></svg>',
+  },
+  {
+    label: "Vendas",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
+  },
+  {
+    label: "Crescimento",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V11"/><path d="M10 20V4"/><path d="M16 20v-8"/><path d="M22 20v-5"/></svg>',
+  },
+];
+
 const EDNEY_BIO = [
   "Formado em Marketing.",
   "Especialista em Marketing e Vendas no setor automotivo, com mais de 20 anos de experiência no mercado.",
@@ -233,13 +252,18 @@ function pdfCover({ ctx, vars, motifUrl, num, total }) {
     total,
     chrome: false,
     bodyHtml: `
+      <div class="pdf-cover__ring"></div>
+      <div class="pdf-cover__ring pdf-cover__ring--inner"></div>
       <div class="pdf-cover__bracket pdf-cover__bracket--tl"></div>
       <div class="pdf-cover__bracket pdf-cover__bracket--br"></div>
-      <div class="pdf-cover__dotgrid">${"<span></span>".repeat(8)}</div>
+      <div class="pdf-cover__dotgrid">${"<span></span>".repeat(10)}</div>
+      <div class="pdf-cover__dotgrid pdf-cover__dotgrid--left">${"<span></span>".repeat(10)}</div>
       <div class="pdf-cover__eyebrow">Grupo GPV apresenta</div>
       <div class="pdf-cover__logos">
-        <img class="pdf-cover__logo" src="${ctx.company.logo}" alt="${ctx.company.name}" />
-        ${ctx.client.logoPreviewUrl ? `<div class="pdf-cover__divider"></div><img class="pdf-cover__client-logo" src="${ctx.client.logoPreviewUrl}" alt="${ctx.client.name}" />` : ""}
+        <div class="pdf-cover__logo-circle pdf-cover__logo-circle--brand">
+          <img src="${ctx.company.logo}" alt="${ctx.company.name}" />
+        </div>
+        ${ctx.client.logoPreviewUrl ? `<div class="pdf-cover__divider"></div><div class="pdf-cover__logo-circle pdf-cover__logo-circle--client"><img src="${ctx.client.logoPreviewUrl}" alt="${ctx.client.name}" /></div>` : ""}
       </div>
       <div class="pdf-cover__title">Proposta Comercial</div>
       <div class="pdf-cover__client">${ctx.client.name}</div>
@@ -258,7 +282,8 @@ function pdfEdneyOne({ ctx, vars, motifUrl, num, total }) {
     total,
     bodyHtml: `
       <div class="pdf-edney__photo-wrap">
-        <img class="pdf-edney__photo" src="${ctx.edneyAssets.photoOne}" alt="Edney Ulisses" />
+        <div class="pdf-edney__accent-circle"></div>
+        <div class="pdf-edney__photo" style="background-image:url('${ctx.edneyAssets.photoOne}')"></div>
         <div class="pdf-edney__dots"><span></span><span></span><span></span></div>
       </div>
       <div class="pdf-edney__content">
@@ -266,7 +291,7 @@ function pdfEdneyOne({ ctx, vars, motifUrl, num, total }) {
         <div class="pdf-page__title">Edney Ulisses</div>
         <div class="pdf-divider"></div>
         <ul class="pdf-edney__bio-list">
-          ${EDNEY_BIO.map((item) => `<li>${item}</li>`).join("")}
+          ${EDNEY_BIO.map((item) => `<li><span>${item}</span></li>`).join("")}
         </ul>
         <div class="pdf-edney__brands pdf-edney__brands--compact">
           ${ctx.allBrandLogos.map((b) => `<img src="${b.logo}" alt="${b.name}" />`).join("")}
@@ -286,7 +311,8 @@ function pdfEdneyTwo({ ctx, vars, motifUrl, num, total }) {
     total,
     bodyHtml: `
       <div class="pdf-edney__photo-wrap">
-        <img class="pdf-edney__photo" src="${ctx.edneyAssets.photoTwo}" alt="Edney Ulisses" />
+        <div class="pdf-edney__accent-circle"></div>
+        <div class="pdf-edney__photo" style="background-image:url('${ctx.edneyAssets.photoTwo}')"></div>
         <div class="pdf-edney__dots"><span></span><span></span><span></span></div>
       </div>
       <div class="pdf-edney__content">
@@ -294,9 +320,8 @@ function pdfEdneyTwo({ ctx, vars, motifUrl, num, total }) {
         <div class="pdf-page__title">Autoridade Comercial</div>
         <div class="pdf-divider"></div>
         <p class="pdf-edney__text">Trajetória consolidada em treinamento, consultoria e desenvolvimento comercial para equipes de alta performance, com atuação direta na aceleração de resultados das marcas do Grupo GPV.</p>
-        <div class="pdf-edney__tags-label">Especialidades</div>
-        <div class="pdf-edney__tags">
-          ${["Treinamento", "Consultoria", "Desenvolvimento comercial", "Alta performance"].map((t) => `<span class="pdf-edney__tag"><span class="pdf-edney__tag-dot"></span>${t}</span>`).join("")}
+        <div class="pdf-edney__icons">
+          ${EDNEY_ICONS.map((i) => `<div class="pdf-edney__icon-item"><span class="pdf-edney__icon-badge">${i.svg}</span><span class="pdf-edney__icon-label">${i.label}</span></div>`).join("")}
         </div>
       </div>
     `,
@@ -312,12 +337,26 @@ function pdfScope({ ctx, vars, motifUrl, num, total }) {
   if (service?.premises?.length) sections.push(["Premissas", service.premises]);
   if (service?.customServices?.enabled) sections.push([service.customServices.fieldLabel, [appState.services.customServicesText]]);
 
-  // Só divide em duas colunas quando há conteúdo suficiente para preencher a página
-  // com equilíbrio — do contrário uma coluna fica vazia e desperdiça espaço.
+  // Quatro níveis de densidade evitam que conteúdo extenso (ex.: Grand Prix, com
+  // ~36 itens somados entre todas as seções) seja cortado pela altura fixa da página:
+  // uma coluna quando cabe folgado, duas quando há conteúdo médio, três + tipografia
+  // compacta quando o total é grande, e um nível "ultra" ainda mais compacto — com
+  // quebra de coluna liberada dentro das seções — para os casos mais extremos.
   const totalItems = sections.reduce((sum, [, items]) => sum + items.length, 0);
-  const splitClass = totalItems >= 6 ? " pdf-scope__columns--split" : "";
+  let densityClass = "";
+  let pageClass = "";
+  if (totalItems >= 24) {
+    densityClass = " pdf-scope__columns--dense pdf-scope__columns--ultra";
+    pageClass = "pdf-scope--dense pdf-scope--ultra";
+  } else if (totalItems >= 14) {
+    densityClass = " pdf-scope__columns--dense";
+    pageClass = "pdf-scope--dense";
+  } else if (totalItems >= 6) {
+    densityClass = " pdf-scope__columns--split";
+  }
 
   return pdfPage({
+    className: pageClass,
     vars,
     motifUrl,
     ctx,
@@ -328,7 +367,7 @@ function pdfScope({ ctx, vars, motifUrl, num, total }) {
       <div class="pdf-page__title">${service ? service.selectionLabel : "Proposta e Escopo"}</div>
       ${service?.description ? `<div class="pdf-page__subtitle">${service.description}</div>` : ""}
       <div class="pdf-divider"></div>
-      <div class="pdf-scope__columns${splitClass}">
+      <div class="pdf-scope__columns${densityClass}">
         ${sections.map(([title, items]) => pdfListSection(title, items)).join("")}
       </div>
     `,
@@ -387,14 +426,12 @@ function pdfClosing({ ctx, vars, motifUrl, num, total }) {
       <div class="pdf-divider"></div>
       <div class="pdf-closing__thanks">Agradecemos a oportunidade de apresentar esta proposta. Seguimos à disposição para esclarecer qualquer detalhe.</div>
       <div class="pdf-closing__signature-card">
-        <div class="pdf-closing__avatar">${(issuer.name || "?").trim().charAt(0).toUpperCase()}</div>
         <div class="pdf-closing__issuer">
           <strong>${issuer.name}</strong>
-          <span>${issuer.role}</span>
-          <span>${issuer.phone} &middot; ${issuer.email}</span>
+          <span class="pdf-closing__role">${issuer.role}</span>
+          <span class="pdf-closing__contact">${issuer.phone} &middot; ${issuer.email}</span>
         </div>
       </div>
-      <div class="pdf-closing__validity">Proposta válida por <strong>${ctx.commercial.proposalValidity}</strong></div>
     `,
   });
 }
