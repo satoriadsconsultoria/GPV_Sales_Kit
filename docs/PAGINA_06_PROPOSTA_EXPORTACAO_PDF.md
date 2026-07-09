@@ -27,6 +27,31 @@ Se algum dado obrigatório estiver ausente, o sistema deve retornar para a etapa
 
 ---
 
+## Regra visual dos modelos anexados
+
+Os dois prints anexados pelo usuário devem ser usados como **referência visual estrutural**, não como layout fixo imutável.
+
+A proposta deve adaptar:
+
+- Cores.
+- Elementos gráficos.
+- Destaques.
+- Ícones.
+- Linhas.
+- Blocos visuais.
+
+Sempre conforme a empresa selecionada na Página 1.
+
+Exemplo:
+
+- Se a marca escolhida for VELOCE, os slides usam identidade da VELOCE.
+- Se a marca escolhida for Projeto Conquista, os slides usam identidade do Projeto Conquista.
+- Se a marca escolhida for Champions Festival, os slides usam identidade do Champions Festival.
+
+Os modelos do Edney servem como referência de hierarquia, composição e narrativa institucional.
+
+---
+
 ## Saída 1 — Proposta interativa
 
 A proposta interativa deve ser exibida dentro do sistema, com visual premium, animações suaves e leitura agradável.
@@ -51,6 +76,7 @@ A proposta interativa deve ser exibida dentro do sistema, com visual premium, an
 - Hover sutil em cards e botões.
 - Transição de opacidade.
 - Transição de escala leve.
+- Navegação animada entre slides/seções.
 
 ### Animações proibidas
 
@@ -63,21 +89,158 @@ A proposta interativa deve ser exibida dentro do sistema, com visual premium, an
 
 ---
 
-## Estrutura da proposta interativa
+## Estrutura obrigatória da proposta final
 
-A proposta interativa deve conter, no mínimo:
+A proposta final deve seguir a seguinte estrutura mínima:
 
-1. Capa da proposta.
-2. Apresentação da marca selecionada.
-3. Dados do cliente.
-4. Serviço/plano selecionado.
-5. Escopo, serviços oferecidos ou serviços personalizados.
-6. Condições específicas, quando existirem.
-7. Investimento da proposta.
-8. Observações, se preenchidas.
-9. Prazo de entrega, se preenchido.
-10. Encerramento institucional.
-11. Botão de download em PDF.
+| Ordem | Página/slide | Conteúdo |
+|---|---|---|
+| 1 | Capa | Logo da marca selecionada, logo do cliente e título da proposta |
+| 2 | Edney Ulisses — Institucional 01 | Apresentação de Edney Ulisses como fundador/especialista |
+| 3 | Edney Ulisses — Institucional 02 | Formação, experiência e autoridade comercial |
+| 4 | Proposta comercial | Serviço/plano selecionado, escopo, entregáveis e condições |
+| 5 | Investimento e condições | Valor, observações, prazo de entrega e validade da proposta |
+| 6 | Encerramento / emissor | Validade, dados do emissor e logo da marca selecionada |
+
+A estrutura pode ganhar páginas adicionais se o escopo for longo, mas não pode remover os blocos obrigatórios.
+
+---
+
+## Página/slide 1 — Capa
+
+Deve conter:
+
+- Logo da marca selecionada.
+- Logo do cliente.
+- Título: `Proposta Comercial`.
+- Nome do cliente.
+- Marca responsável pela proposta.
+- Data de geração, se implementado.
+
+Regra visual:
+
+- Design limpo, premium e executivo.
+- A identidade visual deve ser da marca selecionada.
+- O logo da marca e o logo do cliente devem ser preservados sem alteração visual.
+
+---
+
+## Página/slide 2 — Edney Ulisses — Institucional 01
+
+Base visual: primeiro print anexado pelo usuário.
+
+Objetivo:
+
+Apresentar Edney Ulisses como fundador/especialista do ecossistema comercial do Grupo GPV.
+
+Conteúdo sugerido:
+
+- Nome: `Edney Ulisses`.
+- Chamada: `Fundador`.
+- Descrição: `Especialista em Marketing e Vendas no setor Automotivo`.
+- Elementos visuais inspirados no modelo anexado.
+- Logos institucionais, quando fizer sentido.
+
+Regra visual:
+
+- Usar o modelo apenas como referência de composição.
+- Cores e elementos devem seguir a marca selecionada.
+- Evitar replicar cores fixas do modelo quando a proposta for de outra marca.
+
+---
+
+## Página/slide 3 — Edney Ulisses — Institucional 02
+
+Base visual: segundo print anexado pelo usuário.
+
+Objetivo:
+
+Reforçar autoridade, experiência e diferenciais de Edney Ulisses.
+
+Conteúdo sugerido:
+
+- Formação em marketing.
+- Especialista em Marketing e Vendas no setor automotivo.
+- Mais de 20 anos de experiência no mercado.
+- Criador do Departamento de Vendas Web e InHouse de Marketing e Eventos da Automob.
+- Gerenciamento de 17 marcas e mais de 70 concessionárias.
+- Participação em startup pioneira no mercado de compra e venda de veículos no Brasil.
+- Crescimento de 25% nas vendas ao mês.
+- Conversão de 70% de leads em oportunidades concretas.
+- Fundador de projeto que transforma eventos em experiências de alto impacto.
+
+Regra visual:
+
+- Usar linhas, bullets e cards inspirados no modelo anexado.
+- Cores e elementos gráficos devem ser adaptados à marca selecionada.
+- A narrativa deve ser institucional e executiva.
+
+---
+
+## Página/slide 4 — Proposta comercial / escopo
+
+Conteúdo conforme a empresa selecionada:
+
+### Grand Prix de Vendas
+
+- Serviço: Grand Prix de Vendas.
+- Serviços Oferecidos.
+- Condições para Realização do Evento.
+
+### VELOCE
+
+- Plano selecionado.
+- Serviços Oferecidos.
+- Se Plano Diamond, exibir serviços personalizados digitados.
+- Prazo de entrega obrigatório.
+
+### Champions Festival
+
+- Serviço: Champions Festival.
+- Serviços Oferecidos.
+
+### Projeto Conquista
+
+- Serviço: Projeto Conquista.
+- Serviços personalizados digitados.
+
+### Edney Ulisses — Acelerador de Vendas
+
+- Serviço: Edney Ulisses - Acelerador de Vendas.
+- Serviços personalizados digitados.
+
+---
+
+## Página/slide 5 — Investimento e condições
+
+Deve conter:
+
+- Valor da proposta em `R$`.
+- Observações, se preenchidas.
+- Prazo de entrega, se preenchido.
+- Validade da proposta.
+
+Para VELOCE, o prazo de entrega deve aparecer obrigatoriamente.
+
+---
+
+## Página/slide 6 — Encerramento / emissor
+
+Deve conter:
+
+- Validade da proposta.
+- Nome do emissor.
+- Função do emissor.
+- Telefone do emissor.
+- E-mail do emissor.
+- Logo da marca selecionada novamente.
+
+Os dados vêm da Página 4:
+
+```js
+appState.commercial.issuer
+appState.commercial.proposalValidity
+```
 
 ---
 
@@ -94,69 +257,12 @@ Ele deve ser organizado especificamente para envio ao cliente, priorizando clare
 - Melhor aproveitamento de espaço para leitura em PDF.
 - Hierarquia clara de títulos, subtítulos, cards e blocos de conteúdo.
 - Capa institucional da proposta.
-- Sumário ou sequência lógica de seções, se fizer sentido para o tamanho da proposta.
+- Páginas institucionais de Edney Ulisses conforme modelo adaptado.
 - Informações comerciais em destaque.
 - Logos preservados sem recoloração, filtro ou distorção.
 - Conteúdo sem animações.
 - Conteúdo sem botões ou elementos interativos.
 - Formatação correta para impressão ou envio digital.
-
----
-
-## Estrutura recomendada do PDF
-
-### Página 1 — Capa
-
-- Logo da marca selecionada.
-- Logo do cliente.
-- Título: `Proposta Comercial`.
-- Nome do cliente.
-- Marca/empresa responsável pela proposta.
-
-### Página 2 — Contexto da proposta
-
-- Breve apresentação da solução selecionada.
-- Objetivo da proposta.
-- Dados do cliente.
-
-### Página 3 em diante — Escopo
-
-Conteúdo conforme a empresa selecionada:
-
-#### Grand Prix de Vendas
-
-- Serviço: Grand Prix de Vendas.
-- Serviços Oferecidos.
-- Condições para Realização do Evento.
-
-#### VELOCE
-
-- Plano selecionado.
-- Serviços Oferecidos.
-- Se Plano Diamond, exibir serviços personalizados digitados.
-- Prazo de entrega obrigatório.
-
-#### Champions Festival
-
-- Serviço: Champions Festival.
-- Serviços Oferecidos.
-
-#### Projeto Conquista
-
-- Serviço: Projeto Conquista.
-- Serviços personalizados digitados.
-
-#### Edney Ulisses — Acelerador de Vendas
-
-- Serviço: Edney Ulisses - Acelerador de Vendas.
-- Serviços personalizados digitados.
-
-### Última página — Investimento e encerramento
-
-- Valor da proposta em `R$`.
-- Observações, se preenchidas.
-- Prazo de entrega, se preenchido.
-- Dados institucionais e responsável configurados em `data/config.json`.
 
 ---
 
@@ -206,6 +312,7 @@ appState.commercial
 - Deve evitar cortes ruins entre páginas.
 - Deve usar margens adequadas.
 - Deve gerar arquivo com nome amigável.
+- O PDF deve ter estrutura própria, diferente do HTML interativo.
 
 ### Nome sugerido do arquivo
 
@@ -237,14 +344,18 @@ proposta-veloce-autohaus.pdf
 | P6-RF10 | Exibir valor da proposta em `R$` |
 | P6-RF11 | Exibir observações somente se preenchidas |
 | P6-RF12 | Exibir prazo de entrega se preenchido |
-| P6-RF13 | Exibir botão para download em PDF |
-| P6-RF14 | Gerar PDF diferente da página interativa |
-| P6-RF15 | Gerar PDF com design premium, elegante e executivo |
-| P6-RF16 | Gerar PDF sem animações, botões ou elementos interativos |
-| P6-RF17 | Gerar PDF paginado e otimizado para envio ao cliente |
-| P6-RF18 | Baixar o PDF diretamente pelo navegador |
-| P6-RF19 | Preservar todos os dados do `appState` durante a geração |
-| P6-RF20 | Permitir voltar para Página 5 antes ou depois da geração |
+| P6-RF13 | Exibir validade da proposta |
+| P6-RF14 | Exibir dados do emissor na última página |
+| P6-RF15 | Exibir botão para download em PDF |
+| P6-RF16 | Gerar PDF diferente da página interativa |
+| P6-RF17 | Gerar PDF com design premium, elegante e executivo |
+| P6-RF18 | Gerar PDF sem animações, botões ou elementos interativos |
+| P6-RF19 | Gerar PDF paginado e otimizado para envio ao cliente |
+| P6-RF20 | Baixar o PDF diretamente pelo navegador |
+| P6-RF21 | Preservar todos os dados do `appState` durante a geração |
+| P6-RF22 | Permitir voltar para Página 5 antes ou depois da geração |
+| P6-RF23 | Incluir duas páginas/slides institucionais sobre Edney Ulisses |
+| P6-RF24 | Adaptar os slides de Edney às cores e elementos da marca selecionada |
 
 ---
 
@@ -255,6 +366,12 @@ A Página 6 será considerada aprovada se:
 - Gerar uma proposta final interativa, visual e animada.
 - Manter a identidade visual da marca selecionada.
 - Exibir corretamente marca, cliente, serviço/plano, escopo e dados comerciais.
+- Incluir capa com logo da marca selecionada e logo do cliente.
+- Incluir duas páginas/slides institucionais sobre Edney Ulisses.
+- Adaptar os slides de Edney conforme a marca selecionada.
+- Incluir página de proposta/escopo.
+- Incluir investimento, condições e validade da proposta.
+- Incluir página final com validade, dados do emissor e logo da marca.
 - Disponibilizar botão de download em PDF.
 - Gerar um PDF diferente da página interativa.
 - O PDF possuir layout paginado, limpo, premium e executivo.
