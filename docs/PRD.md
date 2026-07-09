@@ -82,6 +82,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RF011 | Exibir página institucional final | Alta |
 | RF012 | Usar config JSON para dados do responsável | Alta |
 | RF013 | Preservar as cores originais de todos os logos | Alta |
+| RF014 | Usar tipografia padrão do sistema | Alta |
 
 ---
 
@@ -103,20 +104,17 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 
 ## 7. Identidade visual oficial da Página 1
 
-A Página 1 usa a identidade institucional do **Grupo GPV**.
-
 | Elemento | Definição |
 |---|---|
 | Marca dominante | Grupo GPV |
-| Logo oficial | `assets/logos/grupo-gpv.svg` |
-| Referência raster opcional | `assets/logos/grupo-gpv.png` |
+| Logo padrão | `assets/logos/grupo-gpv-negativo.png` |
+| Logo de referência/acervo | `assets/logos/grupo-gpv-positivo.png` |
 | Cor institucional principal | `#252324` |
 | Cor secundária | `#A5A09C` |
 | Texto principal | Branco `#FFFFFF` |
-| Cor de apoio principal | Ciano `#5BBFC8` |
-| Cores auxiliares | Vermelho `#E31838`, Amarelo `#F5C32C`, Azul `#2F3D8E` |
+| Tipografia | `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif` |
 
-A Página 1 deve usar `#252324` como base visual, `#A5A09C` como cor secundária institucional e uso controlado das cores auxiliares apenas como elementos gráficos secundários.
+A Página 1 deve usar sempre o **logo branco** do Grupo GPV sobre fundo escuro dentro da paleta institucional.
 
 As cores institucionais devem ser aplicadas em fundos, botões, bordas, textos, linhas, cards e elementos gráficos. Elas não devem alterar as cores do logo.
 
@@ -172,6 +170,8 @@ Essa regra vale para:
 | Página 1 | Portal institucional do Grupo GPV |
 | Seleção da empresa | Logos das marcas clicáveis |
 | Identidade visual da Página 1 | Grupo GPV, cor principal `#252324` |
+| Logo GPV padrão | Branco sobre fundo escuro |
+| Tipografia | Padrão do sistema |
 | Identidade visual das páginas seguintes | Empresa selecionada |
 | Tratamento dos logos | Preservar cores originais; nunca recolorir |
 | Serviços | Desacoplados da interface |
@@ -186,8 +186,10 @@ Essa regra vale para:
 - A Página 1 apresenta o Grupo GPV como marca dominante.
 - A Página 1 usa `#252324` como cor institucional principal.
 - A Página 1 usa `#A5A09C` como cor secundária institucional.
+- A Página 1 usa tipografia padrão do sistema.
+- A Página 1 usa o logo branco do Grupo GPV sobre fundo escuro.
 - Os logos das empresas funcionam como botões de seleção.
-- Nenhum logo é recolorido, filtrado, distorcido ou convertido para outra versão visual.
+- Nenhum logo é recolorido, filtrado, distorcido ou convertido para outra versão visual não aprovada.
 - O clique na marca seleciona a empresa e avança para a Página 2.
 - A identidade visual muda conforme a empresa selecionada a partir da Página 2.
 - O usuário consegue gerar proposta completa em PDF.
