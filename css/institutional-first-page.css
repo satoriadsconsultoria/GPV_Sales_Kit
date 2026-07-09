@@ -92,10 +92,41 @@
 
 .page--institutional .brand-card,
 .page--institutional .brand-card-wrapper .brand-card {
+  align-items: center;
+  justify-content: center;
+  min-height: 186px;
+  padding: 24px;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.115), rgba(255, 255, 255, 0.035)),
     rgba(255, 255, 255, 0.035);
   border-color: rgba(255, 255, 255, 0.14);
+}
+
+.page--institutional .brand-card__label,
+.page--institutional .brand-card__hint,
+.page--institutional .brand-card__tag {
+  display: none !important;
+}
+
+.page--institutional .brand-card__logo {
+  position: static !important;
+  width: min(190px, 80%);
+  height: 104px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  object-fit: contain;
+}
+
+.page--institutional .brand-grid > .brand-card:nth-child(3),
+.page--institutional .brand-grid > .brand-card:nth-child(4) {
+  min-height: 198px;
+}
+
+.page--institutional .brand-grid > .brand-card:nth-child(3) .brand-card__logo,
+.page--institutional .brand-grid > .brand-card:nth-child(4) .brand-card__logo {
+  width: min(230px, 92%);
+  height: 124px;
+  padding: 8px 12px;
 }
 
 .page--institutional .brand-card::before {
@@ -143,5 +174,10 @@
 
   .page--institutional .institutional__title {
     font-size: clamp(1.55rem, 8vw, 2.5rem);
+  }
+
+  .page--institutional .brand-card__logo {
+    width: min(220px, 84%);
+    height: 110px;
   }
 }
