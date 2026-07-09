@@ -99,7 +99,24 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 
 ---
 
-## 7. Decisões técnicas oficiais
+## 7. Identidade visual oficial da Página 1
+
+A Página 1 usa a identidade institucional do **Grupo GPV**.
+
+| Elemento | Definição |
+|---|---|
+| Marca dominante | Grupo GPV |
+| Logo oficial | `assets/logos/grupo-gpv.png` |
+| Cor institucional principal | Preto `#000000` |
+| Texto principal | Branco `#FFFFFF` |
+| Cor de apoio principal | Ciano `#5BBFC8` |
+| Cores auxiliares | Vermelho `#E31838`, Amarelo `#F5C32C`, Azul `#2F3D8E` |
+
+A Página 1 deve ser majoritariamente preta, com o logo do Grupo GPV em grande escala e uso controlado das cores auxiliares apenas como elementos gráficos secundários.
+
+---
+
+## 8. Decisões técnicas oficiais
 
 | Tema | Decisão |
 |---|---|
@@ -113,18 +130,19 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | Desenvolvimento | VS Code + Claude Code |
 | Página 1 | Portal institucional do Grupo GPV |
 | Seleção da empresa | Logos das marcas clicáveis |
-| Identidade visual da Página 1 | Grupo GPV |
+| Identidade visual da Página 1 | Grupo GPV, preto institucional |
 | Identidade visual das páginas seguintes | Empresa selecionada |
 | Serviços | Desacoplados da interface |
 | Assinatura | Configurável via JSON |
 
 ---
 
-## 8. Critérios gerais de aceite
+## 9. Critérios gerais de aceite
 
 - O sistema roda localmente sem backend.
 - O sistema pode ser hospedado no Netlify.
 - A Página 1 apresenta o Grupo GPV como marca dominante.
+- A Página 1 usa preto como cor institucional principal.
 - Os logos das empresas funcionam como botões de seleção.
 - O clique na marca seleciona a empresa e avança para a Página 2.
 - A identidade visual muda conforme a empresa selecionada a partir da Página 2.
