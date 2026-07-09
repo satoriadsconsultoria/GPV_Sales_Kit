@@ -1,0 +1,87 @@
+[
+  {
+    "id": "grand-prix",
+    "name": "Grand Prix de Vendas",
+    "shortDescription": "Sistema de aceleração comercial para concessionárias, unindo evento, marketing, operação, dados e conversão.",
+    "tag": "Evento Comercial Automotivo",
+    "logo": "assets/logos/grand-prix.png",
+    "background": "assets/backgrounds/grand-prix-bg.jpg",
+    "theme": {
+      "primaryColor": "#D71920",
+      "secondaryColor": "#111111",
+      "accentColor": "#F5C542",
+      "textColor": "#FFFFFF",
+      "backgroundColor": "#0B0B0B"
+    },
+    "positioning": "Sistema proprietário de aceleração comercial para o setor automotivo, baseado em metodologia, operação, marketing, experiência, dados e conversão.",
+    "proposalStructure": "event-commercial"
+  },
+  {
+    "id": "champions",
+    "name": "Champions Festival",
+    "shortDescription": "Modelo de aceleração comercial digital voltado para geração de oportunidades, campanhas e performance de vendas.",
+    "tag": "Campanha Digital de Vendas",
+    "logo": "assets/logos/champions-festival.png",
+    "background": "assets/backgrounds/champions-bg.jpg",
+    "theme": {
+      "primaryColor": "#111111",
+      "secondaryColor": "#D4AF37",
+      "accentColor": "#FFFFFF",
+      "textColor": "#FFFFFF",
+      "backgroundColor": "#080808"
+    },
+    "positioning": "Modelo de aceleração comercial digital com foco em geração de demanda, conversão e performance de vendas.",
+    "proposalStructure": "digital-event"
+  },
+  {
+    "id": "veloce",
+    "name": "VELOCE",
+    "shortDescription": "Agência especialista em marketing, performance e aceleração comercial para empresas do setor automotivo.",
+    "tag": "Marketing Automotivo",
+    "logo": "assets/logos/veloce.png",
+    "background": "assets/backgrounds/veloce-bg.jpg",
+    "theme": {
+      "primaryColor": "#34E1E1",
+      "secondaryColor": "#0B0B0B",
+      "accentColor": "#FFFFFF",
+      "textColor": "#FFFFFF",
+      "backgroundColor": "#050505"
+    },
+    "positioning": "Agência especialista em marketing e aceleração comercial para o setor automotivo.",
+    "proposalStructure": "agency"
+  },
+  {
+    "id": "conquista",
+    "name": "Projeto Conquista",
+    "shortDescription": "Evento de vendas estruturado para o mercado imobiliário, com foco em captação, atendimento e conversão comercial.",
+    "tag": "Evento Comercial Imobiliário",
+    "logo": "assets/logos/projeto-conquista.png",
+    "background": "assets/backgrounds/conquista-bg.jpg",
+    "theme": {
+      "primaryColor": "#1E3A5F",
+      "secondaryColor": "#CFAF6D",
+      "accentColor": "#FFFFFF",
+      "textColor": "#FFFFFF",
+      "backgroundColor": "#08111F"
+    },
+    "positioning": "Evento de aceleração comercial para o mercado imobiliário.",
+    "proposalStructure": "real-estate-event"
+  },
+  {
+    "id": "edney",
+    "name": "Edney Ulisses — Acelerador de Vendas",
+    "shortDescription": "Treinamento, consultoria e desenvolvimento comercial para equipes de vendas de alta performance.",
+    "tag": "Treinamento Comercial",
+    "logo": "assets/logos/edney-ulisses.png",
+    "background": "assets/backgrounds/edney-bg.jpg",
+    "theme": {
+      "primaryColor": "#D71920",
+      "secondaryColor": "#111111",
+      "accentColor": "#FFFFFF",
+      "textColor": "#FFFFFF",
+      "backgroundColor": "#090909"
+    },
+    "positioning": "Treinamento, consultoria e desenvolvimento comercial para equipes de alta performance.",
+    "proposalStructure": "training-consulting"
+  }
+]
