@@ -68,11 +68,11 @@
     "logo": "assets/logos/projeto-conquista.png",
     "background": "assets/backgrounds/conquista-bg.jpg",
     "theme": {
-      "primaryColor": "#1E3A5F",
-      "secondaryColor": "#CFAF6D",
+      "primaryColor": "#0A0A0A",
+      "secondaryColor": "#FFFFFF",
       "accentColor": "#FFFFFF",
       "textColor": "#FFFFFF",
-      "backgroundColor": "#08111F"
+      "backgroundColor": "#0A0A0A"
     },
     "positioning": "Evento de aceleração comercial para o mercado imobiliário.",
     "proposalStructure": "real-estate-event"
@@ -80,7 +80,7 @@
   {
     "id": "edney",
     "name": "Edney Ulisses — Acelerador de Vendas",
-    "shortDescription": "Treinamento, consultoria e desenvolvimento comercial para equipes de vendas de alta performance.",
+    "shortDescription": "Treinamento, consultoria e desenvolvimento comercial para equipes de alta performance.",
     "tag": "Acelerador de Vendas",
     "logo": "assets/logos/edney-ulisses.png",
     "background": "assets/backgrounds/edney-bg.jpg",
