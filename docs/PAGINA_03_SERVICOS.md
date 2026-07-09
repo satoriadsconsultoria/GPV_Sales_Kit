@@ -233,6 +233,38 @@ Champions Festival
 
 ---
 
+## Regra específica — Projeto Conquista
+
+No caso do **Projeto Conquista**, existe somente uma opção disponível na Página 3.
+
+### Serviço exibido
+
+```txt
+Projeto Conquista
+```
+
+### Comportamento
+
+- Exibir apenas uma opção de seleção.
+- A opção deve funcionar como checkbox/fleg.
+- Ao marcar Projeto Conquista, abrir uma caixa de texto para digitar os serviços da proposta.
+- O conteúdo digitado será usado como escopo personalizado do Projeto Conquista.
+- O sistema deve impedir avanço se o campo estiver vazio.
+
+Campo obrigatório:
+
+```txt
+Serviços do Projeto Conquista
+```
+
+Placeholder sugerido:
+
+```txt
+Digite os serviços que serão incluídos na proposta do Projeto Conquista.
+```
+
+---
+
 ## Layout recomendado
 
 ### Desktop
@@ -249,9 +281,7 @@ Champions Festival
 │                                                    │
 │  Se selecionado:                                   │
 │                                                    │
-│  Serviços Oferecidos                               │
-│  - Item 1                                          │
-│  - Item 2                                          │
+│  Serviços Oferecidos ou campo personalizado        │
 │                                                    │
 │  [Voltar]                              [Continuar] │
 └────────────────────────────────────────────────────┘
@@ -282,6 +312,9 @@ Champions Festival
 | P3-RF17 | No Plano Diamond, impedir avanço se o campo personalizado estiver vazio |
 | P3-RF18 | No Champions Festival, exibir somente o serviço Champions Festival |
 | P3-RF19 | Ao selecionar Champions Festival, exibir Serviços Oferecidos |
+| P3-RF20 | No Projeto Conquista, exibir somente a opção Projeto Conquista |
+| P3-RF21 | Ao selecionar Projeto Conquista, exibir textarea para serviços personalizados |
+| P3-RF22 | No Projeto Conquista, impedir avanço se o campo personalizado estiver vazio |
 
 ---
 
@@ -301,6 +334,7 @@ Champions Festival
 | Nenhum serviço selecionado | Selecione pelo menos um serviço para continuar. |
 | Nenhum serviço encontrado para a empresa | Nenhum serviço cadastrado para esta marca. |
 | Plano Diamond sem serviços digitados | Informe os serviços personalizados do Plano Diamond. |
+| Projeto Conquista sem serviços digitados | Informe os serviços do Projeto Conquista. |
 
 ---
 
@@ -315,6 +349,8 @@ A Página 3 será considerada aprovada se:
 - No Plano Diamond, exibir campo livre para digitar os serviços personalizados.
 - No Champions Festival, exibir somente o serviço Champions Festival.
 - No Champions Festival, exibir Serviços Oferecidos após seleção.
+- No Projeto Conquista, exibir somente a opção Projeto Conquista.
+- No Projeto Conquista, exibir campo livre para digitar os serviços personalizados.
 - Permitir marcar/flegar o serviço ou plano.
 - Salvar a seleção em `appState.selectedServices`.
 - Impedir avanço sem serviço/plano selecionado.
