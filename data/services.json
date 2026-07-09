@@ -232,5 +232,31 @@
         "customServices"
       ]
     }
+  },
+  {
+    "id": "edney-ulisses-acelerador-de-vendas",
+    "companyId": "edney",
+    "name": "Edney Ulisses - Acelerador de Vendas",
+    "selectionLabel": "Edney Ulisses - Acelerador de Vendas",
+    "description": "Serviço personalizado de treinamento, consultoria e desenvolvimento comercial, com escopo definido manualmente conforme a necessidade do cliente.",
+    "selectionType": "single-checkbox-custom",
+    "offeredServicesTitle": "Serviços Oferecidos",
+    "offeredServices": [],
+    "customServices": {
+      "enabled": true,
+      "required": true,
+      "fieldType": "textarea",
+      "fieldLabel": "Serviços do Edney Ulisses - Acelerador de Vendas",
+      "placeholder": "Digite os serviços que serão incluídos na proposta do Edney Ulisses - Acelerador de Vendas.",
+      "minLength": 5
+    },
+    "pageThreeBehavior": {
+      "showOnlyOneOption": true,
+      "showDetailsAfterSelection": true,
+      "allowCustomServicesInput": true,
+      "detailsSections": [
+        "customServices"
+      ]
+    }
   }
 ]
