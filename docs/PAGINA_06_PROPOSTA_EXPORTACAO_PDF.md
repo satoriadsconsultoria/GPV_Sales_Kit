@@ -46,25 +46,23 @@ Os modelos do Edney servem como referência de hierarquia, composição e narrat
 
 ---
 
-## Assets pendentes do Edney
+## Assets validados do Edney
 
-As fotos finais do Edney devem ser enviadas posteriormente pelo usuário.
+As fotos finais do Edney foram recebidas e validadas no repositório.
 
-Caminhos oficiais previstos:
+Caminhos oficiais:
 
 ```txt
 assets/images/edney/edney-institucional-01.png
 assets/images/edney/edney-institucional-02.png
 ```
 
-Enquanto os arquivos não forem enviados, a implementação deve:
+Regras:
 
-- Manter os caminhos previstos.
-- Usar placeholder visual temporário.
-- Não quebrar a proposta.
+- Usar essas fotos nos slides institucionais do Edney.
 - Não usar os prints anexados como imagem final chapada.
-
-Os prints são referência de layout, não assets finais de produção.
+- Não usar placeholder no fluxo final, salvo se algum asset for removido futuramente.
+- Preservar qualidade, proporção e enquadramento adequado das fotos.
 
 ---
 
@@ -145,6 +143,12 @@ Regra visual:
 
 Base visual: primeiro print anexado pelo usuário.
 
+Foto oficial:
+
+```txt
+assets/images/edney/edney-institucional-01.png
+```
+
 Objetivo:
 
 Apresentar Edney Ulisses como fundador/especialista do ecossistema comercial do Grupo GPV.
@@ -185,6 +189,12 @@ Regra visual:
 ## Página/slide 3 — Edney Ulisses — Institucional 02
 
 Base visual: segundo print anexado pelo usuário.
+
+Foto oficial:
+
+```txt
+assets/images/edney/edney-institucional-02.png
+```
 
 Objetivo:
 
@@ -417,6 +427,7 @@ proposta-veloce-autohaus.pdf
 | P6-RF25 | No slide 2, exibir somente as marcas oficiais do Grupo GPV cadastradas no sistema |
 | P6-RF26 | Usar template PDF dedicado, separado da tela interativa |
 | P6-RF27 | Usar PDF em A4 landscape |
+| P6-RF28 | Usar as fotos finais validadas do Edney nos slides 2 e 3 |
 
 ---
 
@@ -429,6 +440,7 @@ A Página 6 será considerada aprovada se:
 - Exibir corretamente marca, cliente, serviço/plano, escopo e dados comerciais.
 - Incluir capa com logo da marca selecionada e logo do cliente.
 - Incluir duas páginas/slides institucionais sobre Edney Ulisses.
+- Usar as fotos finais validadas do Edney nos slides 2 e 3.
 - Adaptar os slides de Edney conforme a marca selecionada.
 - Exibir no slide 2 somente as marcas oficiais do Grupo GPV.
 - Não exibir marcas externas presentes no print de referência.
