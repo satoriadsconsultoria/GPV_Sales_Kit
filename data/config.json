@@ -1,13 +1,15 @@
 {
   "groupBrand": {
     "name": "Grupo GPV",
-    "logo": "assets/logos/grupo-gpv.png",
+    "logo": "assets/logos/grupo-gpv.svg",
+    "logoRasterReference": "assets/logos/grupo-gpv.png",
     "theme": {
-      "primaryColor": "#000000",
-      "secondaryColor": "#FFFFFF",
+      "primaryColor": "#252324",
+      "secondaryColor": "#A5A09C",
       "accentColor": "#5BBFC8",
-      "backgroundColor": "#000000",
+      "backgroundColor": "#252324",
       "textColor": "#FFFFFF",
+      "mutedTextColor": "#A5A09C",
       "supportColors": {
         "cyan": "#5BBFC8",
         "red": "#E31838",
