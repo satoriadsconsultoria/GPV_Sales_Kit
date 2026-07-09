@@ -2,11 +2,11 @@
 
 ## Objetivo
 
-A Página 4 será responsável pelo preenchimento das condições comerciais da proposta.
+A Página 4 será responsável pelo preenchimento das condições comerciais da proposta e dos dados de quem está emitindo a proposta.
 
 Ela deve abrir após a validação da Página 3 — Serviços.
 
-A Página 4 deve manter a identidade visual da marca selecionada na Página 1.
+A Página 4 deve manter a identidade visual da marca selecionada na Página 1 e seguir o padrão global de animações e interações.
 
 ---
 
@@ -29,6 +29,11 @@ Se algum desses dados estiver ausente, o sistema deve retornar para a etapa corr
 | Valor da proposta | Moeda | Sim | Campo formatado em Real brasileiro `R$` |
 | Observações | Texto longo | Não | Campo livre para observações comerciais, operacionais ou específicas da proposta |
 | Prazo de entrega | Texto ou data | Condicional | Obrigatório apenas quando a marca selecionada for VELOCE |
+| Validade da proposta | Texto ou data | Sim | Exibido na última página da proposta final/PDF |
+| Nome do emissor | Texto | Sim | Nome de quem está emitindo a proposta |
+| Função do emissor | Texto | Sim | Cargo/função de quem está emitindo a proposta |
+| Telefone do emissor | Telefone | Sim | Telefone de contato do emissor |
+| E-mail do emissor | E-mail | Sim | E-mail de contato do emissor |
 
 ---
 
@@ -50,15 +55,6 @@ O campo de valor da proposta deve ser configurado em formato monetário brasilei
 R$ 12.000,00
 ```
 
-### Estado sugerido
-
-```js
-appState.commercial.value = {
-  raw: 12000,
-  formatted: "R$ 12.000,00"
-}
-```
-
 ---
 
 ## Campo — Observações
@@ -72,13 +68,6 @@ Campo livre para inserir qualquer observação necessária na proposta.
 - Deve aceitar múltiplas linhas.
 - Deve ser salvo mesmo se estiver vazio.
 - Deve aparecer na proposta final somente se tiver conteúdo preenchido.
-
-### Exemplos de uso
-
-- Condição comercial específica.
-- Observação sobre escopo.
-- Observação sobre negociação.
-- Observação sobre prazo, pagamento ou dependências.
 
 ---
 
@@ -96,11 +85,47 @@ Campo para registrar prazo de entrega, início de execução ou prazo operaciona
 | Projeto Conquista | Não |
 | Edney Ulisses — Acelerador de Vendas | Não |
 
-### Regra VELOCE
-
 Quando `appState.selectedCompany.id === "veloce"`, o campo **Prazo de entrega** deve ser obrigatório.
 
 O sistema deve impedir avanço para a Página 5 se a marca for VELOCE e o prazo estiver vazio.
+
+---
+
+## Campo — Validade da proposta
+
+Campo para definir por quanto tempo a proposta será válida.
+
+### Regras
+
+- Obrigatório para todas as marcas.
+- Deve aparecer na proposta final.
+- Deve aparecer na última página do PDF.
+- Pode ser preenchido como data ou texto livre.
+
+### Exemplos
+
+```txt
+Válida por 7 dias
+```
+
+```txt
+Válida até 30/08/2026
+```
+
+---
+
+## Campos — Emissor da proposta
+
+Os dados do emissor serão utilizados na última página da proposta final e no PDF executivo.
+
+### Campos obrigatórios
+
+| Campo | Validação |
+|---|---|
+| Nome | Não pode estar vazio |
+| Função | Não pode estar vazio |
+| Telefone | Deve conter telefone válido com DDD quando aplicável |
+| E-mail | Deve possuir formato básico de e-mail |
 
 ---
 
@@ -113,7 +138,14 @@ appState.commercial = {
     formatted: ""
   },
   notes: "",
-  deliveryDeadline: ""
+  deliveryDeadline: "",
+  proposalValidity: "",
+  issuer: {
+    name: "",
+    role: "",
+    phone: "",
+    email: ""
+  }
 }
 ```
 
@@ -130,6 +162,9 @@ Ao entrar na Página 4, o sistema deve:
 5. Exibir campo de observações.
 6. Exibir campo de prazo de entrega.
 7. Aplicar obrigatoriedade condicional do prazo para VELOCE.
+8. Exibir campo de validade da proposta.
+9. Exibir campos do emissor: nome, função, telefone e e-mail.
+10. Aplicar animações e microinterações nos campos e botões.
 
 ---
 
@@ -156,6 +191,21 @@ Ao entrar na Página 4, o sistema deve:
 | Condicional | Obrigatório somente para VELOCE |
 | Opcional nas demais marcas | Pode ficar vazio |
 
+### Validade da proposta
+
+| Regra | Critério |
+|---|---|
+| Obrigatório | Não pode estar vazio |
+
+### Dados do emissor
+
+| Campo | Regra |
+|---|---|
+| Nome | Obrigatório |
+| Função | Obrigatório |
+| Telefone | Obrigatório |
+| E-mail | Obrigatório e com formato válido |
+
 ---
 
 ## Mensagens de erro
@@ -166,6 +216,12 @@ Ao entrar na Página 4, o sistema deve:
 | Valor inválido | Informe um valor válido para a proposta. |
 | Valor zerado | O valor da proposta deve ser maior que R$ 0,00. |
 | Prazo VELOCE vazio | Informe o prazo de entrega para a proposta da VELOCE. |
+| Validade vazia | Informe a validade da proposta. |
+| Nome do emissor vazio | Informe o nome de quem está emitindo a proposta. |
+| Função do emissor vazia | Informe a função de quem está emitindo a proposta. |
+| Telefone do emissor vazio | Informe o telefone de quem está emitindo a proposta. |
+| E-mail do emissor vazio | Informe o e-mail de quem está emitindo a proposta. |
+| E-mail do emissor inválido | Informe um e-mail válido para o emissor da proposta. |
 
 ---
 
@@ -191,9 +247,14 @@ Ao entrar na Página 4, o sistema deve:
 | P4-RF07 | Exibir campo de prazo de entrega |
 | P4-RF08 | Tornar prazo de entrega obrigatório somente para VELOCE |
 | P4-RF09 | Nas demais marcas, prazo de entrega deve ser opcional |
-| P4-RF10 | Salvar dados comerciais em `appState.commercial` |
-| P4-RF11 | Impedir avanço se houver erro de validação |
-| P4-RF12 | Avançar para Página 5 — Conferência após validação correta |
+| P4-RF10 | Exibir campo de validade da proposta |
+| P4-RF11 | Tornar validade da proposta obrigatória para todas as marcas |
+| P4-RF12 | Exibir campos do emissor: nome, função, telefone e e-mail |
+| P4-RF13 | Tornar dados do emissor obrigatórios |
+| P4-RF14 | Salvar dados comerciais em `appState.commercial` |
+| P4-RF15 | Impedir avanço se houver erro de validação |
+| P4-RF16 | Avançar para Página 5 — Conferência após validação correta |
+| P4-RF17 | Aplicar animações e interações nos campos e botões |
 
 ---
 
@@ -210,5 +271,9 @@ A Página 4 será considerada aprovada se:
 - Exibir campo de prazo de entrega.
 - Tornar prazo de entrega obrigatório apenas para VELOCE.
 - Permitir prazo vazio nas demais marcas.
+- Exibir validade da proposta.
+- Tornar validade da proposta obrigatória.
+- Exibir nome, função, telefone e e-mail do emissor.
+- Tornar dados do emissor obrigatórios.
 - Salvar os dados em `appState.commercial`.
 - Avançar somente após validação correta.
