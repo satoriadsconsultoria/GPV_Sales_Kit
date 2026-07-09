@@ -66,6 +66,8 @@ A Página 1 deve carregar a navegação a partir de:
 data/navigation.json
 ```
 
+Cada item direto e cada opção do submenu deve possuir `hoverColor`.
+
 ### Regra especial — Grand Prix de Vendas / Champions Festival
 
 No logo institucional do Grupo GPV existe somente o ícone do **Grand Prix de Vendas**.
@@ -76,10 +78,10 @@ Por isso, na Página 1, o logo do **Grand Prix de Vendas** deve funcionar como u
 
 Ao passar o mouse sobre o logo do **Grand Prix de Vendas**, o sistema deve abrir um submenu com duas opções:
 
-| Opção | Destino |
-|---|---|
-| Grand Prix de Vendas | `companyId: grand-prix` |
-| Champions Festival | `companyId: champions` |
+| Opção | Destino | Hover |
+|---|---|---|
+| Grand Prix de Vendas | `companyId: grand-prix` | `#FA0115` |
+| Champions Festival | `companyId: champions` | `#95C223` |
 
 Ao clicar em uma das opções, o sistema deve seguir o fluxo normalmente para a Página 2, carregando a identidade visual, os serviços e a estrutura da proposta da opção selecionada.
 
@@ -94,6 +96,8 @@ Em dispositivos mobile, como não existe hover, o primeiro toque no logo do Gran
 Ao passar o mouse sobre cada marca na Página 1, o sistema deve mostrar a seleção antes do clique.
 
 Esse efeito deve usar a cor da linha superior da marca no logo institucional do Grupo GPV.
+
+As cores devem vir de `data/navigation.json`, no campo `hoverColor`.
 
 ### Cores de hover da Página 1
 
@@ -113,29 +117,39 @@ Nas páginas seguintes, o sistema deve usar as cores oficiais da marca cadastrad
 
 No hover:
 
-- O card da marca ganha borda, glow ou linha superior na cor correspondente.
-- O logo/card ganha destaque visual de pré-seleção.
+- O card/container da marca ganha borda, glow ou linha superior na cor correspondente.
+- O card/container ganha destaque visual de pré-seleção.
+- O logo permanece original, sem filtro, sem opacidade alterada e sem recoloração.
 - O cursor indica item clicável.
 - O card pode ter leve elevação e escala discreta.
 - A transição deve ser suave e premium.
 
-### Exceção controlada de hover
+### Regra técnica obrigatória
 
-Na Página 1, é permitida uma exceção visual temporária para indicar seleção da marca no hover.
+O hover colorido deve ser aplicado somente no **container/card** da marca.
 
-O sistema pode aplicar tint/destaque temporário no estado de hover, desde que:
+Permitido:
 
-- Não altere permanentemente o arquivo original do logo.
-- O efeito exista somente durante hover/foco.
-- O efeito seja removido ao tirar o mouse.
-- O efeito não seja usado nas páginas seguintes.
-- O PDF e a proposta final usem os logos originais.
+- Borda colorida no card.
+- Glow discreto no card.
+- Linha superior colorida no card.
+- Fundo auxiliar sutil no card.
+- Sombra leve.
+- Escala leve do card.
+
+Proibido:
+
+- Recolorir o logo.
+- Aplicar filtro no logo.
+- Alterar opacidade do logo.
+- Usar `mix-blend-mode` no logo.
+- Substituir o logo por versão recolorida.
 
 ---
 
 ## Regra obrigatória de preservação de logos
 
-Os logos devem ser exibidos exatamente como foram fornecidos, exceto pelo efeito visual temporário de hover da Página 1 descrito acima.
+Os logos devem ser exibidos exatamente como foram fornecidos.
 
 ### Permitido
 
@@ -144,14 +158,14 @@ Os logos devem ser exibidos exatamente como foram fornecidos, exceto pelo efeito
 - Usar `object-fit: contain`.
 - Aplicar margem e espaçamento externo.
 - Aplicar cor apenas no fundo/container externo.
-- Aplicar destaque visual temporário de hover na Página 1.
+- Aplicar destaque visual temporário de hover no container da Página 1.
 
 ### Proibido
 
 - Recolorir permanentemente.
-- Aplicar filtros CSS fora do estado temporário de hover da Página 1.
-- Alterar opacidade fora do estado temporário de hover da Página 1.
-- Usar `mix-blend-mode` em proposta final ou PDF.
+- Aplicar filtros CSS diretamente no logo.
+- Alterar opacidade do logo.
+- Usar `mix-blend-mode` no logo.
 - Converter para monocromático.
 - Substituir cores internas pelas cores do tema nas páginas 2 a 6.
 - Distorcer proporção.
@@ -200,7 +214,7 @@ A Página 1 deve conter:
 
 - Entrada suave do logo Grupo GPV.
 - Entrada suave dos cards das marcas.
-- Hover colorido por marca.
+- Hover colorido por marca aplicado no card/container.
 - Microinteração no submenu Grand Prix.
 - Transição animada para a Página 2.
 - Feedback visual de clique.
@@ -253,18 +267,20 @@ Ao clicar em uma marca direta ou em uma opção do submenu, o sistema deve:
 | P1-RF03 | Usar `#A5A09C` como cor secundária institucional |
 | P1-RF04 | Usar tipografia padrão do sistema |
 | P1-RF05 | Carregar os itens de navegação a partir de `data/navigation.json` |
-| P1-RF06 | Exibir o logo Grand Prix como agrupador de Grand Prix de Vendas e Champions Festival |
-| P1-RF07 | Abrir submenu no hover do logo Grand Prix em desktop |
-| P1-RF08 | Abrir submenu no toque do logo Grand Prix em mobile |
-| P1-RF09 | Selecionar `grand-prix` ao clicar em Grand Prix de Vendas |
-| P1-RF10 | Selecionar `champions` ao clicar em Champions Festival |
-| P1-RF11 | Salvar empresa selecionada no `appState.selectedCompany` |
-| P1-RF12 | Carregar serviços vinculados ao `companyId` |
-| P1-RF13 | Aplicar identidade visual da empresa selecionada a partir da Página 2 |
-| P1-RF14 | Avançar automaticamente para a Página 2 após clique na opção |
-| P1-RF15 | Preservar as cores originais dos logos fora da exceção temporária de hover da Página 1 |
-| P1-RF16 | Aplicar hover colorido de pré-seleção em cada marca |
-| P1-RF17 | Usar cores da linha superior da marca no Grupo GPV somente no hover da Página 1 |
+| P1-RF06 | Exigir `hoverColor` para itens diretos e opções de dropdown |
+| P1-RF07 | Exibir o logo Grand Prix como agrupador de Grand Prix de Vendas e Champions Festival |
+| P1-RF08 | Abrir submenu no hover do logo Grand Prix em desktop |
+| P1-RF09 | Abrir submenu no toque do logo Grand Prix em mobile |
+| P1-RF10 | Selecionar `grand-prix` ao clicar em Grand Prix de Vendas |
+| P1-RF11 | Selecionar `champions` ao clicar em Champions Festival |
+| P1-RF12 | Salvar empresa selecionada no `appState.selectedCompany` |
+| P1-RF13 | Carregar serviços vinculados ao `companyId` |
+| P1-RF14 | Aplicar identidade visual da empresa selecionada a partir da Página 2 |
+| P1-RF15 | Avançar automaticamente para a Página 2 após clique na opção |
+| P1-RF16 | Preservar as cores originais dos logos |
+| P1-RF17 | Aplicar hover colorido de pré-seleção em cada marca |
+| P1-RF18 | Usar cores da linha superior da marca no Grupo GPV somente no hover da Página 1 |
+| P1-RF19 | Aplicar hover colorido somente no card/container, nunca diretamente no logo |
 
 ---
 
@@ -278,6 +294,7 @@ A Página 1 será considerada aprovada se:
 - A cor secundária institucional é `#A5A09C`.
 - A tipografia segue o padrão do sistema.
 - O hover de cada marca mostra pré-seleção com a cor definida.
+- O hover é aplicado no card/container, não no logo.
 - As cores de hover da Página 1 não contaminam as páginas seguintes.
 - O logo Grand Prix abre submenu com Grand Prix de Vendas e Champions Festival.
 - O clique em Grand Prix de Vendas salva `grand-prix` e avança para a Página 2.
