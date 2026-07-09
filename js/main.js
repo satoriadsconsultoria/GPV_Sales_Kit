@@ -1,3 +1,4 @@
+import "./pdf-export-fix.js";
 import { loadData } from "./data.js";
 import { applyGroupTheme } from "./theme.js";
 import { bindBackButtons } from "./navigation.js";
