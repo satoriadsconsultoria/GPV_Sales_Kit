@@ -81,15 +81,22 @@
     "id": "edney",
     "name": "Edney Ulisses — Acelerador de Vendas",
     "shortDescription": "Treinamento, consultoria e desenvolvimento comercial para equipes de vendas de alta performance.",
-    "tag": "Treinamento Comercial",
+    "tag": "Acelerador de Vendas",
     "logo": "assets/logos/edney-ulisses.png",
     "background": "assets/backgrounds/edney-bg.jpg",
     "theme": {
-      "primaryColor": "#D71920",
-      "secondaryColor": "#111111",
-      "accentColor": "#FFFFFF",
-      "textColor": "#FFFFFF",
-      "backgroundColor": "#090909"
+      "primaryColor": "#D8DBD3",
+      "secondaryColor": "#1B221D",
+      "accentColor": "#989C95",
+      "textColor": "#D8DBD3",
+      "backgroundColor": "#0F1712",
+      "supportColors": {
+        "lightGrey": "#D8DBD3",
+        "darkGreen": "#1B221D",
+        "deepGraphite": "#0F1712",
+        "mediumGrey": "#989C95",
+        "graphite": "#585E58"
+      }
     },
     "positioning": "Treinamento, consultoria e desenvolvimento comercial para equipes de alta performance.",
     "proposalStructure": "training-consulting"
