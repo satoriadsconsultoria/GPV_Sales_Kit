@@ -28,6 +28,14 @@ export function formatCurrencyInput(value) {
   return raw.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
+// Usuário digita só o número; o campo formata automaticamente como "1 dia" / "N dias".
+export function formatDaysInput(value) {
+  const digits = String(value).replace(/\D/g, "");
+  if (!digits) return "";
+  const n = Number(digits);
+  return `${n} ${n === 1 ? "dia" : "dias"}`;
+}
+
 // Aplica/limpa o estado visual de erro em um campo e sua mensagem associada.
 export function setFieldError(fieldId, message) {
   const field = document.getElementById(fieldId);

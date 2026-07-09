@@ -6,6 +6,7 @@ import {
   isValidPhone,
   formatPhoneInput,
   formatCurrencyInput,
+  formatDaysInput,
   parseCurrencyToNumber,
   setFieldError,
   clearFieldErrors,
@@ -25,6 +26,7 @@ export function initPage4() {
   const form = document.getElementById("form-commercial");
   const valueInput = document.getElementById("proposal-value");
   const deadlineInput = document.getElementById("delivery-deadline");
+  const validityInput = document.getElementById("proposal-validity");
   const issuerPhoneInput = document.getElementById("issuer-phone");
 
   valueInput.addEventListener("input", () => {
@@ -36,8 +38,16 @@ export function initPage4() {
     issuerPhoneInput.value = formatPhoneInput(issuerPhoneInput.value);
   });
 
-  deadlineInput.addEventListener("input", updateSummary);
-  document.getElementById("proposal-validity").addEventListener("input", updateSummary);
+  // Usuário digita só o número — "dia" ou "dias" é adicionado automaticamente.
+  deadlineInput.addEventListener("input", () => {
+    deadlineInput.value = formatDaysInput(deadlineInput.value);
+    updateSummary();
+  });
+
+  validityInput.addEventListener("input", () => {
+    validityInput.value = formatDaysInput(validityInput.value);
+    updateSummary();
+  });
 
   document.addEventListener("gpv:page-enter", (e) => {
     if (e.detail.page === 4) updateSummary();

@@ -245,7 +245,10 @@ function pdfEdneyOne({ ctx, vars, motifUrl, num, total }) {
     num,
     total,
     bodyHtml: `
-      <img class="pdf-edney__photo" src="${ctx.edneyAssets.photoOne}" alt="Edney Ulisses" />
+      <div class="pdf-edney__photo-wrap">
+        <img class="pdf-edney__photo" src="${ctx.edneyAssets.photoOne}" alt="Edney Ulisses" />
+        <div class="pdf-edney__dots"><span></span><span></span><span></span></div>
+      </div>
       <div class="pdf-edney__content">
         <div class="pdf-page__eyebrow">Grupo GPV</div>
         <div class="pdf-page__title">Edney Ulisses</div>
@@ -268,7 +271,10 @@ function pdfEdneyTwo({ ctx, vars, motifUrl, num, total }) {
     num,
     total,
     bodyHtml: `
-      <img class="pdf-edney__photo" src="${ctx.edneyAssets.photoTwo}" alt="Edney Ulisses" />
+      <div class="pdf-edney__photo-wrap">
+        <img class="pdf-edney__photo" src="${ctx.edneyAssets.photoTwo}" alt="Edney Ulisses" />
+        <div class="pdf-edney__dots"><span></span><span></span><span></span></div>
+      </div>
       <div class="pdf-edney__content">
         <div class="pdf-page__eyebrow">Formação e Experiência</div>
         <div class="pdf-page__title">Autoridade Comercial</div>
