@@ -1,8 +1,8 @@
 # Assets — Edney Ulisses
 
-Esta pasta deve receber as fotos finais do Edney Ulisses usadas nos slides institucionais da proposta final.
+Esta pasta contém as fotos finais do Edney Ulisses usadas nos slides institucionais da proposta final.
 
-## Arquivos obrigatórios antes da construção final
+## Arquivos validados
 
 ```txt
 assets/images/edney/edney-institucional-01.png
@@ -18,12 +18,12 @@ assets/images/edney/edney-institucional-02.png
 
 ## Regras
 
-- Usar fotos em alta resolução.
-- Preferir PNG ou JPG em boa qualidade.
+- Usar as fotos finais desta pasta nos slides institucionais.
 - Não usar os prints de referência como imagem final chapada.
 - Os prints enviados pelo usuário servem apenas como referência visual de composição.
 - A identidade visual dos slides deve se adaptar à marca selecionada na Página 1.
+- As fotos devem ser tratadas como assets finais do projeto.
 
-## Placeholder
+## Status
 
-Enquanto as fotos finais não forem enviadas, a implementação pode usar placeholder visual temporário sem quebrar o fluxo.
+Fotos finais recebidas e validadas no repositório.
