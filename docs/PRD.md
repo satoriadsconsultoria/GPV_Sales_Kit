@@ -81,6 +81,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RF010 | Exportar proposta em PDF | Alta |
 | RF011 | Exibir página institucional final | Alta |
 | RF012 | Usar config JSON para dados do responsável | Alta |
+| RF013 | Preservar as cores originais de todos os logos | Alta |
 
 ---
 
@@ -96,6 +97,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RNF006 | Design | Padrão premium e executivo |
 | RNF007 | Segurança | Sem envio de dados para servidor |
 | RNF008 | Hospedagem | Compatível com Netlify |
+| RNF009 | Integridade visual de marca | Logos não podem ser recoloridos, distorcidos ou tratados por filtros |
 
 ---
 
@@ -116,9 +118,46 @@ A Página 1 usa a identidade institucional do **Grupo GPV**.
 
 A Página 1 deve usar `#252324` como base visual, `#A5A09C` como cor secundária institucional e uso controlado das cores auxiliares apenas como elementos gráficos secundários.
 
+As cores institucionais devem ser aplicadas em fundos, botões, bordas, textos, linhas, cards e elementos gráficos. Elas não devem alterar as cores do logo.
+
 ---
 
-## 8. Decisões técnicas oficiais
+## 8. Regra global de uso dos logos
+
+Todos os logos do sistema são **assets imutáveis de marca**.
+
+### Permitido
+
+- Usar o logo original exatamente como fornecido.
+- Redimensionar proporcionalmente.
+- Usar `object-fit: contain`.
+- Posicionar em containers, cards, cabeçalhos e capas.
+- Aplicar cores do tema somente ao fundo, bordas, textos, botões e elementos visuais externos ao logo.
+
+### Proibido
+
+- Recolorir logos.
+- Aplicar filtros CSS em logos.
+- Usar `mix-blend-mode` nos logos.
+- Alterar opacidade dos logos.
+- Converter logos para monocromático.
+- Substituir cores internas pelo tema da empresa.
+- Distorcer proporção.
+- Cortar área útil do logo.
+
+Essa regra vale para:
+
+- Grupo GPV.
+- Grand Prix de Vendas.
+- Champions Festival.
+- VELOCE.
+- Projeto Conquista.
+- Edney Ulisses — Acelerador de Vendas.
+- Logo do cliente enviado na proposta.
+
+---
+
+## 9. Decisões técnicas oficiais
 
 | Tema | Decisão |
 |---|---|
@@ -134,12 +173,13 @@ A Página 1 deve usar `#252324` como base visual, `#A5A09C` como cor secundária
 | Seleção da empresa | Logos das marcas clicáveis |
 | Identidade visual da Página 1 | Grupo GPV, cor principal `#252324` |
 | Identidade visual das páginas seguintes | Empresa selecionada |
+| Tratamento dos logos | Preservar cores originais; nunca recolorir |
 | Serviços | Desacoplados da interface |
 | Assinatura | Configurável via JSON |
 
 ---
 
-## 9. Critérios gerais de aceite
+## 10. Critérios gerais de aceite
 
 - O sistema roda localmente sem backend.
 - O sistema pode ser hospedado no Netlify.
@@ -147,6 +187,7 @@ A Página 1 deve usar `#252324` como base visual, `#A5A09C` como cor secundária
 - A Página 1 usa `#252324` como cor institucional principal.
 - A Página 1 usa `#A5A09C` como cor secundária institucional.
 - Os logos das empresas funcionam como botões de seleção.
+- Nenhum logo é recolorido, filtrado, distorcido ou convertido para outra versão visual.
 - O clique na marca seleciona a empresa e avança para a Página 2.
 - A identidade visual muda conforme a empresa selecionada a partir da Página 2.
 - O usuário consegue gerar proposta completa em PDF.
