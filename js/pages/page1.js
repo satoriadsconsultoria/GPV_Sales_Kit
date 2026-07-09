@@ -74,8 +74,8 @@ function buildDropdownCard(item, data) {
 
   card.innerHTML = `
     <img class="brand-card__logo" src="${item.logo}" alt="${item.label}" />
-    <span class="brand-card__label">${item.label}</span>
-    <span class="brand-card__chevron">▾ selecione a solução</span>
+    <span class="brand-card__label">${item.label} <span class="brand-card__label-chevron">▾</span></span>
+    <span class="brand-card__hint">Selecione a solução</span>
   `;
 
   const submenu = document.createElement("div");

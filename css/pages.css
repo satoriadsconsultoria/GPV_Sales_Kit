@@ -2,7 +2,7 @@
 
 .services-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   align-items: start;
   gap: var(--space-sm);
   margin-bottom: var(--space-md);
@@ -77,20 +77,22 @@
 /* Layout em duas colunas — formulário + painel lateral de contexto/prévia */
 .split-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
   align-items: start;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 }
 
 .side-panel {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  padding: var(--space-lg) var(--space-md);
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(6px);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(8, 9, 11, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
 }
 
 .side-panel__brand {
@@ -98,28 +100,28 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0.6rem;
+  gap: 0.7rem;
 }
 
 .side-panel__logo {
-  height: 56px;
-  max-width: 180px;
+  height: 68px;
+  max-width: 200px;
   object-fit: contain;
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
-  padding: 8px 14px;
+  padding: 10px 16px;
   box-sizing: content-box;
 }
 
 .side-panel__brand h3 {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 800;
 }
 
 .side-panel__brand p {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   color: var(--color-muted);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .side-panel__divider {
@@ -140,16 +142,16 @@
 .side-panel__card {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
+  gap: 0.9rem;
+  padding: 1rem;
   border-radius: var(--radius-sm);
-  border: 1px dashed rgba(255, 255, 255, 0.16);
+  border: 1px dashed rgba(255, 255, 255, 0.18);
   transition: border-color var(--duration-base) var(--ease-premium);
 }
 
 .side-panel__card-logo {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border-radius: 8px;
   object-fit: contain;
   background: rgba(255, 255, 255, 0.95);
@@ -161,31 +163,31 @@
 }
 
 .side-panel__card-placeholder {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
 }
 
 .side-panel__card-text strong {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.96rem;
 }
 
 .side-panel__card-text span {
   display: block;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--color-muted);
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
 }
 
 .side-panel__summary-row {
   display: flex;
   justify-content: space-between;
   gap: var(--space-sm);
-  padding: 0.5rem 0;
-  font-size: 0.85rem;
+  padding: 0.6rem 0;
+  font-size: 0.92rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
