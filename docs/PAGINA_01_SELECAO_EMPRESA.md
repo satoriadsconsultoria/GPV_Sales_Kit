@@ -73,6 +73,38 @@ assets/logos/grupo-gpv.png
 
 A Página 1 deve ser majoritariamente escura, usando `#252324` como base visual e `#A5A09C` como cor secundária. As cores de apoio devem ser usadas somente como elementos gráficos secundários, especialmente na régua institucional do Grupo GPV.
 
+As cores informadas são para fundos, cards, botões, bordas, textos e elementos gráficos externos. **Nenhuma cor institucional deve ser aplicada diretamente sobre o logo.**
+
+---
+
+## Regra obrigatória de preservação de logos
+
+Os logos devem ser exibidos exatamente como foram fornecidos.
+
+Essa regra vale para:
+
+- Logo do Grupo GPV.
+- Logos das empresas do Grupo GPV.
+- Logo do cliente enviado na proposta.
+
+### Permitido
+
+- Redimensionar proporcionalmente.
+- Posicionar em containers.
+- Usar `object-fit: contain`.
+- Aplicar margem e espaçamento externo.
+
+### Proibido
+
+- Recolorir.
+- Aplicar filtros CSS.
+- Alterar opacidade.
+- Usar `mix-blend-mode`.
+- Converter para monocromático.
+- Substituir cores internas pelas cores do tema.
+- Distorcer proporção.
+- Cortar área útil.
+
 ---
 
 ## Hierarquia visual da tela
@@ -157,10 +189,11 @@ Textos descritivos devem ser reduzidos ou ocultos na Página 1 para manter a ent
 
 Ao passar o mouse sobre uma marca:
 
-- O logo deve ganhar destaque visual.
-- Deve haver leve elevação.
-- Deve haver brilho ou borda sutil.
+- O container do logo deve ganhar destaque visual.
+- Deve haver leve elevação no card/container.
+- Pode haver brilho ou borda sutil no container.
 - A cor de destaque pode usar a cor da própria marca ou o ciano institucional `#5BBFC8`.
+- O logo em si não deve receber recoloração, filtro ou alteração de opacidade.
 - Cursor deve ser `pointer`.
 - Transição entre 200ms e 300ms.
 
@@ -186,6 +219,8 @@ Exemplo:
 
 - Página 1: Grupo GPV.
 - Página 2 em diante: Grand Prix, VELOCE, Champions, Projeto Conquista ou Edney Ulisses, conforme seleção.
+
+As cores de cada empresa devem afetar layout, fundos, botões, bordas, cards e elementos visuais. Elas não devem alterar o arquivo de logo da empresa.
 
 ---
 
@@ -215,6 +250,14 @@ O arquivo `config.json` deve armazenar a identidade institucional do Grupo GPV p
 
 ```json
 {
+  "brandAssetPolicy": {
+    "preserveOriginalLogos": true,
+    "applyThemeColorsToLogos": false,
+    "allowLogoRecolor": false,
+    "allowCssFiltersOnLogos": false,
+    "allowLogoOpacityChange": false,
+    "allowLogoDistortion": false
+  },
   "groupBrand": {
     "name": "Grupo GPV",
     "logo": "assets/logos/grupo-gpv.svg",
@@ -254,6 +297,7 @@ O arquivo `config.json` deve armazenar a identidade institucional do Grupo GPV p
 | P1-RF09 | Aplicar identidade visual da empresa selecionada a partir da Página 2 |
 | P1-RF10 | Avançar automaticamente para a Página 2 após clique na marca |
 | P1-RF11 | Não exigir botão Continuar na Página 1 |
+| P1-RF12 | Preservar as cores originais dos logos |
 
 ---
 
@@ -262,10 +306,10 @@ O arquivo `config.json` deve armazenar a identidade institucional do Grupo GPV p
 | Elemento | Regra |
 |---|---|
 | Fundo | Cor principal `#252324` |
-| Logo Grupo GPV | Grande, centralizado e dominante |
+| Logo Grupo GPV | Grande, centralizado, dominante e sem alteração de cor |
 | Título | Parte superior, claro e institucional |
 | Texto secundário | Cor `#A5A09C` |
-| Logos das marcas | Abaixo do logo principal, clicáveis e bem espaçados |
+| Logos das marcas | Abaixo do logo principal, clicáveis, sem alteração de cor e bem espaçados |
 | Cards/containers | Minimalistas, sem excesso de texto |
 | Tipografia | Moderna, forte e legível |
 | Animações | Suaves, premium e sem exagero |
@@ -280,10 +324,11 @@ A Página 1 será considerada aprovada se:
 - O logo do Grupo GPV aparece como elemento visual dominante.
 - A cor base da Página 1 é `#252324`.
 - A cor secundária institucional é `#A5A09C`.
-- As cores de apoio são usadas somente como detalhe visual.
+- As cores de apoio são usadas somente como detalhe visual externo ao logo.
 - O título da página aparece na parte superior.
 - Os logos das marcas aparecem abaixo do logo principal.
 - Todos os logos das marcas são clicáveis.
+- Nenhum logo sofre alteração de cor, filtro, opacidade ou proporção.
 - O clique em uma marca salva a empresa selecionada.
 - O clique em uma marca avança automaticamente para a Página 2.
 - A identidade visual da empresa selecionada é aplicada somente a partir da Página 2.
