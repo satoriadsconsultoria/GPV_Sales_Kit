@@ -1,0 +1,106 @@
+/* Institutional first page overrides.
+   Page 1 stays Grupo GPV-only: black, graphite and gray. Brand colors start after selection. */
+
+.page--institutional {
+  --color-accent: #b8b8b8;
+  --color-muted: #a9a9a9;
+  --color-on-accent: #111111;
+  background: #08090a;
+}
+
+.page--institutional::before {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.08), transparent 30%),
+    radial-gradient(circle at 78% 76%, rgba(255, 255, 255, 0.055), transparent 32%);
+  background-size: 58px 58px, 58px 58px, auto, auto;
+  opacity: 0.9;
+}
+
+.page--institutional .institutional__backdrop {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.09), transparent 30%),
+    radial-gradient(circle at 80% 74%, rgba(255, 255, 255, 0.06), transparent 34%),
+    linear-gradient(145deg, #050506 0%, #151617 48%, #08090a 100%);
+  background-size: 58px 58px, 58px 58px, auto, auto, auto;
+}
+
+.page--institutional .institutional__content {
+  padding-top: clamp(32px, 6vh, 64px);
+}
+
+.page--institutional .institutional__logo {
+  display: block !important;
+  width: auto;
+  height: clamp(118px, 10vw, 168px);
+  margin-bottom: 6px;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.55)) !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
+
+.page--institutional .institutional__title {
+  color: #ffffff;
+  text-shadow: 0 18px 55px rgba(0, 0, 0, 0.48);
+}
+
+.page--institutional .institutional__subtitle,
+.page--institutional .brand-card__hint,
+.page--institutional .brand-card__tag,
+.page--institutional .feature-strip__description {
+  color: #b9b9b9;
+}
+
+.page--institutional .brand-card,
+.page--institutional .brand-card-wrapper .brand-card {
+  --card-hover-color: #9b9b9b !important;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.115), rgba(255, 255, 255, 0.035)),
+    rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.page--institutional .brand-card::before {
+  background: #9b9b9b !important;
+}
+
+.page--institutional .brand-card::after {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.page--institutional .brand-card:hover,
+.page--institutional .brand-card:focus-visible,
+.page--institutional .brand-card.is-open {
+  border-color: #c9c9c9;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22) inset, 0 24px 70px rgba(0, 0, 0, 0.34);
+}
+
+.page--institutional .brand-suboption {
+  --suboption-hover-color: #d0d0d0 !important;
+}
+
+.page--institutional .brand-suboption:hover,
+.page--institutional .brand-suboption:focus-visible {
+  color: #ffffff;
+  border-color: #d0d0d0;
+}
+
+.page--institutional .feature-strip__item {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+.page--institutional .feature-strip__icon {
+  color: #d4d4d4;
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.page--institutional .feature-strip__item:hover .feature-strip__icon {
+  border-color: #d4d4d4;
+  background: rgba(255, 255, 255, 0.075);
+}
