@@ -61,5 +61,126 @@
       "Aprovação das campanhas e materiais dentro do prazo.",
       "Disponibilização da estrutura mínima exigida para execução do evento."
     ]
+  },
+  {
+    "id": "veloce-start",
+    "companyId": "veloce",
+    "name": "Plano Start",
+    "selectionLabel": "Plano Start",
+    "description": "Plano inicial da VELOCE para operação enxuta de tráfego pago Meta com volume básico de criativos e acompanhamento mensal.",
+    "selectionType": "plan-checkbox",
+    "planGroup": "veloce-plans",
+    "selectionMode": "single-plan",
+    "offeredServicesTitle": "Serviços Oferecidos",
+    "offeredServices": [
+      "2 criativos por mês.",
+      "Tráfego pago Meta.",
+      "1 reunião por mês."
+    ],
+    "pageThreeBehavior": {
+      "showDetailsAfterSelection": true,
+      "allowCustomServicesInput": false,
+      "detailsSections": [
+        "offeredServices"
+      ]
+    }
+  },
+  {
+    "id": "veloce-bronze",
+    "companyId": "veloce",
+    "name": "Plano Bronze",
+    "selectionLabel": "Plano Bronze",
+    "description": "Plano VELOCE com maior volume de criativos para campanhas Meta e acompanhamento mensal.",
+    "selectionType": "plan-checkbox",
+    "planGroup": "veloce-plans",
+    "selectionMode": "single-plan",
+    "offeredServicesTitle": "Serviços Oferecidos",
+    "offeredServices": [
+      "8 criativos por mês.",
+      "Tráfego pago Meta.",
+      "1 reunião por mês."
+    ],
+    "pageThreeBehavior": {
+      "showDetailsAfterSelection": true,
+      "allowCustomServicesInput": false,
+      "detailsSections": [
+        "offeredServices"
+      ]
+    }
+  },
+  {
+    "id": "veloce-prata",
+    "companyId": "veloce",
+    "name": "Plano Prata",
+    "selectionLabel": "Plano Prata",
+    "description": "Plano VELOCE com atuação em Meta e Google, produção orgânica mensal e acompanhamento quinzenal.",
+    "selectionType": "plan-checkbox",
+    "planGroup": "veloce-plans",
+    "selectionMode": "single-plan",
+    "offeredServicesTitle": "Serviços Oferecidos",
+    "offeredServices": [
+      "20 criativos por mês.",
+      "Tráfego pago Meta e Google.",
+      "12 posts orgânicos por mês — Motion, post único ou carrossel.",
+      "2 reuniões por mês."
+    ],
+    "pageThreeBehavior": {
+      "showDetailsAfterSelection": true,
+      "allowCustomServicesInput": false,
+      "detailsSections": [
+        "offeredServices"
+      ]
+    }
+  },
+  {
+    "id": "veloce-ouro",
+    "companyId": "veloce",
+    "name": "Plano Ouro",
+    "selectionLabel": "Plano Ouro",
+    "description": "Plano VELOCE avançado com maior volume de criativos, atuação multicanal e produção orgânica mensal.",
+    "selectionType": "plan-checkbox",
+    "planGroup": "veloce-plans",
+    "selectionMode": "single-plan",
+    "offeredServicesTitle": "Serviços Oferecidos",
+    "offeredServices": [
+      "50 criativos por mês.",
+      "Tráfego pago Meta, TikTok, LinkedIn e Google.",
+      "12 posts orgânicos por mês — Motion, post único ou carrossel.",
+      "3 reuniões por mês."
+    ],
+    "pageThreeBehavior": {
+      "showDetailsAfterSelection": true,
+      "allowCustomServicesInput": false,
+      "detailsSections": [
+        "offeredServices"
+      ]
+    }
+  },
+  {
+    "id": "veloce-diamond",
+    "companyId": "veloce",
+    "name": "Plano Diamond",
+    "selectionLabel": "Plano Diamond",
+    "description": "Plano personalizado da VELOCE, estruturado conforme necessidade específica do cliente.",
+    "selectionType": "plan-checkbox-custom",
+    "planGroup": "veloce-plans",
+    "selectionMode": "single-plan",
+    "offeredServicesTitle": "Serviços Oferecidos",
+    "offeredServices": [],
+    "customServices": {
+      "enabled": true,
+      "required": true,
+      "fieldType": "textarea",
+      "fieldLabel": "Serviços personalizados do Plano Diamond",
+      "placeholder": "Digite os serviços que serão incluídos no Plano Diamond.",
+      "minLength": 5
+    },
+    "pageThreeBehavior": {
+      "showDetailsAfterSelection": true,
+      "allowCustomServicesInput": true,
+      "detailsSections": [
+        "customServices"
+      ]
+    }
   }
 ]
