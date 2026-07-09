@@ -1,0 +1,36 @@
+[
+  {
+    "id": "gpv-evento-presencial",
+    "companyId": "grand-prix",
+    "name": "Grand Prix de Vendas — Evento Presencial",
+    "description": "Evento comercial estruturado para aumento de fluxo, geração de oportunidades e aceleração de vendas em concessionárias.",
+    "objective": "Aumentar o volume de atendimento, intensificar a conversão comercial e gerar pressão positiva de vendas em curto período.",
+    "scope": [
+      "Planejamento comercial do evento",
+      "Estruturação da dinâmica de vendas",
+      "Campanhas de geração de demanda",
+      "Acompanhamento operacional",
+      "Gestão de leads e agendamentos"
+    ],
+    "deliverables": [
+      "Planejamento estratégico do evento",
+      "Organização das equipes comerciais",
+      "Estrutura de metas e premiações",
+      "Relatório de performance",
+      "Acompanhamento dos principais indicadores"
+    ],
+    "differentials": [
+      "Metodologia proprietária",
+      "Especialização no mercado automotivo",
+      "Integração entre marketing e comercial",
+      "Foco em conversão real",
+      "Modelo de alta pressão comercial"
+    ],
+    "premises": [
+      "Disponibilidade da equipe comercial do cliente",
+      "Acesso às informações comerciais necessárias",
+      "Alinhamento prévio de metas",
+      "Aprovação das campanhas dentro do prazo"
+    ]
+  }
+]
