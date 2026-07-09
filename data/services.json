@@ -1,36 +1,65 @@
 [
   {
-    "id": "gpv-evento-presencial",
+    "id": "grand-prix-de-vendas",
     "companyId": "grand-prix",
-    "name": "Grand Prix de Vendas — Evento Presencial",
-    "description": "Evento comercial estruturado para aumento de fluxo, geração de oportunidades e aceleração de vendas em concessionárias.",
-    "objective": "Aumentar o volume de atendimento, intensificar a conversão comercial e gerar pressão positiva de vendas em curto período.",
-    "scope": [
-      "Planejamento comercial do evento",
-      "Estruturação da dinâmica de vendas",
-      "Campanhas de geração de demanda",
-      "Acompanhamento operacional",
-      "Gestão de leads e agendamentos"
+    "name": "Grand Prix de Vendas",
+    "selectionLabel": "Grand Prix de Vendas",
+    "description": "Evento físico de aceleração comercial para concessionárias, estruturado para aumento de fluxo de loja, geração de oportunidades, agendamento, atendimento e conversão de vendas.",
+    "objective": "Planejar, promover, operar e acompanhar um evento comercial presencial de alta performance, integrando marketing, inteligência comercial, prospecção, automação, atendimento e controle operacional.",
+    "selectionType": "single-checkbox",
+    "pageThreeBehavior": {
+      "showOnlyOneOption": true,
+      "showDetailsAfterSelection": true,
+      "detailsSections": [
+        "offeredServices",
+        "eventConditions"
+      ]
+    },
+    "offeredServicesTitle": "Serviços Oferecidos",
+    "offeredServices": [
+      "Planejamento de todo evento e distribuição de equipe.",
+      "Criação de todas as artes para divulgação do evento, incluindo mais de 300 anúncios.",
+      "Roteiro, produção, gravação e edição de todos os vídeos.",
+      "Criação de script para prospecção e acompanhamento dos agendamentos dos vendedores.",
+      "Prospecção dos clientes captados pela campanha e da base do cliente.",
+      "Setup de automação da IA de prospecção e agendamento.",
+      "Agendamento por IA e ligação.",
+      "Disparo de voz para clientes agendados.",
+      "Envio de QR Code individual e personalizado para cada cliente agendado.",
+      "Planejamento, estratégia e execução das campanhas de performance e captação dos leads.",
+      "Otimização diária de todas as campanhas de performance.",
+      "Pit Stop com toda equipe sobre o evento, estratégia e motivacional.",
+      "Controle de fluxo de loja nos dias do evento.",
+      "Equipe de recepção do evento."
     ],
-    "deliverables": [
-      "Planejamento estratégico do evento",
-      "Organização das equipes comerciais",
-      "Estrutura de metas e premiações",
-      "Relatório de performance",
-      "Acompanhamento dos principais indicadores"
+    "eventConditionsTitle": "Condições para Realização do Evento",
+    "eventConditions": [
+      "Espaço para evento e treinamento.",
+      "Espaço para equipe do GP de Vendas no showroom.",
+      "Base para prospecção complementar.",
+      "Disparo de CRM via sistema interno da concessionária.",
+      "Equipe de apoio de marketing da concessionária.",
+      "Decoração interna e externa da loja.",
+      "Fotos internas e externas da loja.",
+      "Verba de tráfego pago a combinar. Média utilizada em eventos: R$ 20.000 por marca + imposto Meta. Valor depositado com antecedência para realização do evento.",
+      "Coffee break para clientes.",
+      "Recepcionistas para controle de fluxo. Serviço realizado pelo GP de Vendas.",
+      "Definição de datas, horários e atividades do evento.",
+      "Informações sobre produtos, promoções, condições e descontos.",
+      "Telão de LED 3x2, palco, iluminação interna, sonorização, chuva de prata e operador.",
+      "Painel externo 3x5 para identificação do evento."
     ],
     "differentials": [
-      "Metodologia proprietária",
-      "Especialização no mercado automotivo",
-      "Integração entre marketing e comercial",
-      "Foco em conversão real",
-      "Modelo de alta pressão comercial"
+      "Metodologia proprietária de aceleração comercial automotiva.",
+      "Integração entre marketing, comercial, IA, atendimento e operação presencial.",
+      "Modelo orientado a dados, agendamentos, fluxo de loja e conversão.",
+      "Especialização no mercado de concessionárias."
     ],
     "premises": [
-      "Disponibilidade da equipe comercial do cliente",
-      "Acesso às informações comerciais necessárias",
-      "Alinhamento prévio de metas",
-      "Aprovação das campanhas dentro do prazo"
+      "Alinhamento prévio com a concessionária.",
+      "Disponibilização das informações comerciais necessárias.",
+      "Aprovação das campanhas e materiais dentro do prazo.",
+      "Disponibilização da estrutura mínima exigida para execução do evento."
     ]
   }
 ]
