@@ -36,10 +36,11 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 - Telefone do cliente com DDD.
 - E-mail do cliente.
 - Upload e preview do logotipo do cliente.
-- Seleção múltipla de serviços.
+- Seleção dinâmica de serviços e planos por empresa.
 - Banco local de serviços em JSON.
-- Campo manual para valor da proposta.
+- Campo para valor da proposta em formato `R$`.
 - Campo livre para observações.
+- Campo para prazo de entrega, obrigatório somente para VELOCE.
 - Tela de conferência.
 - Renderização da proposta.
 - Exportação em PDF.
@@ -63,10 +64,10 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 1. Portal institucional Grupo GPV com seleção da marca.
 2. Quando o usuário interagir com o logo Grand Prix de Vendas, abrir opções: Grand Prix de Vendas ou Champions Festival.
 3. Página 2 — Cliente: cadastro de nome, telefone, e-mail e logo do cliente.
-4. Seleção dos serviços.
-5. Dados comerciais.
-6. Conferência.
-7. Proposta e exportação em PDF.
+4. Página 3 — Serviços: seleção dos serviços ou planos conforme empresa selecionada.
+5. Página 4 — Comercial: valor da proposta, observações e prazo de entrega.
+6. Página 5 — Conferência.
+7. Página 6 — Proposta e exportação em PDF.
 
 ---
 
@@ -83,14 +84,18 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RF007 | Permitir cadastro do telefone do cliente com DDD | Alta |
 | RF008 | Permitir cadastro do e-mail do cliente | Alta |
 | RF009 | Permitir upload e preview do logo do cliente | Alta |
-| RF010 | Permitir seleção múltipla de serviços | Alta |
-| RF011 | Exibir conferência completa | Alta |
-| RF012 | Renderizar proposta final | Alta |
-| RF013 | Exportar proposta em PDF | Alta |
-| RF014 | Exibir página institucional final | Alta |
-| RF015 | Usar config JSON para dados do responsável | Alta |
-| RF016 | Preservar as cores originais de todos os logos | Alta |
-| RF017 | Usar tipografia padrão do sistema | Alta |
+| RF010 | Permitir seleção de serviços ou planos conforme empresa | Alta |
+| RF011 | Permitir inserir valor da proposta em formato monetário `R$` | Alta |
+| RF012 | Permitir inserir observações opcionais | Média |
+| RF013 | Permitir inserir prazo de entrega | Média |
+| RF014 | Tornar prazo de entrega obrigatório somente para VELOCE | Alta |
+| RF015 | Exibir conferência completa | Alta |
+| RF016 | Renderizar proposta final | Alta |
+| RF017 | Exportar proposta em PDF | Alta |
+| RF018 | Exibir página institucional final | Alta |
+| RF019 | Usar config JSON para dados do responsável | Alta |
+| RF020 | Preservar as cores originais de todos os logos | Alta |
+| RF021 | Usar tipografia padrão do sistema | Alta |
 
 ---
 
@@ -169,7 +174,67 @@ O logo do cliente deve ser preservado exatamente como enviado, sem recoloração
 
 ---
 
-## 9. Regra de navegação agrupada
+## 9. Página 3 — Serviços
+
+A Página 3 deve carregar os serviços e planos a partir de:
+
+```txt
+data/services.json
+```
+
+A exibição deve ser filtrada pelo `companyId` da marca selecionada.
+
+### Comportamento por empresa
+
+| Empresa | Comportamento |
+|---|---|
+| Grand Prix de Vendas | Uma opção: Grand Prix de Vendas; ao selecionar, exibe Serviços Oferecidos e Condições para Realização do Evento |
+| VELOCE | Planos Start, Bronze, Prata, Ouro e Diamond; seleção única entre planos |
+| Champions Festival | Uma opção: Champions Festival; ao selecionar, exibe Serviços Oferecidos |
+| Projeto Conquista | Uma opção; ao selecionar, exibe campo livre de serviços personalizados |
+| Edney Ulisses — Acelerador de Vendas | Uma opção; ao selecionar, exibe campo livre de serviços personalizados |
+
+---
+
+## 10. Página 4 — Comercial
+
+A Página 4 deve abrir após a validação da Página 3.
+
+A identidade visual deve continuar sendo a da empresa selecionada.
+
+### Campos
+
+| Campo | Tipo | Obrigatório |
+|---|---|---|
+| Valor da proposta | Moeda `R$` | Sim |
+| Observações | Texto longo | Não |
+| Prazo de entrega | Texto ou data | Obrigatório somente para VELOCE |
+
+### Estado esperado
+
+```js
+appState.commercial = {
+  proposalValue: {
+    raw: 0,
+    formatted: ""
+  },
+  notes: "",
+  deliveryDeadline: ""
+}
+```
+
+### Regras principais
+
+- Valor da proposta deve ser obrigatório para todas as marcas.
+- Valor da proposta deve ser formatado em Real brasileiro, com prefixo `R$`.
+- Observações devem ser opcionais.
+- Prazo de entrega deve ser exibido para todas as marcas.
+- Prazo de entrega deve ser obrigatório somente quando `companyId` for `veloce`.
+- Nas demais marcas, prazo de entrega pode ficar vazio.
+
+---
+
+## 11. Regra de navegação agrupada
 
 A navegação da Página 1 deve ser carregada a partir de:
 
@@ -196,7 +261,7 @@ O logo do Grand Prix de Vendas deve funcionar como agrupador para duas soluçõe
 
 ---
 
-## 10. Regra global de uso dos logos
+## 12. Regra global de uso dos logos
 
 Todos os logos do sistema são **assets imutáveis de marca**.
 
@@ -223,7 +288,7 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 
 ---
 
-## 11. Decisões técnicas oficiais
+## 13. Decisões técnicas oficiais
 
 | Tema | Decisão |
 |---|---|
@@ -237,6 +302,8 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 | Desenvolvimento | VS Code + Claude Code |
 | Página 1 | Portal institucional do Grupo GPV |
 | Página 2 | Cadastro do cliente |
+| Página 3 | Seleção de serviços e planos |
+| Página 4 | Dados comerciais |
 | Navegação da Página 1 | `data/navigation.json` |
 | Seleção da empresa | Logos das marcas clicáveis |
 | Grand Prix de Vendas | Logo agrupador com submenu |
@@ -247,12 +314,14 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 | Tipografia | Padrão do sistema |
 | Tratamento dos logos | Preservar cores originais; nunca recolorir |
 | Upload do logo do cliente | Local no navegador, sem backend |
-| Serviços | Desacoplados da interface |
+| Serviços | Desacoplados da interface via `data/services.json` |
+| Comercial | Valor, observações e prazo |
+| Prazo VELOCE | Obrigatório somente para VELOCE |
 | Assinatura | Configurável via JSON |
 
 ---
 
-## 12. Critérios gerais de aceite
+## 14. Critérios gerais de aceite
 
 - O sistema roda localmente sem backend.
 - O sistema pode ser hospedado no Netlify.
@@ -266,6 +335,9 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 - O clique em Champions Festival seleciona `champions`.
 - A Página 2 abre com a identidade visual da empresa selecionada.
 - A Página 2 coleta nome, telefone com DDD, e-mail e logo do cliente.
+- A Página 3 carrega serviços conforme empresa selecionada.
+- A Página 4 coleta valor da proposta em `R$`, observações e prazo de entrega.
+- O prazo de entrega é obrigatório somente para VELOCE.
 - Nenhum logo é recolorido, filtrado, distorcido ou convertido para outra versão visual não aprovada.
 - A identidade visual muda conforme a empresa selecionada a partir da Página 2.
 - O usuário consegue gerar proposta completa em PDF.
