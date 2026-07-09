@@ -1,4 +1,29 @@
 {
+  "brandAssetPolicy": {
+    "preserveOriginalLogos": true,
+    "applyThemeColorsToLogos": false,
+    "allowLogoRecolor": false,
+    "allowCssFiltersOnLogos": false,
+    "allowLogoOpacityChange": false,
+    "allowLogoDistortion": false,
+    "allowedLogoTreatment": [
+      "preservar cores originais",
+      "preservar proporção original",
+      "usar object-fit: contain",
+      "aplicar somente redimensionamento proporcional",
+      "usar cores institucionais apenas em fundos, botões, bordas, textos e elementos gráficos"
+    ],
+    "forbiddenLogoTreatment": [
+      "recolorir logo",
+      "converter logo para monocromático",
+      "aplicar filter CSS",
+      "aplicar mix-blend-mode",
+      "alterar opacidade",
+      "distorcer proporção",
+      "cortar área útil do logo",
+      "substituir cores internas do logo pelas cores do tema"
+    ]
+  },
   "groupBrand": {
     "name": "Grupo GPV",
     "logo": "assets/logos/grupo-gpv.svg",
