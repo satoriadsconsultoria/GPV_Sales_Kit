@@ -53,8 +53,9 @@
   "edneyInstitutionalAssets": {
     "photoOne": "assets/images/edney/edney-institucional-01.png",
     "photoTwo": "assets/images/edney/edney-institucional-02.png",
-    "requiredBeforeBuild": true,
-    "description": "Fotos finais do Edney Ulisses para os slides institucionais da proposta. Enquanto não forem enviadas, o sistema pode usar placeholder visual sem quebrar o fluxo."
+    "status": "validated",
+    "requiredBeforeBuild": false,
+    "description": "Fotos finais do Edney Ulisses validadas no repositório para uso nos slides institucionais da proposta."
   },
   "typography": {
     "fontFamily": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif",
