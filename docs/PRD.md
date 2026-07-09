@@ -32,7 +32,10 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 - Submenu no logo Grand Prix de Vendas para seleção entre Grand Prix de Vendas e Champions Festival.
 - Carregamento automático da identidade visual da empresa selecionada a partir da Página 2.
 - Cadastro do cliente.
-- Upload do logotipo do cliente.
+- Nome do cliente.
+- Telefone do cliente com DDD.
+- E-mail do cliente.
+- Upload e preview do logotipo do cliente.
 - Seleção múltipla de serviços.
 - Banco local de serviços em JSON.
 - Campo manual para valor da proposta.
@@ -59,7 +62,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 
 1. Portal institucional Grupo GPV com seleção da marca.
 2. Quando o usuário interagir com o logo Grand Prix de Vendas, abrir opções: Grand Prix de Vendas ou Champions Festival.
-3. Cadastro do cliente.
+3. Página 2 — Cliente: cadastro de nome, telefone, e-mail e logo do cliente.
 4. Seleção dos serviços.
 5. Dados comerciais.
 6. Conferência.
@@ -76,16 +79,18 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RF003 | Exibir submenu Grand Prix de Vendas / Champions Festival ao interagir com o logo Grand Prix | Alta |
 | RF004 | Carregar identidade visual da empresa selecionada a partir da Página 2 | Alta |
 | RF005 | Carregar serviços conforme empresa | Alta |
-| RF006 | Permitir cadastro do cliente | Alta |
-| RF007 | Permitir upload do logo do cliente | Média |
-| RF008 | Permitir seleção múltipla de serviços | Alta |
-| RF009 | Exibir conferência completa | Alta |
-| RF010 | Renderizar proposta final | Alta |
-| RF011 | Exportar proposta em PDF | Alta |
-| RF012 | Exibir página institucional final | Alta |
-| RF013 | Usar config JSON para dados do responsável | Alta |
-| RF014 | Preservar as cores originais de todos os logos | Alta |
-| RF015 | Usar tipografia padrão do sistema | Alta |
+| RF006 | Permitir cadastro do nome do cliente | Alta |
+| RF007 | Permitir cadastro do telefone do cliente com DDD | Alta |
+| RF008 | Permitir cadastro do e-mail do cliente | Alta |
+| RF009 | Permitir upload e preview do logo do cliente | Alta |
+| RF010 | Permitir seleção múltipla de serviços | Alta |
+| RF011 | Exibir conferência completa | Alta |
+| RF012 | Renderizar proposta final | Alta |
+| RF013 | Exportar proposta em PDF | Alta |
+| RF014 | Exibir página institucional final | Alta |
+| RF015 | Usar config JSON para dados do responsável | Alta |
+| RF016 | Preservar as cores originais de todos os logos | Alta |
+| RF017 | Usar tipografia padrão do sistema | Alta |
 
 ---
 
@@ -102,6 +107,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | RNF007 | Segurança | Sem envio de dados para servidor |
 | RNF008 | Hospedagem | Compatível com Netlify |
 | RNF009 | Integridade visual de marca | Logos não podem ser recoloridos, distorcidos ou tratados por filtros |
+| RNF010 | Privacidade local | Dados e arquivos do cliente devem permanecer no navegador na V1 |
 
 ---
 
@@ -123,7 +129,47 @@ As cores institucionais devem ser aplicadas em fundos, botões, bordas, textos, 
 
 ---
 
-## 8. Regra de navegação agrupada
+## 8. Página 2 — Cliente
+
+A Página 2 deve abrir imediatamente após a seleção da empresa na Página 1.
+
+A partir da Página 2, a identidade visual predominante deve ser a da empresa selecionada, não mais a do Grupo GPV.
+
+### Campos obrigatórios
+
+| Campo | Tipo | Obrigatório |
+|---|---|---|
+| Nome do cliente | Texto | Sim |
+| Telefone do cliente com DDD | Telefone | Sim |
+| E-mail do cliente | E-mail | Sim |
+| Logo do cliente | Upload de arquivo | Sim |
+
+### Estado esperado
+
+```js
+appState.client = {
+  name: "",
+  phone: "",
+  email: "",
+  logoFile: null,
+  logoPreviewUrl: ""
+}
+```
+
+### Validações principais
+
+| Campo | Regra |
+|---|---|
+| Nome | Mínimo de 2 caracteres |
+| Telefone | Deve conter DDD e pelo menos 10 dígitos numéricos |
+| E-mail | Deve possuir formato básico de e-mail |
+| Logo | Aceitar PNG, JPG, JPEG, WEBP ou SVG, até 5 MB |
+
+O logo do cliente deve ser preservado exatamente como enviado, sem recoloração, filtro, opacidade alterada, corte ou distorção.
+
+---
+
+## 9. Regra de navegação agrupada
 
 A navegação da Página 1 deve ser carregada a partir de:
 
@@ -150,7 +196,7 @@ O logo do Grand Prix de Vendas deve funcionar como agrupador para duas soluçõe
 
 ---
 
-## 9. Regra global de uso dos logos
+## 10. Regra global de uso dos logos
 
 Todos os logos do sistema são **assets imutáveis de marca**.
 
@@ -177,7 +223,7 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 
 ---
 
-## 10. Decisões técnicas oficiais
+## 11. Decisões técnicas oficiais
 
 | Tema | Decisão |
 |---|---|
@@ -190,21 +236,23 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 | Repositório | GPV_Sales_Kit |
 | Desenvolvimento | VS Code + Claude Code |
 | Página 1 | Portal institucional do Grupo GPV |
+| Página 2 | Cadastro do cliente |
 | Navegação da Página 1 | `data/navigation.json` |
 | Seleção da empresa | Logos das marcas clicáveis |
 | Grand Prix de Vendas | Logo agrupador com submenu |
 | Champions Festival | Opção dentro do agrupamento Grand Prix |
 | Identidade visual da Página 1 | Grupo GPV, cor principal `#252324` |
+| Identidade visual da Página 2 em diante | Empresa selecionada |
 | Logo GPV padrão | Branco sobre fundo escuro |
 | Tipografia | Padrão do sistema |
-| Identidade visual das páginas seguintes | Empresa selecionada |
 | Tratamento dos logos | Preservar cores originais; nunca recolorir |
+| Upload do logo do cliente | Local no navegador, sem backend |
 | Serviços | Desacoplados da interface |
 | Assinatura | Configurável via JSON |
 
 ---
 
-## 11. Critérios gerais de aceite
+## 12. Critérios gerais de aceite
 
 - O sistema roda localmente sem backend.
 - O sistema pode ser hospedado no Netlify.
@@ -216,6 +264,8 @@ Essa regra vale para todas as marcas e para o logo do cliente.
 - O logo Grand Prix abre submenu com Grand Prix de Vendas e Champions Festival.
 - O clique em Grand Prix de Vendas seleciona `grand-prix`.
 - O clique em Champions Festival seleciona `champions`.
+- A Página 2 abre com a identidade visual da empresa selecionada.
+- A Página 2 coleta nome, telefone com DDD, e-mail e logo do cliente.
 - Nenhum logo é recolorido, filtrado, distorcido ou convertido para outra versão visual não aprovada.
 - A identidade visual muda conforme a empresa selecionada a partir da Página 2.
 - O usuário consegue gerar proposta completa em PDF.
