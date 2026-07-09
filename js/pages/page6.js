@@ -66,21 +66,21 @@ function buildInteractiveProposal(ctx) {
   wrapper.appendChild(section(
     "Capa",
     `<div class="form-card animate-scale-in" style="text-align:center;">
-      <div style="display:flex;justify-content:center;gap:32px;align-items:center;margin-bottom:16px;">
-        <img class="logo-chip" src="${ctx.company.logo}" alt="${ctx.company.name}" style="height:56px;" />
-        ${ctx.client.logoPreviewUrl ? `<img class="logo-chip" src="${ctx.client.logoPreviewUrl}" alt="${ctx.client.name}" style="height:56px;" />` : ""}
+      <div style="display:flex;justify-content:center;gap:40px;align-items:center;margin-bottom:22px;">
+        <img class="logo-chip" src="${ctx.company.logo}" alt="${ctx.company.name}" style="height:72px;" />
+        ${ctx.client.logoPreviewUrl ? `<img class="logo-chip" src="${ctx.client.logoPreviewUrl}" alt="${ctx.client.name}" style="height:72px;" />` : ""}
       </div>
-      <h2 style="font-size:1.8rem;font-weight:800;">Proposta Comercial</h2>
-      <p style="color:var(--color-muted);margin-top:8px;">${ctx.client.name}</p>
+      <h2 style="font-size:2.4rem;font-weight:800;letter-spacing:-0.01em;">Proposta Comercial</h2>
+      <p style="color:var(--color-muted);margin-top:10px;font-size:1.15rem;">${ctx.client.name}</p>
     </div>`
   ));
 
   wrapper.appendChild(section(
     "Edney Ulisses — Institucional",
     `<div class="form-card">
-      <p>Edney Ulisses é fundador e especialista à frente das soluções do Grupo GPV, referência em aceleração comercial no mercado brasileiro.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:24px;margin-top:16px;align-items:center;">
-        ${ctx.allBrandLogos.map((b) => `<img class="logo-chip" src="${b.logo}" alt="${b.name}" style="height:32px;" />`).join("")}
+      <p style="font-size:1.08rem;line-height:1.65;">Edney Ulisses é fundador e especialista à frente das soluções do Grupo GPV, referência em aceleração comercial no mercado brasileiro.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:28px;margin-top:22px;align-items:center;">
+        ${ctx.allBrandLogos.map((b) => `<img class="logo-chip" src="${b.logo}" alt="${b.name}" style="height:42px;" />`).join("")}
       </div>
     </div>`
   ));
@@ -88,7 +88,7 @@ function buildInteractiveProposal(ctx) {
   wrapper.appendChild(section(
     "Edney Ulisses — Formação e Experiência",
     `<div class="form-card">
-      <p>Trajetória consolidada em treinamento, consultoria e desenvolvimento comercial para equipes de alta performance, com atuação direta na aceleração de resultados das marcas do Grupo GPV.</p>
+      <p style="font-size:1.08rem;line-height:1.65;">Trajetória consolidada em treinamento, consultoria e desenvolvimento comercial para equipes de alta performance, com atuação direta na aceleração de resultados das marcas do Grupo GPV.</p>
     </div>`
   ));
 
@@ -98,7 +98,7 @@ function buildInteractiveProposal(ctx) {
     "Investimento e Condições",
     `<div class="form-card">
       <div id="investment-value-counter" class="investment-value">R$ 0,00</div>
-      ${ctx.commercial.notes ? `<p style="margin-top:12px;">${ctx.commercial.notes}</p>` : ""}
+      ${ctx.commercial.notes ? `<p style="margin-top:16px;font-size:1.05rem;">${ctx.commercial.notes}</p>` : ""}
       ${ctx.commercial.deliveryDeadline ? row("Prazo de entrega", ctx.commercial.deliveryDeadline) : ""}
       ${row("Validade da proposta", ctx.commercial.proposalValidity)}
     </div>`
@@ -112,7 +112,7 @@ function buildInteractiveProposal(ctx) {
       ${row("Função", ctx.commercial.issuer.role)}
       ${row("Telefone", ctx.commercial.issuer.phone)}
       ${row("E-mail", ctx.commercial.issuer.email)}
-      <img class="logo-chip" src="${ctx.company.logo}" alt="${ctx.company.name}" style="height:40px;margin-top:16px;" />
+      <img class="logo-chip" src="${ctx.company.logo}" alt="${ctx.company.name}" style="height:52px;margin-top:20px;" />
     </div>`
   ));
 
@@ -121,7 +121,7 @@ function buildInteractiveProposal(ctx) {
 
 function section(title, innerHtml) {
   const el = document.createElement("section");
-  el.innerHTML = `<h3 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-muted);margin-bottom:12px;">${title}</h3>${innerHtml}`;
+  el.innerHTML = `<h3 style="font-size:1.02rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-accent);margin-bottom:16px;">${title}</h3>${innerHtml}`;
   return el;
 }
 

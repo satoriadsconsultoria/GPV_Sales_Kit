@@ -16,7 +16,7 @@ function blendHexColors(hexA, hexB, weightA) {
 }
 
 export function getMutedTextColor(theme) {
-  return theme.mutedTextColor || blendHexColors(theme.textColor, theme.backgroundColor, 0.6);
+  return theme.mutedTextColor || blendHexColors(theme.textColor, theme.backgroundColor, 0.72);
 }
 
 function relativeLuminance(hex) {
