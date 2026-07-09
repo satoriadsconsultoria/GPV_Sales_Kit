@@ -8,6 +8,8 @@ Ela deve consolidar todas as informações preenchidas nas etapas anteriores e p
 
 Ao clicar em editar, o sistema deve retornar automaticamente para a tela correspondente, mantendo todos os dados já preenchidos no estado da aplicação.
 
+A Página 5 deve ser animada, interativa e usar a identidade visual da marca selecionada.
+
 ---
 
 ## Contexto de entrada
@@ -38,7 +40,7 @@ A prévia deve ser visualmente executiva, clara e objetiva, ainda em formato de 
 | Marca selecionada | Página 1 | Editar volta para Página 1 |
 | Dados do cliente | Página 2 | Editar volta para Página 2 |
 | Serviços/planos selecionados | Página 3 | Editar volta para Página 3 |
-| Dados comerciais | Página 4 | Editar volta para Página 4 |
+| Dados comerciais, validade e emissor | Página 4 | Editar volta para Página 4 |
 
 ---
 
@@ -122,14 +124,19 @@ Ao clicar, voltar para Página 3.
 
 ---
 
-### 4. Dados comerciais
+### 4. Dados comerciais, validade e emissor
 
 Exibir:
 
 - Valor da proposta em `R$`.
 - Observações, somente se preenchidas.
 - Prazo de entrega, se preenchido.
-- Para VELOCE, o prazo de entrega sempre deve aparecer, pois é obrigatório.
+- Prazo de entrega obrigatório para VELOCE.
+- Validade da proposta.
+- Nome do emissor.
+- Função do emissor.
+- Telefone do emissor.
+- E-mail do emissor.
 
 Ação:
 
@@ -199,13 +206,25 @@ appState.currentStep = 5
 │  │ Serviço/plano selecionado + escopo        │     │
 │  └───────────────────────────────────────────┘     │
 │                                                    │
-│  ┌ Dados comerciais ─────────────── [Editar] ┐     │
-│  │ Valor | Observações | Prazo               │     │
+│  ┌ Comercial e emissor ──────────── [Editar] ┐     │
+│  │ Valor | Prazo | Validade | Emissor        │     │
 │  └───────────────────────────────────────────┘     │
 │                                                    │
 │  [Voltar]                        [Gerar proposta]  │
 └────────────────────────────────────────────────────┘
 ```
+
+---
+
+## Animações e interações
+
+A Página 5 deve conter:
+
+- Entrada suave dos blocos de conferência.
+- Hover nos cards de cada bloco.
+- Botão de edição com destaque claro.
+- Feedback visual ao clicar em editar.
+- Transição suave ao retornar para a etapa correspondente.
 
 ---
 
@@ -227,7 +246,7 @@ appState.currentStep = 5
 | P5-RF03 | Exibir bloco de marca selecionada |
 | P5-RF04 | Exibir bloco de dados do cliente |
 | P5-RF05 | Exibir bloco de serviços/planos selecionados |
-| P5-RF06 | Exibir bloco de dados comerciais |
+| P5-RF06 | Exibir bloco de dados comerciais, validade e emissor |
 | P5-RF07 | Cada bloco deve possuir opção de editar |
 | P5-RF08 | Editar marca deve voltar para Página 1 |
 | P5-RF09 | Editar cliente deve voltar para Página 2 |
@@ -238,7 +257,10 @@ appState.currentStep = 5
 | P5-RF14 | Exibir observações somente se houver conteúdo |
 | P5-RF15 | Exibir prazo de entrega sempre que preenchido |
 | P5-RF16 | Para VELOCE, exibir prazo de entrega obrigatoriamente |
-| P5-RF17 | Avançar para Página 6 somente após o usuário clicar em Gerar proposta |
+| P5-RF17 | Exibir validade da proposta |
+| P5-RF18 | Exibir nome, função, telefone e e-mail do emissor |
+| P5-RF19 | Avançar para Página 6 somente após o usuário clicar em Gerar proposta |
+| P5-RF20 | Aplicar animações e microinterações na tela de conferência |
 
 ---
 
@@ -248,6 +270,8 @@ A Página 5 será considerada aprovada se:
 
 - Gerar uma prévia clara da proposta.
 - Consolidar dados da marca, cliente, serviços e comercial.
+- Exibir validade da proposta.
+- Exibir dados do emissor.
 - Exibir opção de editar em cada bloco.
 - Levar o usuário para a tela correta ao clicar em editar.
 - Manter os dados preenchidos ao navegar para edição.
