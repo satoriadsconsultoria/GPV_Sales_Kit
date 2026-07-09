@@ -29,7 +29,8 @@ export function initPage4() {
   const validityInput = document.getElementById("proposal-validity");
   const issuerPhoneInput = document.getElementById("issuer-phone");
 
-  valueInput.addEventListener("input", () => {
+  valueInput.addEventListener("input", updateSummary);
+  valueInput.addEventListener("blur", () => {
     valueInput.value = formatCurrencyInput(valueInput.value);
     updateSummary();
   });
@@ -38,7 +39,7 @@ export function initPage4() {
     issuerPhoneInput.value = formatPhoneInput(issuerPhoneInput.value);
   });
 
-  // Usuário digita só o número — "dia" ou "dias" é adicionado automaticamente.
+  // Usuario digita so o numero; "dia" ou "dias" e adicionado automaticamente.
   deadlineInput.addEventListener("input", () => {
     deadlineInput.value = formatDaysInput(deadlineInput.value);
     updateSummary();
@@ -55,6 +56,7 @@ export function initPage4() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    valueInput.value = formatCurrencyInput(valueInput.value);
     if (!validatePage4()) return;
 
     appState.commercial.proposalValue = {
@@ -75,7 +77,7 @@ export function initPage4() {
   });
 }
 
-// O prazo de entrega é obrigatório somente para a marca VELOCE (RF015).
+// O prazo de entrega e obrigatorio somente para a marca VELOCE (RF015).
 export function refreshCommercialRules() {
   const isVeloce = appState.company?.id === "veloce";
   const field = document.getElementById("delivery-deadline-field");
@@ -96,9 +98,10 @@ function updateSummary() {
   const value = document.getElementById("proposal-value").value.trim();
   const deadline = document.getElementById("delivery-deadline").value.trim();
   const validity = document.getElementById("proposal-validity").value.trim();
+  const formattedValue = value ? formatCurrencyInput(value) : "";
 
   let html = summaryRow("Serviço/Plano", service ? service.selectionLabel : "—");
-  html += summaryRow("Valor", value || "—");
+  html += summaryRow("Valor", formattedValue || "—");
   if (deadline) html += summaryRow("Prazo", deadline);
   if (validity) html += summaryRow("Validade", validity);
 
