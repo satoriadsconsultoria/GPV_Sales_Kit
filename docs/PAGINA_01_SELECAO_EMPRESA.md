@@ -35,23 +35,30 @@ Ela deve funcionar como uma **porta de entrada institucional premium**, com:
 Arquivo de referência enviado pelo usuário:
 
 ```txt
-GPV logo.png
+GPV_Regua_logo positivo-03.png
 ```
 
 Caminho oficial no projeto:
 
 ```txt
+assets/logos/grupo-gpv.svg
+```
+
+Referência raster opcional para uso futuro:
+
+```txt
 assets/logos/grupo-gpv.png
 ```
 
-### Cor institucional principal
+### Cores institucionais oficiais
 
 | Uso | Cor |
 |---|---|
-| Fundo institucional | `#000000` |
-| Cor primária | `#000000` |
+| Cor principal | `#252324` |
+| Cor secundária | `#A5A09C` |
+| Fundo institucional | `#252324` |
 | Texto principal | `#FFFFFF` |
-| Texto secundário | `rgba(255,255,255,0.72)` |
+| Texto secundário | `#A5A09C` |
 
 ### Cores de apoio presentes no material visual
 
@@ -64,7 +71,7 @@ assets/logos/grupo-gpv.png
 
 ### Regra de aplicação
 
-A Página 1 deve ser majoritariamente preta, com logo branco do Grupo GPV em grande escala e uso controlado das cores de apoio apenas como elementos gráficos secundários.
+A Página 1 deve ser majoritariamente escura, usando `#252324` como base visual e `#A5A09C` como cor secundária. As cores de apoio devem ser usadas somente como elementos gráficos secundários, especialmente na régua institucional do Grupo GPV.
 
 ---
 
@@ -116,50 +123,6 @@ Os logos devem funcionar como botões clicáveis.
 | veloce | VELOCE | Seleciona a empresa e avança para a Página 2 |
 | conquista | Projeto Conquista | Seleciona a empresa e avança para a Página 2 |
 | edney | Edney Ulisses — Acelerador de Vendas | Seleciona a empresa e avança para a Página 2 |
-
----
-
-## Layout recomendado
-
-### Desktop
-
-```txt
-┌────────────────────────────────────────────────────┐
-│ GPV Sales Kit                         Etapa 1 de 6 │
-├────────────────────────────────────────────────────┤
-│                                                    │
-│              [LOGO GRANDE GRUPO GPV]               │
-│                                                    │
-│       Selecione a marca responsável pela proposta  │
-│       Subtítulo institucional                      │
-│                                                    │
-│   [Grand Prix] [Champions] [VELOCE] [Conquista]    │
-│                 [Edney Ulisses]                    │
-│                                                    │
-└────────────────────────────────────────────────────┘
-```
-
-### Mobile
-
-```txt
-┌──────────────────────────────┐
-│ GPV Sales Kit                 │
-│ Etapa 1 de 6                  │
-├──────────────────────────────┤
-│                              │
-│       [LOGO GRUPO GPV]        │
-│                              │
-│ Selecione a marca             │
-│ Subtítulo                     │
-│                              │
-│ [Grand Prix]                  │
-│ [Champions Festival]          │
-│ [VELOCE]                      │
-│ [Projeto Conquista]           │
-│ [Edney Ulisses]               │
-│                              │
-└──────────────────────────────┘
-```
 
 ---
 
@@ -231,7 +194,7 @@ Exemplo:
 ### Logo institucional do Grupo GPV
 
 ```txt
-assets/logos/grupo-gpv.png
+assets/logos/grupo-gpv.svg
 ```
 
 ### Logos das empresas
@@ -254,13 +217,15 @@ O arquivo `config.json` deve armazenar a identidade institucional do Grupo GPV p
 {
   "groupBrand": {
     "name": "Grupo GPV",
-    "logo": "assets/logos/grupo-gpv.png",
+    "logo": "assets/logos/grupo-gpv.svg",
+    "logoRasterReference": "assets/logos/grupo-gpv.png",
     "theme": {
-      "primaryColor": "#000000",
-      "secondaryColor": "#FFFFFF",
+      "primaryColor": "#252324",
+      "secondaryColor": "#A5A09C",
       "accentColor": "#5BBFC8",
-      "backgroundColor": "#000000",
+      "backgroundColor": "#252324",
       "textColor": "#FFFFFF",
+      "mutedTextColor": "#A5A09C",
       "supportColors": {
         "cyan": "#5BBFC8",
         "red": "#E31838",
@@ -279,15 +244,16 @@ O arquivo `config.json` deve armazenar a identidade institucional do Grupo GPV p
 | ID | Regra |
 |---|---|
 | P1-RF01 | Exibir o logo principal do Grupo GPV em destaque |
-| P1-RF02 | Aplicar preto institucional `#000000` como base visual da Página 1 |
-| P1-RF03 | Exibir os logos das empresas cadastradas no `companies.json` |
-| P1-RF04 | Tornar cada logo de empresa clicável |
-| P1-RF05 | Permitir seleção de apenas uma empresa |
-| P1-RF06 | Salvar empresa selecionada no `appState.selectedCompany` |
-| P1-RF07 | Carregar serviços vinculados ao `companyId` |
-| P1-RF08 | Aplicar identidade visual da empresa selecionada a partir da Página 2 |
-| P1-RF09 | Avançar automaticamente para a Página 2 após clique na marca |
-| P1-RF10 | Não exigir botão Continuar na Página 1 |
+| P1-RF02 | Aplicar `#252324` como base visual da Página 1 |
+| P1-RF03 | Usar `#A5A09C` como cor secundária institucional |
+| P1-RF04 | Exibir os logos das empresas cadastradas no `companies.json` |
+| P1-RF05 | Tornar cada logo de empresa clicável |
+| P1-RF06 | Permitir seleção de apenas uma empresa |
+| P1-RF07 | Salvar empresa selecionada no `appState.selectedCompany` |
+| P1-RF08 | Carregar serviços vinculados ao `companyId` |
+| P1-RF09 | Aplicar identidade visual da empresa selecionada a partir da Página 2 |
+| P1-RF10 | Avançar automaticamente para a Página 2 após clique na marca |
+| P1-RF11 | Não exigir botão Continuar na Página 1 |
 
 ---
 
@@ -295,9 +261,10 @@ O arquivo `config.json` deve armazenar a identidade institucional do Grupo GPV p
 
 | Elemento | Regra |
 |---|---|
-| Fundo | Preto institucional `#000000` |
+| Fundo | Cor principal `#252324` |
 | Logo Grupo GPV | Grande, centralizado e dominante |
 | Título | Parte superior, claro e institucional |
+| Texto secundário | Cor `#A5A09C` |
 | Logos das marcas | Abaixo do logo principal, clicáveis e bem espaçados |
 | Cards/containers | Minimalistas, sem excesso de texto |
 | Tipografia | Moderna, forte e legível |
@@ -311,7 +278,8 @@ O arquivo `config.json` deve armazenar a identidade institucional do Grupo GPV p
 A Página 1 será considerada aprovada se:
 
 - O logo do Grupo GPV aparece como elemento visual dominante.
-- A cor base da Página 1 é preta.
+- A cor base da Página 1 é `#252324`.
+- A cor secundária institucional é `#A5A09C`.
 - As cores de apoio são usadas somente como detalhe visual.
 - O título da página aparece na parte superior.
 - Os logos das marcas aparecem abaixo do logo principal.
