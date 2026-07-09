@@ -1,0 +1,21 @@
+/* Ajustes finos específicos de cada página que não cabem em components/layout */
+
+.services-container {
+  margin-bottom: var(--space-md);
+}
+
+.review-blocks {
+  margin-bottom: var(--space-md);
+}
+
+#delivery-deadline-field[data-required="false"] .required {
+  display: none;
+}
+
+.upload-box__hint.is-hidden {
+  display: none;
+}
+
+.brand-card__logo--group {
+  height: 44px;
+}

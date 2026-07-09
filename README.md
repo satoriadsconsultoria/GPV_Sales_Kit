@@ -70,6 +70,24 @@ assets/images/edney/edney-institucional-01.png
 assets/images/edney/edney-institucional-02.png
 ```
 
+## Como rodar localmente
+
+O sistema usa `fetch()` para carregar os arquivos em `data/*.json`, então **não funciona abrindo `index.html` direto no navegador** (`file://`) — é preciso servir via HTTP.
+
+Com Node instalado:
+
+```txt
+npx serve .
+```
+
+Sem Node, no Windows, use o servidor auxiliar incluso:
+
+```txt
+powershell -ExecutionPolicy Bypass -File serve-local.ps1
+```
+
+Depois acesse `http://localhost:8090/`.
+
 ## Status
 
-PRD, arquitetura funcional, dados, diretrizes visuais e assets principais validados. Projeto pronto para início da construção em HTML, CSS e JavaScript no VS Code + Claude Code.
+Sistema construído: as 6 páginas (portal institucional, cliente, serviços, comercial, conferência e proposta final com exportação em PDF) estão implementadas em HTML5, CSS3 e JavaScript puro, orientadas pelos dados em `data/*.json`, e testadas de ponta a ponta em navegador.

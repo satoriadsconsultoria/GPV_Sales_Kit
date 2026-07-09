@@ -1,0 +1,198 @@
+#app {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.page {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.page-shell {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: calc(var(--space-xl) + 56px) var(--space-md) var(--space-xl);
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.page-header__logo {
+  height: 48px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 6px 12px;
+  box-sizing: content-box;
+}
+
+.page-header__text h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.page-header__text p {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+/* Página 1 — Institucional */
+.page--institutional {
+  position: relative;
+  overflow: hidden;
+}
+
+.page--institutional.page--active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.institutional__backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(91, 191, 200, 0.12), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(165, 160, 156, 0.10), transparent 50%),
+    var(--color-bg);
+  z-index: 0;
+}
+
+.institutional__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-xl) var(--space-md);
+  text-align: center;
+}
+
+.institutional__logo {
+  height: 64px;
+  width: auto;
+  margin-bottom: var(--space-sm);
+}
+
+.institutional__title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800;
+}
+
+.institutional__subtitle {
+  color: var(--color-muted);
+  max-width: 520px;
+  margin-bottom: var(--space-md);
+}
+
+/* Navegação de progresso */
+.progress-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.progress-nav.is-hidden {
+  display: none;
+}
+
+.progress-nav__list {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+.progress-nav__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  opacity: 0.55;
+  transition: opacity var(--duration-fast) var(--ease-premium);
+}
+
+.progress-nav__item.is-active,
+.progress-nav__item.is-done {
+  opacity: 1;
+}
+
+.progress-nav__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-muted);
+  transition: background-color var(--duration-fast) var(--ease-premium);
+}
+
+.progress-nav__item.is-active .progress-nav__dot {
+  background: var(--color-accent);
+}
+
+.progress-nav__item.is-done .progress-nav__dot {
+  background: var(--color-accent);
+  opacity: 0.6;
+}
+
+/* Página 6 — Proposta final */
+.proposal-toolbar {
+  position: sticky;
+  top: 56px;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.proposal-viewer {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Template de PDF — fora da tela, nunca visível na interface */
+.pdf-template {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+  width: 1123px; /* A4 landscape a 96dpi aprox */
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding-top: calc(var(--space-lg) + 56px);
+  }
+
+  .page-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

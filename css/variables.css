@@ -1,0 +1,37 @@
+:root {
+  /* Tema dinâmico — valores padrão = identidade institucional do Grupo GPV */
+  --color-primary: #252324;
+  --color-secondary: #A5A09C;
+  --color-accent: #5BBFC8;
+  --color-bg: #252324;
+  --color-text: #FFFFFF;
+  --color-muted: #A5A09C;
+
+  /* Tipografia */
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+
+  /* Espaçamento */
+  --space-xs: 0.5rem;
+  --space-sm: 0.875rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* Forma */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+
+  /* Sombra */
+  --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.28);
+  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.16);
+
+  /* Transição */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 560ms;
+
+  /* Layout */
+  --max-content-width: 1080px;
+}

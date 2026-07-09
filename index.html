@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GPV Sales Kit — Proposta Comercial</title>
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/variables.css" />
+<link rel="stylesheet" href="css/animations.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/layout.css" />
+<link rel="stylesheet" href="css/pages.css" />
+<link rel="stylesheet" href="css/pdf.css" />
+</head>
+<body>
+
+<div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+<div id="app">
+
+  <nav id="progress-nav" class="progress-nav is-hidden" aria-label="Progresso da proposta">
+    <ol class="progress-nav__list">
+      <li class="progress-nav__item" data-step="2"><span class="progress-nav__dot"></span><span class="progress-nav__label">Cliente</span></li>
+      <li class="progress-nav__item" data-step="3"><span class="progress-nav__dot"></span><span class="progress-nav__label">Serviços</span></li>
+      <li class="progress-nav__item" data-step="4"><span class="progress-nav__dot"></span><span class="progress-nav__label">Comercial</span></li>
+      <li class="progress-nav__item" data-step="5"><span class="progress-nav__dot"></span><span class="progress-nav__label">Conferência</span></li>
+      <li class="progress-nav__item" data-step="6"><span class="progress-nav__dot"></span><span class="progress-nav__label">Proposta</span></li>
+    </ol>
+  </nav>
+
+  <main id="page-root">
+
+    <!-- PÁGINA 1 — PORTAL INSTITUCIONAL GRUPO GPV -->
+    <section id="page-1" class="page page--institutional page--active" data-page="1">
+      <div class="institutional__backdrop"></div>
+      <div class="institutional__content">
+        <img id="group-logo" class="institutional__logo animate-fade-in" src="assets/logos/grupo-gpv-negativo.png" alt="Grupo GPV" />
+        <h1 class="institutional__title animate-fade-in-up">Selecione a marca da proposta</h1>
+        <p class="institutional__subtitle animate-fade-in-up">Escolha a empresa do Grupo GPV para iniciar a proposta comercial.</p>
+
+        <div id="brand-grid" class="brand-grid"></div>
+      </div>
+    </section>
+
+    <!-- PÁGINA 2 — CLIENTE -->
+    <section id="page-2" class="page" data-page="2">
+      <div class="page-shell">
+        <header class="page-header">
+          <img id="page2-brand-logo" class="page-header__logo" src="" alt="" />
+          <div class="page-header__text">
+            <h2>Dados do cliente</h2>
+            <p>Informe os dados de quem receberá esta proposta.</p>
+          </div>
+        </header>
+
+        <form id="form-client" class="form-card animate-fade-in-up" novalidate>
+          <div class="form-field">
+            <label for="client-name">Nome do cliente <span class="required">*</span></label>
+            <input type="text" id="client-name" name="name" autocomplete="off" required />
+            <span class="form-error" data-error-for="client-name"></span>
+          </div>
+
+          <div class="form-field">
+            <label for="client-phone">Telefone com DDD <span class="required">*</span></label>
+            <input type="tel" id="client-phone" name="phone" placeholder="(00) 00000-0000" required />
+            <span class="form-error" data-error-for="client-phone"></span>
+          </div>
+
+          <div class="form-field">
+            <label for="client-email">E-mail <span class="required">*</span></label>
+            <input type="email" id="client-email" name="email" required />
+            <span class="form-error" data-error-for="client-email"></span>
+          </div>
+
+          <div class="form-field">
+            <label for="client-logo">Logotipo do cliente <span class="required">*</span></label>
+            <div class="upload-box" id="upload-box">
+              <input type="file" id="client-logo" name="logo" accept="image/*" required />
+              <div class="upload-box__hint">
+                <span class="upload-box__icon">⬆</span>
+                <span>Clique ou arraste o logo do cliente (PNG, JPG ou SVG)</span>
+              </div>
+              <img id="client-logo-preview" class="upload-box__preview is-hidden" alt="Prévia do logo do cliente" />
+            </div>
+            <span class="form-error" data-error-for="client-logo"></span>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn--ghost" data-nav-back>Voltar</button>
+            <button type="submit" class="btn btn--primary">Continuar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- PÁGINA 3 — SERVIÇOS -->
+    <section id="page-3" class="page" data-page="3">
+      <div class="page-shell">
+        <header class="page-header">
+          <img id="page3-brand-logo" class="page-header__logo" src="" alt="" />
+          <div class="page-header__text">
+            <h2>Serviços e planos</h2>
+            <p>Selecione o serviço ou plano desta proposta.</p>
+          </div>
+        </header>
+
+        <div id="services-container" class="services-container animate-fade-in-up"></div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn--ghost" data-nav-back>Voltar</button>
+          <button type="button" class="btn btn--primary" id="services-continue-btn" disabled>Continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PÁGINA 4 — COMERCIAL -->
+    <section id="page-4" class="page" data-page="4">
+      <div class="page-shell">
+        <header class="page-header">
+          <img id="page4-brand-logo" class="page-header__logo" src="" alt="" />
+          <div class="page-header__text">
+            <h2>Dados comerciais</h2>
+            <p>Defina valor, prazos e responsável pela proposta.</p>
+          </div>
+        </header>
+
+        <form id="form-commercial" class="form-card animate-fade-in-up" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="proposal-value">Valor da proposta (R$) <span class="required">*</span></label>
+              <input type="text" id="proposal-value" name="proposalValue" inputmode="decimal" placeholder="R$ 0,00" required />
+              <span class="form-error" data-error-for="proposal-value"></span>
+            </div>
+
+            <div class="form-field" id="delivery-deadline-field">
+              <label for="delivery-deadline">Prazo de entrega <span class="required" id="deadline-required-mark">*</span></label>
+              <input type="text" id="delivery-deadline" name="deliveryDeadline" placeholder="Ex: 30 dias" />
+              <span class="form-error" data-error-for="delivery-deadline"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="proposal-validity">Validade da proposta <span class="required">*</span></label>
+              <input type="text" id="proposal-validity" name="proposalValidity" placeholder="Ex: 7 dias" required />
+              <span class="form-error" data-error-for="proposal-validity"></span>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="proposal-notes">Observações</label>
+            <textarea id="proposal-notes" name="notes" rows="3" placeholder="Observações adicionais (opcional)"></textarea>
+          </div>
+
+          <h3 class="form-subtitle">Dados do emissor</h3>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="issuer-name">Nome <span class="required">*</span></label>
+              <input type="text" id="issuer-name" name="issuerName" required />
+              <span class="form-error" data-error-for="issuer-name"></span>
+            </div>
+            <div class="form-field">
+              <label for="issuer-role">Função <span class="required">*</span></label>
+              <input type="text" id="issuer-role" name="issuerRole" required />
+              <span class="form-error" data-error-for="issuer-role"></span>
+            </div>
+            <div class="form-field">
+              <label for="issuer-phone">Telefone <span class="required">*</span></label>
+              <input type="tel" id="issuer-phone" name="issuerPhone" placeholder="(00) 00000-0000" required />
+              <span class="form-error" data-error-for="issuer-phone"></span>
+            </div>
+            <div class="form-field">
+              <label for="issuer-email">E-mail <span class="required">*</span></label>
+              <input type="email" id="issuer-email" name="issuerEmail" required />
+              <span class="form-error" data-error-for="issuer-email"></span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn--ghost" data-nav-back>Voltar</button>
+            <button type="submit" class="btn btn--primary">Continuar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- PÁGINA 5 — CONFERÊNCIA -->
+    <section id="page-5" class="page" data-page="5">
+      <div class="page-shell">
+        <header class="page-header">
+          <img id="page5-brand-logo" class="page-header__logo" src="" alt="" />
+          <div class="page-header__text">
+            <h2>Conferência da proposta</h2>
+            <p>Revise todos os dados antes de gerar a proposta final.</p>
+          </div>
+        </header>
+
+        <div id="review-blocks" class="review-blocks animate-fade-in-up"></div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn--ghost" data-nav-back>Voltar</button>
+          <button type="button" class="btn btn--primary" id="generate-proposal-btn">Gerar proposta final</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PÁGINA 6 — PROPOSTA FINAL -->
+    <section id="page-6" class="page" data-page="6">
+      <div class="proposal-toolbar">
+        <button type="button" class="btn btn--ghost" data-nav-back>Voltar à conferência</button>
+        <button type="button" class="btn btn--primary" id="download-pdf-btn">Baixar PDF</button>
+      </div>
+      <div id="proposal-viewer" class="proposal-viewer"></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Template dedicado para exportação em PDF (oculto, sem animações/botões) -->
+<div id="pdf-template-root" class="pdf-template" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
