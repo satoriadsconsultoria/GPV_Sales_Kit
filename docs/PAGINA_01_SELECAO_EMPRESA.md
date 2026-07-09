@@ -24,6 +24,50 @@ Ela deve funcionar como uma **porta de entrada institucional premium**, com:
 
 ---
 
+## Identidade visual oficial da Página 1
+
+### Marca dominante
+
+**Grupo GPV**
+
+### Logo institucional
+
+Arquivo de referência enviado pelo usuário:
+
+```txt
+GPV logo.png
+```
+
+Caminho oficial no projeto:
+
+```txt
+assets/logos/grupo-gpv.png
+```
+
+### Cor institucional principal
+
+| Uso | Cor |
+|---|---|
+| Fundo institucional | `#000000` |
+| Cor primária | `#000000` |
+| Texto principal | `#FFFFFF` |
+| Texto secundário | `rgba(255,255,255,0.72)` |
+
+### Cores de apoio presentes no material visual
+
+| Cor | Hexadecimal | Uso recomendado |
+|---|---|---|
+| Ciano | `#5BBFC8` | Destaques sutis, linha decorativa, hover |
+| Vermelho | `#E31838` | Pontos de atenção, microdetalhes |
+| Amarelo | `#F5C32C` | Ênfase premium, detalhe visual |
+| Azul | `#2F3D8E` | Complemento visual, barra institucional |
+
+### Regra de aplicação
+
+A Página 1 deve ser majoritariamente preta, com logo branco do Grupo GPV em grande escala e uso controlado das cores de apoio apenas como elementos gráficos secundários.
+
+---
+
 ## Hierarquia visual da tela
 
 ### 1. Topo da página
@@ -153,7 +197,7 @@ Ao passar o mouse sobre uma marca:
 - O logo deve ganhar destaque visual.
 - Deve haver leve elevação.
 - Deve haver brilho ou borda sutil.
-- A cor de destaque pode usar a cor da própria marca ou cor institucional do Grupo GPV.
+- A cor de destaque pode usar a cor da própria marca ou o ciano institucional `#5BBFC8`.
 - Cursor deve ser `pointer`.
 - Transição entre 200ms e 300ms.
 
@@ -186,15 +230,11 @@ Exemplo:
 
 ### Logo institucional do Grupo GPV
 
-Caminho recomendado:
-
 ```txt
 assets/logos/grupo-gpv.png
 ```
 
 ### Logos das empresas
-
-Caminhos recomendados:
 
 ```txt
 assets/logos/grand-prix.png
@@ -208,11 +248,7 @@ assets/logos/edney-ulisses.png
 
 ## Dados necessários no JSON
 
-O arquivo `companies.json` deve continuar armazenando os dados das marcas.
-
-O arquivo `config.json` deve receber a identidade institucional do Grupo GPV para a Página 1.
-
-Estrutura recomendada:
+O arquivo `config.json` deve armazenar a identidade institucional do Grupo GPV para a Página 1.
 
 ```json
 {
@@ -220,17 +256,21 @@ Estrutura recomendada:
     "name": "Grupo GPV",
     "logo": "assets/logos/grupo-gpv.png",
     "theme": {
-      "primaryColor": "",
-      "secondaryColor": "",
-      "accentColor": "",
-      "backgroundColor": "",
-      "textColor": "#FFFFFF"
+      "primaryColor": "#000000",
+      "secondaryColor": "#FFFFFF",
+      "accentColor": "#5BBFC8",
+      "backgroundColor": "#000000",
+      "textColor": "#FFFFFF",
+      "supportColors": {
+        "cyan": "#5BBFC8",
+        "red": "#E31838",
+        "yellow": "#F5C32C",
+        "blue": "#2F3D8E"
+      }
     }
   }
 }
 ```
-
-As cores serão definidas após envio do material oficial do Grupo GPV.
 
 ---
 
@@ -239,7 +279,7 @@ As cores serão definidas após envio do material oficial do Grupo GPV.
 | ID | Regra |
 |---|---|
 | P1-RF01 | Exibir o logo principal do Grupo GPV em destaque |
-| P1-RF02 | Aplicar as cores institucionais do Grupo GPV na Página 1 |
+| P1-RF02 | Aplicar preto institucional `#000000` como base visual da Página 1 |
 | P1-RF03 | Exibir os logos das empresas cadastradas no `companies.json` |
 | P1-RF04 | Tornar cada logo de empresa clicável |
 | P1-RF05 | Permitir seleção de apenas uma empresa |
@@ -255,7 +295,7 @@ As cores serão definidas após envio do material oficial do Grupo GPV.
 
 | Elemento | Regra |
 |---|---|
-| Fundo | Cores institucionais do Grupo GPV |
+| Fundo | Preto institucional `#000000` |
 | Logo Grupo GPV | Grande, centralizado e dominante |
 | Título | Parte superior, claro e institucional |
 | Logos das marcas | Abaixo do logo principal, clicáveis e bem espaçados |
@@ -271,7 +311,8 @@ As cores serão definidas após envio do material oficial do Grupo GPV.
 A Página 1 será considerada aprovada se:
 
 - O logo do Grupo GPV aparece como elemento visual dominante.
-- As cores da Página 1 seguem a identidade institucional do Grupo GPV.
+- A cor base da Página 1 é preta.
+- As cores de apoio são usadas somente como detalhe visual.
 - O título da página aparece na parte superior.
 - Os logos das marcas aparecem abaixo do logo principal.
 - Todos os logos das marcas são clicáveis.
