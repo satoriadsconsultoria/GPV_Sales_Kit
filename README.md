@@ -12,7 +12,7 @@ Gerar propostas comerciais executivas, padronizadas e profissionais em poucos mi
 - CSS3
 - JavaScript
 - JSON local
-- html2pdf.js
+- html2pdf.js ou biblioteca equivalente de exportação PDF no navegador
 - Netlify
 
 ## Empresas contempladas
@@ -25,12 +25,24 @@ Gerar propostas comerciais executivas, padronizadas e profissionais em poucos mi
 
 ## Fluxo do sistema
 
-1. Seleção da empresa
-2. Cadastro do cliente
-3. Seleção dos serviços
-4. Dados comerciais
-5. Conferência
-6. Renderização da proposta e exportação em PDF
+1. Página 1 — Portal institucional Grupo GPV e seleção da marca
+2. Página 2 — Cadastro do cliente
+3. Página 3 — Seleção dos serviços/planos
+4. Página 4 — Dados comerciais, validade e emissor
+5. Página 5 — Conferência e edição por bloco
+6. Página 6 — Proposta final interativa e exportação em PDF executivo
+
+## Diretrizes principais
+
+- Página 1 usa identidade institucional do Grupo GPV.
+- Páginas 2 a 6 usam a identidade visual da marca selecionada.
+- Todas as páginas devem ser animadas e interativas.
+- O hover da Página 1 usa cores de pré-seleção por marca, aplicadas somente no container/card.
+- Logos não podem ser recoloridos, filtrados ou distorcidos.
+- O PDF deve ser diferente da página interativa.
+- O PDF deve ser gerado por template dedicado, sem animações ou botões.
+- O PDF deve usar formato A4 landscape.
+- A proposta final deve incluir capa, dois slides institucionais de Edney Ulisses, proposta/escopo, investimento e encerramento.
 
 ## Estrutura planejada
 
@@ -38,6 +50,10 @@ Gerar propostas comerciais executivas, padronizadas e profissionais em poucos mi
 GPV_Sales_Kit/
 ├── index.html
 ├── assets/
+│   ├── backgrounds/
+│   ├── images/
+│   │   └── edney/
+│   └── logos/
 ├── css/
 ├── js/
 ├── data/
@@ -45,6 +61,17 @@ GPV_Sales_Kit/
 └── libs/
 ```
 
+## Pendência antes da construção visual final
+
+Subir as fotos finais do Edney Ulisses nos caminhos:
+
+```txt
+assets/images/edney/edney-institucional-01.png
+assets/images/edney/edney-institucional-02.png
+```
+
+Enquanto esses arquivos não forem enviados, o sistema deve usar placeholder visual temporário.
+
 ## Status
 
-Projeto em fase de definição técnica antes da construção.
+PRD e arquitetura funcional em fase final de validação. Documentação consolidada para início da construção em HTML, CSS e JavaScript.
