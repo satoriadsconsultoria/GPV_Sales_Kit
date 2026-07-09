@@ -27,8 +27,9 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 
 ### Incluído
 
-- Seleção da empresa.
-- Carregamento automático da identidade visual.
+- Página inicial institucional com predominância da marca Grupo GPV.
+- Seleção da empresa por meio dos logos clicáveis das marcas.
+- Carregamento automático da identidade visual da empresa selecionada a partir da Página 2.
 - Cadastro do cliente.
 - Upload do logotipo do cliente.
 - Seleção múltipla de serviços.
@@ -55,7 +56,7 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 
 ## 4. Fluxo funcional
 
-1. Seleção da empresa.
+1. Portal institucional Grupo GPV com seleção da marca.
 2. Cadastro do cliente.
 3. Seleção dos serviços.
 4. Dados comerciais.
@@ -68,17 +69,18 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 
 | ID | Requisito | Prioridade |
 |---|---|---|
-| RF001 | Permitir seleção da empresa | Alta |
-| RF002 | Carregar identidade visual dinamicamente | Alta |
-| RF003 | Carregar serviços conforme empresa | Alta |
-| RF004 | Permitir cadastro do cliente | Alta |
-| RF005 | Permitir upload do logo do cliente | Média |
-| RF006 | Permitir seleção múltipla de serviços | Alta |
-| RF007 | Exibir conferência completa | Alta |
-| RF008 | Renderizar proposta final | Alta |
-| RF009 | Exportar proposta em PDF | Alta |
-| RF010 | Exibir página institucional final | Alta |
-| RF011 | Usar config JSON para dados do responsável | Alta |
+| RF001 | Exibir página inicial institucional com identidade visual do Grupo GPV | Alta |
+| RF002 | Permitir seleção da empresa por logos clicáveis | Alta |
+| RF003 | Carregar identidade visual da empresa selecionada a partir da Página 2 | Alta |
+| RF004 | Carregar serviços conforme empresa | Alta |
+| RF005 | Permitir cadastro do cliente | Alta |
+| RF006 | Permitir upload do logo do cliente | Média |
+| RF007 | Permitir seleção múltipla de serviços | Alta |
+| RF008 | Exibir conferência completa | Alta |
+| RF009 | Renderizar proposta final | Alta |
+| RF010 | Exportar proposta em PDF | Alta |
+| RF011 | Exibir página institucional final | Alta |
+| RF012 | Usar config JSON para dados do responsável | Alta |
 
 ---
 
@@ -109,7 +111,10 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 | Hospedagem | Netlify |
 | Repositório | GPV_Sales_Kit |
 | Desenvolvimento | VS Code + Claude Code |
-| Identidade visual | Dinâmica por empresa |
+| Página 1 | Portal institucional do Grupo GPV |
+| Seleção da empresa | Logos das marcas clicáveis |
+| Identidade visual da Página 1 | Grupo GPV |
+| Identidade visual das páginas seguintes | Empresa selecionada |
 | Serviços | Desacoplados da interface |
 | Assinatura | Configurável via JSON |
 
@@ -119,7 +124,10 @@ Padronizar, acelerar e elevar o nível visual das propostas comerciais do Grupo 
 
 - O sistema roda localmente sem backend.
 - O sistema pode ser hospedado no Netlify.
+- A Página 1 apresenta o Grupo GPV como marca dominante.
+- Os logos das empresas funcionam como botões de seleção.
+- O clique na marca seleciona a empresa e avança para a Página 2.
+- A identidade visual muda conforme a empresa selecionada a partir da Página 2.
 - O usuário consegue gerar proposta completa em PDF.
-- A identidade visual muda conforme a empresa selecionada.
 - Os serviços podem ser editados via JSON.
 - O layout possui aparência premium, institucional e executiva.
