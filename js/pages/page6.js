@@ -1,43 +1,28 @@
 import { appState } from "../state.js";
 import { getSelectedService } from "./page3.js";
-import { getMutedTextColor } from "../theme.js";
+import { getMutedTextColor, getOnAccentColor } from "../theme.js";
 import { getMotifPath } from "../motif.js";
 
-let sharedData = null;
+const PDF_PAGE_WIDTH = 1123;
+const PDF_PAGE_HEIGHT = 794;
+const SCOPE_CARD_MAX_UNITS = 15;
+
+let previewObserver = null;
 
 export function initPage6() {
   document.getElementById("download-pdf-btn").addEventListener("click", downloadPdf);
 }
 
 export function buildProposal(data) {
-  sharedData = data;
   const ctx = collectProposalContext(data);
-  document.getElementById("proposal-viewer").innerHTML = "";
-  document.getElementById("proposal-viewer").appendChild(buildInteractiveProposal(ctx));
-  animateInvestmentCounter(ctx.commercial.proposalValue.raw);
-
   const pdfRoot = document.getElementById("pdf-template-root");
+  const viewer = document.getElementById("proposal-viewer");
+
   pdfRoot.innerHTML = "";
   pdfRoot.appendChild(buildPdfTemplate(ctx));
-}
 
-// Conta do zero até o valor da proposta — pequeno toque de interatividade
-// no momento de maior impacto da proposta final.
-function animateInvestmentCounter(target) {
-  const el = document.getElementById("investment-value-counter");
-  if (!el || !target) return;
-
-  const duration = 900;
-  const start = performance.now();
-
-  function tick(now) {
-    const elapsed = Math.min(1, (now - start) / duration);
-    const eased = 1 - Math.pow(1 - elapsed, 3);
-    el.textContent = (target * eased).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-    if (elapsed < 1) requestAnimationFrame(tick);
-  }
-
-  requestAnimationFrame(tick);
+  viewer.innerHTML = "";
+  viewer.appendChild(buildInteractiveProposal(ctx, pdfRoot));
 }
 
 function collectProposalContext(data) {
@@ -45,6 +30,12 @@ function collectProposalContext(data) {
   const service = getSelectedService();
   const client = appState.client;
   const commercial = appState.commercial;
+  const createdAt = new Date();
+  const dateKey = [
+    createdAt.getFullYear(),
+    String(createdAt.getMonth() + 1).padStart(2, "0"),
+    String(createdAt.getDate()).padStart(2, "0"),
+  ].join("");
 
   return {
     company,
@@ -53,196 +44,239 @@ function collectProposalContext(data) {
     commercial,
     groupBrand: data.config.groupBrand,
     edneyAssets: data.config.edneyInstitutionalAssets,
-    allBrandLogos: data.companies.map((c) => ({ id: c.id, name: c.name, logo: c.logo })),
+    allBrandLogos: data.companies.map((item) => ({
+      id: item.id,
+      name: item.name,
+      logo: item.logo,
+    })),
+    createdAt,
+    proposalDate: createdAt.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }),
+    proposalCode: `GPV-${String(company.id).toUpperCase().replace(/[^A-Z0-9]+/g, "-")}-${dateKey}`,
   };
 }
 
-/* ---------------------------- PROPOSTA INTERATIVA ---------------------------- */
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
-function buildInteractiveProposal(ctx) {
+function displayText(value, fallback = "-") {
+  const text = String(value ?? "").trim();
+  return escapeHtml(text || fallback);
+}
+
+function imageMarkup(src, alt, className = "") {
+  if (!src) return "";
+  return `<img class="${className}" src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" />`;
+}
+
+function hexToRgba(hex, alpha) {
+  const normalized = String(hex || "").replace("#", "");
+  if (!/^[0-9a-f]{6}$/i.test(normalized)) return `rgba(91, 191, 200, ${alpha})`;
+  const value = Number.parseInt(normalized, 16);
+  const red = (value >> 16) & 255;
+  const green = (value >> 8) & 255;
+  const blue = value & 255;
+  return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+}
+
+/* ------------------------- PREVIA INTERATIVA DO PDF ------------------------- */
+
+function buildInteractiveProposal(ctx, pdfRoot) {
   const wrapper = document.createElement("div");
-  wrapper.className = "stagger";
+  wrapper.className = "proposal-preview";
 
-  wrapper.appendChild(section(
-    "Capa",
-    `<div class="form-card animate-scale-in" style="text-align:center;">
-      <div style="display:flex;justify-content:center;gap:40px;align-items:center;margin-bottom:22px;">
-        <img class="logo-chip" src="${ctx.company.logo}" alt="${ctx.company.name}" style="height:72px;" />
-        ${ctx.client.logoPreviewUrl ? `<img class="logo-chip" src="${ctx.client.logoPreviewUrl}" alt="${ctx.client.name}" style="height:72px;" />` : ""}
+  const pages = Array.from(pdfRoot.querySelectorAll(".pdf-page"));
+  wrapper.innerHTML = `
+    <div class="proposal-preview__intro">
+      <div class="proposal-preview__intro-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <path d="M14 2v6h6M8 13h8M8 17h6" />
+        </svg>
       </div>
-      <h2 style="font-size:2.4rem;font-weight:800;letter-spacing:-0.01em;">Proposta Comercial</h2>
-      <p style="color:var(--color-muted);margin-top:10px;font-size:1.15rem;">${ctx.client.name}</p>
-    </div>`
-  ));
-
-  wrapper.appendChild(section(
-    "Edney Ulisses — Institucional",
-    `<div class="form-card">
-      <p style="font-size:1.08rem;line-height:1.65;">Edney Ulisses é fundador e especialista à frente das soluções do Grupo GPV, referência em aceleração comercial no mercado brasileiro.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:28px;margin-top:22px;align-items:center;">
-        ${ctx.allBrandLogos.map((b) => `<img class="logo-chip" src="${b.logo}" alt="${b.name}" style="height:42px;" />`).join("")}
+      <div>
+        <span class="proposal-preview__kicker">Documento executivo pronto</span>
+        <h2>Prévia exata da proposta</h2>
+        <p>${pages.length} páginas diagramadas para ${displayText(ctx.client.name)} com a identidade visual da ${displayText(ctx.company.name)}.</p>
       </div>
-    </div>`
-  ));
+      <div class="proposal-preview__status"><span></span> Pronto para exportar</div>
+    </div>
+    <div class="proposal-preview__stack" aria-label="Páginas da proposta"></div>
+  `;
 
-  wrapper.appendChild(section(
-    "Edney Ulisses — Formação e Experiência",
-    `<div class="form-card">
-      <p style="font-size:1.08rem;line-height:1.65;">Trajetória consolidada em treinamento, consultoria e desenvolvimento comercial para equipes de alta performance, com atuação direta na aceleração de resultados das marcas do Grupo GPV.</p>
-    </div>`
-  ));
+  const stack = wrapper.querySelector(".proposal-preview__stack");
+  pages.forEach((page, index) => {
+    const sheet = document.createElement("section");
+    sheet.className = "proposal-preview__sheet";
+    sheet.setAttribute("aria-label", `Página ${index + 1} de ${pages.length}`);
+    sheet.innerHTML = `
+      <div class="proposal-preview__sheet-heading">
+        <span>Página ${String(index + 1).padStart(2, "0")}</span>
+        <span>${displayText(page.dataset.section, "Proposta")}</span>
+      </div>
+      <div class="proposal-preview__stage"><div class="proposal-preview__canvas"></div></div>
+    `;
+    sheet.querySelector(".proposal-preview__canvas").appendChild(page.cloneNode(true));
+    stack.appendChild(sheet);
+  });
 
-  wrapper.appendChild(section("Proposta e Escopo", buildScopeHtml(ctx.service)));
-
-  wrapper.appendChild(section(
-    "Investimento e Condições",
-    `<div class="form-card">
-      <div id="investment-value-counter" class="investment-value">R$ 0,00</div>
-      ${ctx.commercial.notes ? `<p style="margin-top:16px;font-size:1.05rem;">${ctx.commercial.notes}</p>` : ""}
-      ${ctx.commercial.deliveryDeadline ? row("Prazo de entrega", ctx.commercial.deliveryDeadline) : ""}
-      ${row("Validade da proposta", ctx.commercial.proposalValidity)}
-    </div>`
-  ));
-
-  wrapper.appendChild(section(
-    "Encerramento",
-    `<div class="form-card">
-      ${row("Validade da proposta", ctx.commercial.proposalValidity)}
-      ${row("Emissor", ctx.commercial.issuer.name)}
-      ${row("Função", ctx.commercial.issuer.role)}
-      ${row("Telefone", ctx.commercial.issuer.phone)}
-      ${row("E-mail", ctx.commercial.issuer.email)}
-      <img class="logo-chip" src="${ctx.company.logo}" alt="${ctx.company.name}" style="height:52px;margin-top:20px;" />
-    </div>`
-  ));
-
+  requestAnimationFrame(() => setupPreviewScaling(wrapper));
   return wrapper;
 }
 
-function section(title, innerHtml) {
-  const el = document.createElement("section");
-  el.innerHTML = `<h3 style="font-size:1.02rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-accent);margin-bottom:16px;">${title}</h3>${innerHtml}`;
-  return el;
-}
+function setupPreviewScaling(root) {
+  if (previewObserver) previewObserver.disconnect();
 
-function row(label, value) {
-  return `<div class="review-row"><span class="review-row__label">${label}</span><span class="review-row__value">${value || "—"}</span></div>`;
-}
+  const resize = () => {
+    root.querySelectorAll(".proposal-preview__stage").forEach((stage) => {
+      const canvas = stage.querySelector(".proposal-preview__canvas");
+      const availableWidth = Math.max(280, stage.clientWidth);
+      const scale = Math.min(1, availableWidth / PDF_PAGE_WIDTH);
 
-function buildScopeHtml(service) {
-  if (!service) return `<div class="form-card">Nenhum serviço selecionado.</div>`;
+      canvas.style.width = `${PDF_PAGE_WIDTH}px`;
+      canvas.style.height = `${PDF_PAGE_HEIGHT}px`;
+      canvas.style.transform = `scale(${scale})`;
+      stage.style.height = `${Math.round(PDF_PAGE_HEIGHT * scale)}px`;
+    });
+  };
 
-  let html = `<div class="form-card"><h4 style="margin-bottom:8px;">${service.selectionLabel}</h4>`;
-  if (service.description) html += `<p style="color:var(--color-muted);margin-bottom:12px;">${service.description}</p>`;
-
-  if (service.offeredServices?.length) {
-    html += listBlock(service.offeredServicesTitle, service.offeredServices);
+  resize();
+  if (typeof ResizeObserver === "function") {
+    previewObserver = new ResizeObserver(resize);
+    previewObserver.observe(root);
   }
-  if (service.eventConditions?.length) {
-    html += listBlock(service.eventConditionsTitle, service.eventConditions);
-  }
-  if (service.customServices?.enabled) {
-    html += listBlock(service.customServices.fieldLabel, [appState.services.customServicesText]);
-  }
-  html += "</div>";
-  return html;
 }
 
-function listBlock(title, items) {
-  return `
-    <div class="service-detail-section">
-      <h4>${title || "Detalhes"}</h4>
-      <ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul>
-    </div>`;
-}
-
-/* ---------------------------- TEMPLATE DEDICADO DO PDF ---------------------------- */
-
-const PDF_SECTIONS = [
-  "Capa",
-  "Grupo GPV",
-  "Formação",
-  "Proposta",
-  "Investimento",
-  "Encerramento",
-];
+/* --------------------------- TEMPLATE EXECUTIVO PDF --------------------------- */
 
 const EDNEY_ICONS = [
   {
     label: "Tecnologia",
+    description: "Estratégia conectada à execução.",
     svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>',
   },
   {
     label: "Inteligência Artificial",
+    description: "Automação aplicada à performance.",
     svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l1.8 5.3 5.3 1.8-5.3 1.8L12 16.7l-1.8-5.3-5.3-1.8 5.3-1.8L12 2.5z"/><path d="M19 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z"/></svg>',
   },
   {
     label: "Vendas",
+    description: "Método orientado à conversão.",
     svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
   },
   {
     label: "Crescimento",
-    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V11"/><path d="M10 20V4"/><path d="M16 20v-8"/><path d="M22 20v-5"/></svg>',
+    description: "Decisões guiadas por resultado.",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V11M10 20V4M16 20v-8M22 20v-5"/></svg>',
   },
 ];
 
 const EDNEY_BIO = [
   "Formado em Marketing.",
-  "Especialista em Marketing e Vendas no setor automotivo, com mais de 20 anos de experiência no mercado.",
-  "Criador do Departamento de Vendas Web e House de Marketing e Eventos da Automob, gerenciando 17 marcas e mais de 70 concessionárias.",
-  "Foi peça-chave em uma das startups pioneiras que revolucionaram o mercado de compra e venda de veículos no Brasil, com crescimento de 25% nas vendas ao mês e conversão de 70% de leads em oportunidades concretas.",
-  "Fundador do projeto que transforma eventos em experiências de alto impacto.",
+  "Especialista em Marketing e Vendas no setor automotivo, com mais de 20 anos de experiência.",
+  "Criador do Departamento de Vendas Web e da House de Marketing e Eventos da Automob, com atuação em 17 marcas e mais de 70 concessionárias.",
+  "Participação decisiva em uma das startups pioneiras do mercado de compra e venda de veículos no Brasil.",
+  "Fundador de projetos que transformam eventos e operações comerciais em experiências de alto impacto.",
 ];
 
-function buildPdfTemplate(ctx) {
-  const fragment = document.createDocumentFragment();
+function getPdfVariables(ctx) {
   const theme = ctx.company.theme;
-  const pdfVars = `--pdf-bg:${theme.backgroundColor};--pdf-text:${theme.textColor};--pdf-accent:${theme.accentColor};--pdf-muted:${getMutedTextColor(theme)};`;
-  const motifUrl = getMotifPath(ctx.company.id);
-  const base = { ctx, vars: pdfVars, motifUrl, total: PDF_SECTIONS.length };
+  return [
+    `--pdf-bg:${theme.backgroundColor}`,
+    `--pdf-text:${theme.textColor}`,
+    `--pdf-accent:${theme.accentColor}`,
+    `--pdf-primary:${theme.primaryColor}`,
+    `--pdf-secondary:${theme.secondaryColor}`,
+    `--pdf-muted:${getMutedTextColor(theme)}`,
+    `--pdf-on-accent:${getOnAccentColor(theme)}`,
+    `--pdf-accent-soft:${hexToRgba(theme.accentColor, 0.14)}`,
+    `--pdf-accent-faint:${hexToRgba(theme.accentColor, 0.07)}`,
+  ].join(";");
+}
 
-  fragment.appendChild(pdfCover({ ...base, num: 1 }));
-  fragment.appendChild(pdfEdneyOne({ ...base, num: 2 }));
-  fragment.appendChild(pdfEdneyTwo({ ...base, num: 3 }));
-  fragment.appendChild(pdfScope({ ...base, num: 4 }));
-  fragment.appendChild(pdfInvestment({ ...base, num: 5 }));
-  fragment.appendChild(pdfClosing({ ...base, num: 6 }));
+export function buildPdfTemplate(ctx) {
+  const fragment = document.createDocumentFragment();
+  const scopeCards = buildScopeCards(ctx.service);
+  const scopePages = chunkArray(scopeCards, 2);
+  const definitions = [
+    { label: "Capa", render: pdfCover },
+    { label: "Visão executiva", render: pdfExecutiveSummary },
+    { label: "Grupo GPV", render: pdfEdneyOne },
+    { label: "Experiência", render: pdfEdneyTwo },
+    ...scopePages.map((cards, index) => ({
+      label: scopePages.length > 1 ? `Escopo ${index + 1}/${scopePages.length}` : "Escopo",
+      render: (base) => pdfScopePage({ ...base, cards, scopeIndex: index, scopeTotal: scopePages.length }),
+    })),
+    { label: "Condições comerciais", render: pdfInvestment },
+    { label: "Próximos passos", render: pdfClosing },
+  ];
+
+  const base = {
+    ctx,
+    vars: getPdfVariables(ctx),
+    motifUrl: getMotifPath(ctx.company.id),
+    total: definitions.length,
+  };
+
+  definitions.forEach((definition, index) => {
+    fragment.appendChild(definition.render({
+      ...base,
+      num: index + 1,
+      sectionLabel: definition.label,
+    }));
+  });
 
   return fragment;
 }
 
-// Toda página compartilha o mesmo "chrome" (selo de marca + rótulo de seção no topo,
-// rodapé com cliente e numeração) — dá sensação de deck executivo coeso, como um
-// material de apresentação internacional, em vez de páginas soltas.
-function pdfPage({ className = "", vars, motifUrl, ctx, num, total, chrome = true, bodyHtml }) {
-  const div = document.createElement("div");
-  div.className = "pdf-page";
-  div.style.cssText = motifUrl
-    ? `${vars}background-image:linear-gradient(rgba(6,7,9,0.86),rgba(6,7,9,0.86)),url("${motifUrl}");`
-    : vars;
+function pdfPage({ className = "", vars, motifUrl, ctx, num, total, sectionLabel, chrome = true, bodyHtml }) {
+  const page = document.createElement("div");
+  page.className = "pdf-page";
+  page.dataset.section = sectionLabel;
+  page.style.cssText = vars;
+  if (motifUrl) {
+    page.style.backgroundImage = `linear-gradient(rgba(5, 7, 9, 0.90), rgba(5, 7, 9, 0.90)), url("${motifUrl}")`;
+  }
 
   const topmark = chrome
     ? `<div class="pdf-topmark">
-        <img class="pdf-topmark__logo" src="${ctx.company.logo}" alt="${ctx.company.name}" />
-        <span class="pdf-topmark__label">${String(num).padStart(2, "0")} — ${PDF_SECTIONS[num - 1]}</span>
+        <div class="pdf-topmark__brand">
+          ${imageMarkup(ctx.company.logo, ctx.company.name, "pdf-topmark__logo")}
+          <span class="pdf-topmark__rule"></span>
+          <span class="pdf-topmark__client">${displayText(ctx.client.name)}</span>
+        </div>
+        <span class="pdf-topmark__label">${String(num).padStart(2, "0")} &nbsp; ${displayText(sectionLabel)}</span>
       </div>`
     : "";
 
   const footer = chrome
     ? `<div class="pdf-footer">
-        <span>Proposta Comercial &middot; <strong>${ctx.client.name}</strong></span>
+        <span><strong>${displayText(ctx.proposalCode)}</strong> &nbsp; Documento confidencial</span>
         <span>${String(num).padStart(2, "0")} / ${String(total).padStart(2, "0")}</span>
       </div>`
     : "";
 
-  const watermark = chrome ? `<div class="pdf-page__watermark">${String(num).padStart(2, "0")}</div>` : "";
-  const spine = chrome ? `<div class="pdf-page__spine"></div>` : "";
-
-  div.innerHTML = `${watermark}${spine}${topmark}<div class="pdf-page__body ${className}">${bodyHtml}</div>${footer}`;
-  return div;
+  page.innerHTML = `
+    <div class="pdf-page__brandbar"><span></span><span></span><span></span></div>
+    ${chrome ? `<div class="pdf-page__watermark">${String(num).padStart(2, "0")}</div>` : ""}
+    ${topmark}
+    <div class="pdf-page__body ${className}">${bodyHtml}</div>
+    ${footer}
+  `;
+  return page;
 }
 
-function pdfCover({ ctx, vars, motifUrl, num, total }) {
+function pdfCover({ ctx, vars, motifUrl, num, total, sectionLabel }) {
   return pdfPage({
     className: "pdf-cover",
     vars,
@@ -250,29 +284,95 @@ function pdfCover({ ctx, vars, motifUrl, num, total }) {
     ctx,
     num,
     total,
+    sectionLabel,
     chrome: false,
     bodyHtml: `
-      <div class="pdf-cover__ring"></div>
-      <div class="pdf-cover__ring pdf-cover__ring--inner"></div>
-      <div class="pdf-cover__bracket pdf-cover__bracket--tl"></div>
-      <div class="pdf-cover__bracket pdf-cover__bracket--br"></div>
-      <div class="pdf-cover__dotgrid">${"<span></span>".repeat(10)}</div>
-      <div class="pdf-cover__dotgrid pdf-cover__dotgrid--left">${"<span></span>".repeat(10)}</div>
-      <div class="pdf-cover__eyebrow">Grupo GPV apresenta</div>
-      <div class="pdf-cover__logos">
-        <div class="pdf-cover__logo-circle pdf-cover__logo-circle--brand">
-          <img src="${ctx.company.logo}" alt="${ctx.company.name}" />
-        </div>
-        ${ctx.client.logoPreviewUrl ? `<div class="pdf-cover__divider"></div><div class="pdf-cover__logo-circle pdf-cover__logo-circle--client"><img src="${ctx.client.logoPreviewUrl}" alt="${ctx.client.name}" /></div>` : ""}
+      <div class="pdf-cover__frame"></div>
+      <div class="pdf-cover__grid"></div>
+      <div class="pdf-cover__header">
+        ${imageMarkup(ctx.groupBrand.logo, ctx.groupBrand.name, "pdf-cover__group-logo")}
+        <span>Documento executivo &nbsp; ${displayText(ctx.proposalCode)}</span>
       </div>
-      <div class="pdf-cover__title">Proposta Comercial</div>
-      <div class="pdf-cover__client">${ctx.client.name}</div>
-      <div class="pdf-cover__accent"></div>
+      <div class="pdf-cover__content">
+        <div class="pdf-cover__eyebrow">Proposta comercial personalizada</div>
+        <h1 class="pdf-cover__title">Estratégia que se<br />transforma em resultado.</h1>
+        <p class="pdf-cover__client">Preparada para <strong>${displayText(ctx.client.name)}</strong></p>
+        <div class="pdf-cover__logos">
+          <div class="pdf-cover__logo-card pdf-cover__logo-card--brand">
+            <span>Proponente</span>
+            ${imageMarkup(ctx.company.logo, ctx.company.name)}
+          </div>
+          <div class="pdf-cover__connector"><span></span><i></i><span></span></div>
+          <div class="pdf-cover__logo-card pdf-cover__logo-card--client">
+            <span>Cliente</span>
+            ${ctx.client.logoPreviewUrl
+              ? imageMarkup(ctx.client.logoPreviewUrl, ctx.client.name)
+              : `<strong>${displayText(ctx.client.name)}</strong>`}
+          </div>
+        </div>
+      </div>
+      <div class="pdf-cover__meta">
+        <div><span>Emissão</span><strong>${displayText(ctx.proposalDate)}</strong></div>
+        <div><span>Solução</span><strong>${displayText(ctx.service?.selectionLabel, "Proposta personalizada")}</strong></div>
+        <div><span>Páginas</span><strong>${String(total).padStart(2, "0")}</strong></div>
+      </div>
     `,
   });
 }
 
-function pdfEdneyOne({ ctx, vars, motifUrl, num, total }) {
+function pdfExecutiveSummary({ ctx, vars, motifUrl, num, total, sectionLabel }) {
+  const objective = ctx.service?.objective || ctx.company.positioning || ctx.service?.description;
+  const facts = [
+    ["Solução", ctx.service?.selectionLabel || "Proposta personalizada"],
+    ["Investimento", ctx.commercial.proposalValue.formatted],
+    ["Validade", ctx.commercial.proposalValidity],
+  ];
+  if (ctx.commercial.deliveryDeadline) facts.push(["Prazo", ctx.commercial.deliveryDeadline]);
+
+  return pdfPage({
+    className: "pdf-summary",
+    vars,
+    motifUrl,
+    ctx,
+    num,
+    total,
+    sectionLabel,
+    bodyHtml: `
+      <div class="pdf-page__eyebrow">Visão executiva</div>
+      <h2 class="pdf-page__title">Uma proposta construída para avançar.</h2>
+      <p class="pdf-page__subtitle">Clareza sobre o objetivo, o escopo e as condições para uma decisão segura.</p>
+      <div class="pdf-summary__layout">
+        <div class="pdf-summary__objective">
+          <span class="pdf-summary__label">Objetivo central</span>
+          <p>${displayText(objective, "Desenvolver uma solução comercial alinhada aos objetivos do cliente.")}</p>
+          <div class="pdf-summary__signature">
+            <span></span>
+            <small>${displayText(ctx.company.positioning)}</small>
+          </div>
+        </div>
+        <div class="pdf-summary__client-card">
+          <span class="pdf-summary__label">Preparado especialmente para</span>
+          <div class="pdf-summary__client-logo">
+            ${ctx.client.logoPreviewUrl
+              ? imageMarkup(ctx.client.logoPreviewUrl, ctx.client.name)
+              : `<strong>${displayText(ctx.client.name)}</strong>`}
+          </div>
+          <strong>${displayText(ctx.client.name)}</strong>
+          <small>${displayText(ctx.client.email)}<br />${displayText(ctx.client.phone)}</small>
+        </div>
+      </div>
+      <div class="pdf-summary__facts">
+        ${facts.map(([label, value], index) => `
+          <div class="pdf-summary__fact ${index === 0 ? "pdf-summary__fact--wide" : ""}">
+            <span>${displayText(label)}</span>
+            <strong>${displayText(value)}</strong>
+          </div>`).join("")}
+      </div>
+    `,
+  });
+}
+
+function pdfEdneyOne({ ctx, vars, motifUrl, num, total, sectionLabel }) {
   return pdfPage({
     className: "pdf-edney",
     vars,
@@ -280,138 +380,198 @@ function pdfEdneyOne({ ctx, vars, motifUrl, num, total }) {
     ctx,
     num,
     total,
+    sectionLabel,
     bodyHtml: `
-      <div class="pdf-edney__photo-wrap">
-        <div class="pdf-edney__accent-circle"></div>
-        <div class="pdf-edney__photo" style="background-image:url('${ctx.edneyAssets.photoOne}')"></div>
-        <div class="pdf-edney__dots"><span></span><span></span><span></span></div>
+      <div class="pdf-edney__visual">
+        <div class="pdf-edney__photo" style="background-image:url('${escapeHtml(ctx.edneyAssets.photoOne)}')"></div>
+        <div class="pdf-edney__experience"><strong>20+</strong><span>anos de experiência</span></div>
       </div>
       <div class="pdf-edney__content">
-        <div class="pdf-page__eyebrow">Grupo GPV</div>
-        <div class="pdf-page__title">Edney Ulisses</div>
-        <div class="pdf-divider"></div>
+        <div class="pdf-page__eyebrow">Liderança e visão comercial</div>
+        <h2 class="pdf-page__title">Edney Ulisses</h2>
+        <p class="pdf-page__subtitle">Experiência de mercado conectada à criação de soluções que aproximam estratégia, operação e vendas.</p>
         <ul class="pdf-edney__bio-list">
-          ${EDNEY_BIO.map((item) => `<li><span>${item}</span></li>`).join("")}
+          ${EDNEY_BIO.map((item) => `<li><span>${displayText(item)}</span></li>`).join("")}
         </ul>
-        <div class="pdf-edney__brands pdf-edney__brands--compact">
-          ${ctx.allBrandLogos.map((b) => `<img src="${b.logo}" alt="${b.name}" />`).join("")}
+        <div class="pdf-edney__brands">
+          ${ctx.allBrandLogos.map((brand) => imageMarkup(brand.logo, brand.name)).join("")}
         </div>
       </div>
     `,
   });
 }
 
-function pdfEdneyTwo({ ctx, vars, motifUrl, num, total }) {
+function pdfEdneyTwo({ ctx, vars, motifUrl, num, total, sectionLabel }) {
   return pdfPage({
-    className: "pdf-edney",
+    className: "pdf-edney pdf-edney--expertise",
     vars,
     motifUrl,
     ctx,
     num,
     total,
+    sectionLabel,
     bodyHtml: `
-      <div class="pdf-edney__photo-wrap">
-        <div class="pdf-edney__accent-circle"></div>
-        <div class="pdf-edney__photo" style="background-image:url('${ctx.edneyAssets.photoTwo}')"></div>
-        <div class="pdf-edney__dots"><span></span><span></span><span></span></div>
+      <div class="pdf-edney__visual">
+        <div class="pdf-edney__photo" style="background-image:url('${escapeHtml(ctx.edneyAssets.photoTwo)}')"></div>
+        <div class="pdf-edney__visual-caption">Estratégia. Método. Execução.</div>
       </div>
       <div class="pdf-edney__content">
-        <div class="pdf-page__eyebrow">Formação e Experiência</div>
-        <div class="pdf-page__title">Autoridade Comercial</div>
-        <div class="pdf-divider"></div>
-        <p class="pdf-edney__text">Trajetória consolidada em treinamento, consultoria e desenvolvimento comercial para equipes de alta performance, com atuação direta na aceleração de resultados das marcas do Grupo GPV.</p>
+        <div class="pdf-page__eyebrow">Formação e experiência</div>
+        <h2 class="pdf-page__title">Autoridade que gera movimento.</h2>
+        <p class="pdf-edney__lead">Trajetória consolidada em treinamento, consultoria e desenvolvimento comercial para equipes de alta performance.</p>
         <div class="pdf-edney__icons">
-          ${EDNEY_ICONS.map((i) => `<div class="pdf-edney__icon-item"><span class="pdf-edney__icon-badge">${i.svg}</span><span class="pdf-edney__icon-label">${i.label}</span></div>`).join("")}
+          ${EDNEY_ICONS.map((item) => `
+            <div class="pdf-edney__icon-item">
+              <span class="pdf-edney__icon-badge">${item.svg}</span>
+              <span><strong>${displayText(item.label)}</strong><small>${displayText(item.description)}</small></span>
+            </div>`).join("")}
         </div>
       </div>
     `,
   });
 }
 
-function pdfScope({ ctx, vars, motifUrl, num, total }) {
-  const service = ctx.service;
+function getScopeSections(service) {
+  if (!service) return [];
   const sections = [];
-  if (service?.offeredServices?.length) sections.push([service.offeredServicesTitle, service.offeredServices]);
-  if (service?.eventConditions?.length) sections.push([service.eventConditionsTitle, service.eventConditions]);
-  if (service?.differentials?.length) sections.push(["Diferenciais", service.differentials]);
-  if (service?.premises?.length) sections.push(["Premissas", service.premises]);
-  if (service?.customServices?.enabled) sections.push([service.customServices.fieldLabel, [appState.services.customServicesText]]);
-
-  // Quatro níveis de densidade evitam que conteúdo extenso (ex.: Grand Prix, com
-  // ~36 itens somados entre todas as seções) seja cortado pela altura fixa da página:
-  // uma coluna quando cabe folgado, duas quando há conteúdo médio, três + tipografia
-  // compacta quando o total é grande, e um nível "ultra" ainda mais compacto — com
-  // quebra de coluna liberada dentro das seções — para os casos mais extremos.
-  const totalItems = sections.reduce((sum, [, items]) => sum + items.length, 0);
-  let densityClass = "";
-  let pageClass = "";
-  if (totalItems >= 24) {
-    densityClass = " pdf-scope__columns--dense pdf-scope__columns--ultra";
-    pageClass = "pdf-scope--dense pdf-scope--ultra";
-  } else if (totalItems >= 14) {
-    densityClass = " pdf-scope__columns--dense";
-    pageClass = "pdf-scope--dense";
-  } else if (totalItems >= 6) {
-    densityClass = " pdf-scope__columns--split";
+  if (service.offeredServices?.length) sections.push([service.offeredServicesTitle || "Serviços oferecidos", service.offeredServices]);
+  if (service.eventConditions?.length) sections.push([service.eventConditionsTitle || "Condições", service.eventConditions]);
+  if (service.differentials?.length) sections.push(["Diferenciais", service.differentials]);
+  if (service.premises?.length) sections.push(["Premissas", service.premises]);
+  if (service.customServices?.enabled) {
+    const customItems = String(appState.services.customServicesText || "")
+      .split(/\r?\n/)
+      .map((item) => item.replace(/^[-*•]\s*/, "").trim())
+      .filter(Boolean);
+    sections.push([service.customServices.fieldLabel || "Escopo personalizado", customItems.length ? customItems : ["Escopo personalizado conforme alinhamento comercial."]]);
   }
+  return sections;
+}
 
+function estimateScopeUnits(value) {
+  return Math.max(1, Math.ceil(String(value || "").length / 74));
+}
+
+function buildScopeCards(service) {
+  const cards = [];
+  getScopeSections(service).forEach(([title, items], sectionIndex) => {
+    let cardItems = [];
+    let units = 0;
+    let part = 1;
+
+    items.forEach((item) => {
+      const itemUnits = estimateScopeUnits(item);
+      if (cardItems.length && units + itemUnits > SCOPE_CARD_MAX_UNITS) {
+        cards.push({ title, items: cardItems, sectionIndex, part });
+        cardItems = [];
+        units = 0;
+        part += 1;
+      }
+      cardItems.push(item);
+      units += itemUnits;
+    });
+
+    if (cardItems.length) cards.push({ title, items: cardItems, sectionIndex, part });
+  });
+
+  if (!cards.length) {
+    cards.push({
+      title: "Escopo da proposta",
+      items: [service?.description || "Escopo personalizado conforme alinhamento comercial."],
+      sectionIndex: 0,
+      part: 1,
+    });
+  }
+  return cards;
+}
+
+function chunkArray(items, size) {
+  const chunks = [];
+  for (let index = 0; index < items.length; index += size) chunks.push(items.slice(index, index + size));
+  return chunks;
+}
+
+function pdfScopePage({ ctx, vars, motifUrl, num, total, sectionLabel, cards, scopeIndex, scopeTotal }) {
+  const service = ctx.service;
   return pdfPage({
-    className: pageClass,
+    className: "pdf-scope-page",
     vars,
     motifUrl,
     ctx,
     num,
     total,
+    sectionLabel,
     bodyHtml: `
-      <div class="pdf-page__eyebrow">${ctx.company.name}</div>
-      <div class="pdf-page__title">${service ? service.selectionLabel : "Proposta e Escopo"}</div>
-      ${service?.description ? `<div class="pdf-page__subtitle">${service.description}</div>` : ""}
-      <div class="pdf-divider"></div>
-      <div class="pdf-scope__columns${densityClass}">
-        ${sections.map(([title, items]) => pdfListSection(title, items)).join("")}
+      <div class="pdf-page__eyebrow">Escopo executivo ${scopeTotal > 1 ? `${scopeIndex + 1} de ${scopeTotal}` : ""}</div>
+      <h2 class="pdf-page__title">${displayText(service?.selectionLabel, "Proposta e escopo")}</h2>
+      <p class="pdf-page__subtitle">${scopeIndex === 0
+        ? displayText(service?.description, "Entregas organizadas para garantir clareza e alinhamento.")
+        : "Continuação das entregas e condições que compõem esta proposta."}</p>
+      <div class="pdf-scope__grid ${cards.length === 1 ? "pdf-scope__grid--single" : ""}">
+        ${cards.map((card, cardIndex) => `
+          <section class="pdf-scope__card">
+            <header>
+              <span>${String(scopeIndex * 2 + cardIndex + 1).padStart(2, "0")}</span>
+              <h3>${displayText(card.title)}${card.part > 1 ? " <small>continuação</small>" : ""}</h3>
+            </header>
+            <ul>${card.items.map((item) => `<li><span></span><p>${displayText(item)}</p></li>`).join("")}</ul>
+          </section>`).join("")}
       </div>
     `,
   });
 }
 
-function pdfListSection(title, items) {
-  return `
-    <div class="pdf-scope__section">
-      <h4>${title || "Detalhes"}</h4>
-      <ul class="pdf-scope__list">${items.map((i) => `<li>${i}</li>`).join("")}</ul>
-    </div>`;
-}
+function pdfInvestment({ ctx, vars, motifUrl, num, total, sectionLabel }) {
+  const commercial = ctx.commercial;
+  const conditions = [
+    ["Solução", ctx.service?.selectionLabel || "Proposta personalizada"],
+    ...(commercial.deliveryDeadline ? [["Prazo de entrega", commercial.deliveryDeadline]] : []),
+    ["Validade da proposta", commercial.proposalValidity],
+  ];
 
-function pdfInvestment({ ctx, vars, motifUrl, num, total }) {
-  const com = ctx.commercial;
   return pdfPage({
+    className: "pdf-investment",
     vars,
     motifUrl,
     ctx,
     num,
     total,
+    sectionLabel,
     bodyHtml: `
-      <div class="pdf-page__eyebrow">Investimento</div>
-      <div class="pdf-page__title">Condições Comerciais</div>
-      <div class="pdf-divider"></div>
-      <div class="pdf-investment">
+      <div class="pdf-page__eyebrow">Condições comerciais</div>
+      <h2 class="pdf-page__title">Investimento com clareza.</h2>
+      <p class="pdf-page__subtitle">Condições vinculadas ao escopo executivo apresentado neste documento.</p>
+      <div class="pdf-investment__layout">
         <div class="pdf-investment__hero">
-          <div class="pdf-investment__badge">Investimento total</div>
-          <div class="pdf-investment__value">${com.proposalValue.formatted}</div>
-          <div class="pdf-investment__value-label">para o escopo descrito nesta proposta</div>
+          <span>Investimento total</span>
+          <strong>${displayText(commercial.proposalValue.formatted)}</strong>
+          <small>para execução do escopo descrito</small>
         </div>
-        ${com.notes ? `<div class="pdf-investment__notes">${com.notes}</div>` : ""}
-        <div class="pdf-investment__stats">
-          ${com.deliveryDeadline ? `<div class="pdf-investment__stat"><div class="pdf-investment__stat-icon"></div><div class="pdf-investment__stat-label">Prazo de entrega</div><div class="pdf-investment__stat-value">${com.deliveryDeadline}</div></div>` : ""}
-          <div class="pdf-investment__stat"><div class="pdf-investment__stat-icon"></div><div class="pdf-investment__stat-label">Validade da proposta</div><div class="pdf-investment__stat-value">${com.proposalValidity}</div></div>
+        <div class="pdf-investment__conditions">
+          ${conditions.map(([label, value], index) => `
+            <div class="pdf-investment__condition">
+              <span>${String(index + 1).padStart(2, "0")}</span>
+              <div><small>${displayText(label)}</small><strong>${displayText(value)}</strong></div>
+            </div>`).join("")}
         </div>
       </div>
+      ${commercial.notes ? `
+        <div class="pdf-investment__notes">
+          <span>Observações comerciais</span>
+          <p>${displayText(commercial.notes)}</p>
+        </div>` : ""}
     `,
   });
 }
 
-function pdfClosing({ ctx, vars, motifUrl, num, total }) {
+function pdfClosing({ ctx, vars, motifUrl, num, total, sectionLabel }) {
   const issuer = ctx.commercial.issuer;
+  const steps = [
+    ["Aprovação", "Confirmação formal das condições apresentadas."],
+    ["Alinhamento", "Definição do cronograma e dos responsáveis."],
+    ["Início", "Ativação da operação conforme o escopo aprovado."],
+  ];
+
   return pdfPage({
     className: "pdf-closing",
     vars,
@@ -419,29 +579,45 @@ function pdfClosing({ ctx, vars, motifUrl, num, total }) {
     ctx,
     num,
     total,
+    sectionLabel,
     bodyHtml: `
-      <div class="pdf-closing__quote">&rdquo;</div>
-      <div class="pdf-page__eyebrow">Encerramento</div>
-      <div class="pdf-page__title">Vamos acelerar seus resultados</div>
-      <div class="pdf-divider"></div>
-      <div class="pdf-closing__thanks">Agradecemos a oportunidade de apresentar esta proposta. Seguimos à disposição para esclarecer qualquer detalhe.</div>
-      <div class="pdf-closing__signature-card">
-        <div class="pdf-closing__issuer">
-          <strong>${issuer.name}</strong>
-          <span class="pdf-closing__role">${issuer.role}</span>
-          <span class="pdf-closing__contact">${issuer.phone} &middot; ${issuer.email}</span>
+      <div class="pdf-closing__headline">
+        <div class="pdf-page__eyebrow">Próximos passos</div>
+        <h2 class="pdf-page__title">Vamos transformar esta proposta em resultado.</h2>
+        <p>Obrigado pela oportunidade de construir este próximo capítulo com ${displayText(ctx.client.name)}.</p>
+      </div>
+      <div class="pdf-closing__layout">
+        <div class="pdf-closing__steps">
+          ${steps.map(([title, description], index) => `
+            <div class="pdf-closing__step">
+              <span>${String(index + 1).padStart(2, "0")}</span>
+              <div><strong>${displayText(title)}</strong><p>${displayText(description)}</p></div>
+            </div>`).join("")}
+        </div>
+        <div class="pdf-closing__contact-card">
+          <span class="pdf-closing__contact-label">Contato responsável</span>
+          <strong>${displayText(issuer.name)}</strong>
+          <small>${displayText(issuer.role)}</small>
+          <div class="pdf-closing__contact-lines">
+            <span>${displayText(issuer.phone)}</span>
+            <span>${displayText(issuer.email)}</span>
+          </div>
+          <div class="pdf-closing__logos">
+            ${imageMarkup(ctx.company.logo, ctx.company.name)}
+            ${imageMarkup(ctx.groupBrand.logoPositiveReference || ctx.groupBrand.logo, ctx.groupBrand.name)}
+          </div>
         </div>
       </div>
     `,
   });
 }
 
-/* ---------------------------- EXPORTAÇÃO PDF ---------------------------- */
+/* ------------------------------- EXPORTACAO PDF ------------------------------- */
 
 function slugify(text) {
-  return String(text)
+  return String(text || "proposta")
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
@@ -450,47 +626,42 @@ function slugify(text) {
 
 function waitForImages(root) {
   const images = Array.from(root.querySelectorAll("img"));
-  return Promise.all(
-    images.map((img) => (img.complete ? Promise.resolve() : new Promise((resolve) => {
+  return Promise.all(images.map((img) => {
+    if (img.complete) return Promise.resolve();
+    return new Promise((resolve) => {
       img.addEventListener("load", resolve, { once: true });
       img.addEventListener("error", resolve, { once: true });
-    })))
-  );
+    });
+  }));
 }
 
-const PDF_PAGE_WIDTH = 1123;
-const PDF_PAGE_HEIGHT = 794;
-
-// Cada .pdf-page é capturada isoladamente e inserida como uma página própria do PDF.
-// Evita depender do plugin de paginação automática de bibliotecas de PDF-a-partir-de-HTML,
-// que se mostrou instável com este layout (canvas capturado com altura zerada).
 async function downloadPdf() {
   const company = appState.company;
-  const filename = `proposta-${slugify(company.id)}-${slugify(appState.client.name)}.pdf`;
+  const filename = `Proposta_Comercial_${slugify(company.id)}_${slugify(appState.client.name)}.pdf`;
   const pdfRoot = document.getElementById("pdf-template-root");
   const pageElements = Array.from(pdfRoot.querySelectorAll(".pdf-page"));
-
   const button = document.getElementById("download-pdf-btn");
-  button.disabled = true;
   const originalLabel = button.textContent;
+
+  button.disabled = true;
   button.textContent = "Gerando PDF...";
 
   try {
     await waitForImages(pdfRoot);
-
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({ unit: "px", format: [PDF_PAGE_WIDTH, PDF_PAGE_HEIGHT], orientation: "landscape" });
 
-    for (let i = 0; i < pageElements.length; i++) {
-      const canvas = await window.html2canvas(pageElements[i], {
+    for (let index = 0; index < pageElements.length; index += 1) {
+      const canvas = await window.html2canvas(pageElements[index], {
         scale: 2,
         useCORS: true,
+        backgroundColor: null,
         width: PDF_PAGE_WIDTH,
         height: PDF_PAGE_HEIGHT,
       });
-      const imgData = canvas.toDataURL("image/jpeg", 0.95);
-      if (i > 0) pdf.addPage([PDF_PAGE_WIDTH, PDF_PAGE_HEIGHT], "landscape");
-      pdf.addImage(imgData, "JPEG", 0, 0, PDF_PAGE_WIDTH, PDF_PAGE_HEIGHT);
+      const imageData = canvas.toDataURL("image/jpeg", 0.96);
+      if (index > 0) pdf.addPage([PDF_PAGE_WIDTH, PDF_PAGE_HEIGHT], "landscape");
+      pdf.addImage(imageData, "JPEG", 0, 0, PDF_PAGE_WIDTH, PDF_PAGE_HEIGHT);
     }
 
     pdf.save(filename);
