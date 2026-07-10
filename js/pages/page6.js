@@ -516,6 +516,18 @@ function pdfScopePage({ ctx, vars, motifUrl, num, total, sectionLabel, cards, sc
             </header>
             <ul>${card.items.map((item) => `<li><span></span><p>${displayText(item)}</p></li>`).join("")}</ul>
           </section>`).join("")}
+        ${cards.length === 1 ? `
+          <aside class="pdf-scope__aside">
+            <div>
+              <span class="pdf-scope__aside-label">Visão consolidada</span>
+              <h3>Escopo preparado para ${displayText(ctx.client.name)}</h3>
+              <p>${displayText(service?.objective || service?.description, "Entregas organizadas para uma execução clara, alinhada e orientada a resultados.")}</p>
+            </div>
+            <div class="pdf-scope__aside-meta">
+              <div><small>Itens nesta etapa</small><strong>${cards[0].items.length}</strong></div>
+              <div><small>Solução</small><strong>${displayText(service?.selectionLabel, "Personalizada")}</strong></div>
+            </div>
+          </aside>` : ""}
       </div>
     `,
   });
