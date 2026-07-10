@@ -45,7 +45,28 @@ function ensureFinalPolishStyles() {
       grid-template-columns: 292px minmax(0, 1fr) !important;
       gap: 46px !important;
     }
+    .pdf-edney__visual::before {
+      inset: 14px 0 0 14px !important;
+    }
     .pdf-edney__content .pdf-page__title { font-size: 30px !important; }
+    .pdf-edney__quote {
+      grid-template-columns: 6px minmax(0, 1fr) !important;
+      gap: 14px !important;
+      padding: 14px 16px !important;
+    }
+    .pdf-edney__quote span {
+      width: auto !important;
+      height: auto !important;
+      min-width: 0 !important;
+      border-radius: 999px !important;
+    }
+    .pdf-edney__quote p,
+    .pdf-edney__quote strong {
+      margin: 0 !important;
+      padding: 0 !important;
+      font-size: 11.6px !important;
+      line-height: 1.42 !important;
+    }
     .pdf-edney__bio-list {
       gap: 6px !important;
       margin-top: 14px !important;
@@ -263,18 +284,23 @@ function rebuildPreviewFromPdfRoot() {
   resizePreviewStages(preview);
 }
 
+function setTextIfChanged(element, value) {
+  if (element && element.textContent !== value) element.textContent = value;
+}
+
+function setHtmlIfChanged(element, value) {
+  if (element && element.innerHTML !== value) element.innerHTML = value;
+}
+
 function renumberPageSet(pages) {
   const total = pages.length;
   pages.forEach((page, index) => {
     const pageNumber = String(index + 1).padStart(2, "0");
     const totalNumber = String(total).padStart(2, "0");
     const label = page.dataset.section || "Proposta";
-    const topLabel = page.querySelector(".pdf-topmark__label");
-    if (topLabel) topLabel.innerHTML = `${pageNumber} &nbsp; ${label}`;
-    const footer = page.querySelector(".pdf-footer span:last-child");
-    if (footer) footer.textContent = `${pageNumber} / ${totalNumber}`;
-    const watermark = page.querySelector(".pdf-page__watermark");
-    if (watermark) watermark.textContent = pageNumber;
+    setHtmlIfChanged(page.querySelector(".pdf-topmark__label"), `${pageNumber} &nbsp; ${label}`);
+    setTextIfChanged(page.querySelector(".pdf-footer span:last-child"), `${pageNumber} / ${totalNumber}`);
+    setTextIfChanged(page.querySelector(".pdf-page__watermark"), pageNumber);
   });
 }
 
@@ -285,8 +311,7 @@ function renumberPdfPages(root = document) {
     const pages = Array.from(stack.querySelectorAll(".proposal-preview__canvas > .pdf-page"));
     renumberPageSet(pages);
     stack.querySelectorAll(".proposal-preview__sheet").forEach((sheet, index) => {
-      const heading = sheet.querySelector(".proposal-preview__sheet-heading span:first-child");
-      if (heading) heading.textContent = `Página ${String(index + 1).padStart(2, "0")}`;
+      setTextIfChanged(sheet.querySelector(".proposal-preview__sheet-heading span:first-child"), `Página ${String(index + 1).padStart(2, "0")}`);
     });
   });
 }
