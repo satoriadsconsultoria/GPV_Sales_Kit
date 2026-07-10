@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GPV Sales Kit - Prévia Premium PDF</title>
+  <style>
+    :root {
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      --executive-border: rgba(255, 255, 255, 0.14);
+      --color-text: #fff;
+      --color-muted: #b9bdc1;
+      --color-accent: #fa0115;
+      --color-on-accent: #fff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #0a0b0d; color: #fff; font-family: var(--font-family); }
+    img { display: block; max-width: 100%; }
+    h1, h2, h3, p, ul { margin: 0; padding: 0; }
+    ul { list-style: none; }
+    .preview-shell { width: min(calc(100% - 36px), 1220px); margin: 0 auto; padding: 34px 0 72px; }
+    .preview-top { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 22px; padding: 18px 0; background: rgba(10, 11, 13, 0.94); backdrop-filter: blur(18px); }
+    .preview-top h1 { font-size: clamp(1.35rem, 2.4vw, 2.1rem); }
+    .preview-top p { margin-top: 4px; color: #b9bdc1; font-size: 0.92rem; }
+    .preview-chip { min-width: max-content; padding: 9px 12px; border: 1px solid rgba(255,255,255,0.16); border-radius: 999px; background: rgba(255,255,255,0.06); color: #fff; font-size: 0.75rem; font-weight: 800; }
+    #pdf-template-root { position: absolute; left: -99999px; top: 0; width: 1123px; pointer-events: none; visibility: hidden; }
+    .proposal-preview__intro { display: grid; grid-template-columns: 58px minmax(0, 1fr) auto; align-items: center; gap: 18px; margin-bottom: 28px; padding: 22px 24px; border: 1px solid var(--executive-border); border-left: 5px solid var(--color-accent); border-radius: 8px; background: rgba(10, 12, 14, 0.84); box-shadow: 0 20px 50px rgba(0,0,0,0.28); }
+    .proposal-preview__intro-icon { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 7px; background: var(--color-accent); color: var(--color-on-accent); }
+    .proposal-preview__intro-icon svg { width: 25px; height: 25px; }
+    .proposal-preview__kicker { color: var(--color-accent); font-size: 0.7rem; font-weight: 850; letter-spacing: 0.12em; text-transform: uppercase; }
+    .proposal-preview__intro h2 { margin-top: 3px; font-size: 1.55rem; }
+    .proposal-preview__intro p { margin-top: 5px; color: #b9bdc1; font-size: 0.9rem; }
+    .proposal-preview__status { display: inline-flex; align-items: center; gap: 8px; padding: 8px 11px; border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; background: rgba(255,255,255,0.055); font-size: 0.72rem; font-weight: 750; white-space: nowrap; }
+    .proposal-preview__status span { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 0 4px rgba(255,255,255,0.06); }
+    .proposal-preview__stack { display: grid; gap: 28px; }
+    .proposal-preview__sheet { padding: 14px; border: 1px solid var(--executive-border); border-radius: 8px; background: rgba(255,255,255,0.035); box-shadow: 0 22px 60px rgba(0,0,0,0.34); }
+    .proposal-preview__sheet-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 2px 11px; color: #b9bdc1; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+    .proposal-preview__stage { position: relative; width: 100%; overflow: hidden; border-radius: 5px; background: #0d0f11; }
+    .proposal-preview__canvas { position: absolute; top: 0; left: 0; width: 1123px; height: 794px; transform-origin: top left; }
+  </style>
+  <link rel="stylesheet" href="css/pdf.css?v=1.2.0" />
+  <link rel="stylesheet" href="css/executive-final-polish.css?v=1.2.0" />
+</head>
+<body>
+  <div class="preview-shell">
+    <header class="preview-top">
+      <div>
+        <h1>GPV Sales Kit - Prévia premium do PDF</h1>
+        <p>Visualização das páginas que serão exportadas no PDF executivo.</p>
+      </div>
+      <span class="preview-chip">Versão 1.2.0</span>
+    </header>
+    <div class="proposal-preview">
+      <div class="proposal-preview__intro">
+        <div class="proposal-preview__intro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg></div>
+        <div><span class="proposal-preview__kicker">Documento executivo premium</span><h2>Prévia real do template PDF</h2><p id="preview-description">Páginas diagramadas com a identidade visual da marca selecionada.</p></div>
+        <div class="proposal-preview__status"><span></span> Pronto para revisar</div>
+      </div>
+      <div class="proposal-preview__stack" aria-label="Páginas da proposta"></div>
+    </div>
+  </div>
+  <div id="pdf-template-root" class="pdf-template" aria-hidden="true"></div>
+  <script type="module">
+    import { buildPdfTemplate } from './js/pages/page6.js?v=1.2.0';
+    import './js/executive-final-polish.js?v=1.2.0';
+    const host = './';
+    const ctx = {
+      company: { id: 'grand-prix', name: 'Grand Prix de Vendas', logo: host + 'assets/logos/grand-prix.png', positioning: 'Sistema proprietario de aceleracao comercial para o setor automotivo, baseado em metodologia, operacao, marketing, experiencia, dados e conversao.', theme: { primaryColor: '#FA0115', secondaryColor: '#A5A09C', accentColor: '#FA0115', textColor: '#FFFFFF', backgroundColor: '#17191b' } },
+      client: { name: 'Grupo Horizonte Automoveis', phone: '(11) 99999-0000', email: 'diretoria@horizonte.com.br', logoPreviewUrl: host + 'assets/logos/grupo-gpv-positivo.png' },
+      service: {
+        selectionLabel: 'Grand Prix de Vendas',
+        description: 'Evento fisico de aceleracao comercial para concessionarias, estruturado para aumento de fluxo de loja, geracao de oportunidades, atendimento e conversao de vendas.',
+        objective: 'Planejar, promover, operar e acompanhar um evento comercial presencial de alta performance, integrando marketing, inteligencia comercial, prospeccao, automacao, atendimento e controle operacional.',
+        offeredServicesTitle: 'Servicos oferecidos',
+        offeredServices: ['Planejamento de todo evento e distribuicao de equipe.', 'Criacao de todas as artes para divulgacao do evento, incluindo mais de 300 anuncios.', 'Roteiro, producao, gravacao e edicao de todos os videos.', 'Criacao de script para prospeccao e acompanhamento dos agendamentos dos vendedores.', 'Prospecao dos clientes captados pela campanha e da base do cliente.', 'Setup de automacao da IA de prospeccao e agendamento.', 'Agendamento por IA e ligacao.', 'Disparo de voz para clientes agendados.', 'Envio de QR Code individual e personalizado para cada cliente agendado.', 'Planejamento, estrategia e execucao das campanhas de performance e captacao dos leads.', 'Otimizacao diaria de todas as campanhas de performance.', 'Pit Stop com toda equipe sobre o evento, estrategia e motivacional.', 'Controle de fluxo de loja nos dias do evento.', 'Equipe de recepcao do evento.'],
+        eventConditionsTitle: 'Condicoes para realizacao do evento',
+        eventConditions: ['Espaco para evento e treinamento.', 'Espaco para equipe do GP de Vendas no showroom.', 'Base para prospeccao complementar.', 'Disparo de CRM via sistema interno da concessionaria.', 'Equipe de apoio de marketing da concessionaria.', 'Decoracao interna e externa da loja.', 'Fotos internas e externas da loja.', 'Verba de trafego pago a combinar, depositada com antecedencia para realizacao do evento.', 'Coffee break para clientes.', 'Recepcionistas para controle de fluxo.', 'Definicao de datas, horarios e atividades do evento.', 'Informacoes sobre produtos, promocoes, condicoes e descontos.', 'Telao de LED, palco, iluminacao interna, sonorizacao e operador.', 'Painel externo para identificacao do evento.'],
+        differentials: ['Metodologia proprietaria de aceleracao comercial automotiva.', 'Integracao entre marketing, comercial, IA, atendimento e operacao presencial.', 'Modelo orientado a dados, agendamentos, fluxo de loja e conversao.', 'Especializacao no mercado de concessionarias.'],
+        premises: ['Alinhamento previo com a concessionaria.', 'Disponibilizacao das informacoes comerciais necessarias.', 'Aprovacao das campanhas e materiais dentro do prazo.', 'Disponibilizacao da estrutura minima exigida para execucao do evento.']
+      },
+      commercial: { proposalValue: { raw: 59000, formatted: 'R$ 59.000,00' }, notes: 'O investimento contempla planejamento, operacao e acompanhamento previstos no escopo. Verba de midia e fornecedores externos serao alinhados separadamente.', deliveryDeadline: '30 dias', proposalValidity: '10 dias', issuer: { name: 'Rafael', role: 'Gerente Comercial', phone: '(11) 99999-0000', email: 'comercial@grupogpv.com.br' } },
+      groupBrand: { name: 'Grupo GPV', logo: host + 'assets/logos/grupo-gpv-negativo.png', logoPositiveReference: host + 'assets/logos/grupo-gpv-positivo.png' },
+      edneyAssets: { photoOne: host + 'assets/images/edney/edney-institucional-01.png', photoTwo: host + 'assets/images/edney/edney-institucional-02.png' },
+      allBrandLogos: [['grand-prix','Grand Prix de Vendas','grand-prix.png'],['champions','Champions Festival','champions-festival.png'],['veloce','VELOCE','veloce.png'],['conquista','Projeto Conquista','projeto-conquista.png'],['edney','Edney Ulisses','edney-ulisses.png']].map(([id, name, file]) => ({ id, name, logo: host + 'assets/logos/' + file })),
+      createdAt: new Date('2026-07-10T12:00:00-03:00'), proposalDate: '10 de julho de 2026', proposalCode: 'GPV-GRAND-PRIX-20260710'
+    };
+    const pdfRoot = document.getElementById('pdf-template-root');
+    const stack = document.querySelector('.proposal-preview__stack');
+    pdfRoot.appendChild(buildPdfTemplate(ctx));
+    const pages = Array.from(pdfRoot.querySelectorAll('.pdf-page'));
+    document.getElementById('preview-description').textContent = `${pages.length} páginas diagramadas para ${ctx.client.name} com a identidade visual da ${ctx.company.name}.`;
+    pages.forEach((page, index) => {
+      const sheet = document.createElement('section');
+      sheet.className = 'proposal-preview__sheet';
+      sheet.innerHTML = `<div class="proposal-preview__sheet-heading"><span>Página ${String(index + 1).padStart(2, '0')}</span><span>${page.dataset.section || 'Proposta'}</span></div><div class="proposal-preview__stage"><div class="proposal-preview__canvas"></div></div>`;
+      sheet.querySelector('.proposal-preview__canvas').appendChild(page.cloneNode(true));
+      stack.appendChild(sheet);
+    });
+    function resizeSheets() { document.querySelectorAll('.proposal-preview__stage').forEach((stage) => { const canvas = stage.querySelector('.proposal-preview__canvas'); const scale = Math.min(1, Math.max(280, stage.clientWidth) / 1123); canvas.style.transform = `scale(${scale})`; stage.style.height = `${Math.round(794 * scale)}px`; }); }
+    resizeSheets(); window.addEventListener('resize', resizeSheets); document.documentElement.dataset.ready = 'true';
+  </script>
+</body>
+</html>
