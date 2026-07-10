@@ -5,24 +5,27 @@
 }
 
 .pdf-cover__title {
-  width: 58%;
-  font-size: 52px;
+  width: 100%;
+  max-width: 590px;
+  font-size: 48px;
+  line-height: 1.04;
 }
 
 .pdf-cover__pillars {
-  width: 58%;
+  width: 100%;
+  max-width: 610px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 26px;
+  gap: 12px;
+  margin-top: 32px;
 }
 
 .pdf-cover__pillars div {
-  min-height: 98px;
+  min-height: 108px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 13px 14px;
+  padding: 15px 16px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-top: 3px solid var(--pdf-accent, #5bbfc8);
   border-radius: 7px;
@@ -110,7 +113,7 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 7px;
   background: rgba(255, 255, 255, 0.045);
-  color: var(--color-text);
+  color: var(--color-text, #fff);
   font-size: 0.72rem;
   font-weight: 780;
   cursor: pointer;
@@ -119,12 +122,12 @@
 
 .proposal-preview__nav button:hover {
   transform: translateY(-1px);
-  border-color: var(--color-accent);
+  border-color: var(--color-accent, #fa0115);
   background: rgba(255, 255, 255, 0.08);
 }
 
 .proposal-preview__nav span {
-  color: var(--color-accent);
+  color: var(--color-accent, #fa0115);
   font-weight: 900;
 }
 
@@ -132,4 +135,223 @@
   .proposal-preview__nav {
     top: 136px;
   }
+}
+
+/* Executive PDF layout refinement. */
+.pdf-page {
+  padding: 36px 64px 30px;
+}
+
+.pdf-page__body {
+  gap: 28px;
+  padding-top: 28px;
+}
+
+.pdf-page__title {
+  line-height: 1.04;
+}
+
+.pdf-page__subtitle,
+.pdf-page__lead {
+  max-width: 680px;
+  line-height: 1.58;
+}
+
+.pdf-cover {
+  padding: 48px 64px 42px;
+}
+
+.pdf-cover__header {
+  justify-content: flex-end;
+  min-height: 24px;
+  margin-bottom: 42px;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+}
+
+.pdf-cover__group-logo {
+  display: none !important;
+}
+
+.pdf-cover__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 430px;
+  align-items: start;
+  gap: 56px;
+  min-height: 408px;
+  padding-top: 8px;
+}
+
+.pdf-cover__copy {
+  min-width: 0;
+}
+
+.pdf-cover__title {
+  width: 100%;
+  max-width: 590px;
+  margin-top: 24px;
+  font-size: 48px;
+  line-height: 1.04;
+}
+
+.pdf-cover__client {
+  margin-top: 22px;
+}
+
+.pdf-cover__pillars {
+  width: 100%;
+  max-width: 610px;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.pdf-cover__pillars div {
+  min-height: 108px;
+  padding: 15px 16px;
+}
+
+.pdf-cover__logos {
+  position: static;
+  width: 100%;
+  display: grid;
+  gap: 18px;
+  align-self: start;
+  padding-top: 4px;
+}
+
+.pdf-cover__brand,
+.pdf-cover__client-logo {
+  min-height: 142px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border-radius: 9px;
+}
+
+.pdf-cover__brand img,
+.pdf-cover__client-logo img,
+.pdf-page img[class*="logo"],
+.pdf-edney__brand-card img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 96px;
+  object-fit: contain;
+}
+
+.pdf-cover__meta {
+  left: 64px;
+  right: 64px;
+  bottom: 34px;
+  padding-top: 20px;
+}
+
+.pdf-edney .pdf-page__body {
+  grid-template-columns: 342px minmax(0, 1fr);
+  align-items: start;
+  gap: 54px;
+}
+
+.pdf-edney__visual {
+  min-height: 492px;
+}
+
+.pdf-edney__content {
+  gap: 20px;
+  padding-top: 2px;
+}
+
+.pdf-edney__strategy-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 4px 0 8px;
+}
+
+.pdf-edney__strategy-strip div {
+  min-height: 68px;
+  padding: 12px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 3px solid var(--pdf-accent, #5bbfc8);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.pdf-edney__strategy-strip span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--pdf-accent, #5bbfc8);
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.pdf-edney__strategy-strip strong {
+  color: var(--pdf-text, #fff);
+  font-size: 10.5px;
+  line-height: 1.35;
+}
+
+.pdf-edney__quote {
+  display: grid;
+  grid-template-columns: 6px minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+  margin: 2px 0 8px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.pdf-edney__quote span {
+  border-radius: 99px;
+  background: var(--pdf-accent, #5bbfc8);
+}
+
+.pdf-edney__quote strong {
+  color: var(--pdf-text, #fff);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.pdf-edney__icons {
+  gap: 12px;
+}
+
+.pdf-edney__icons div {
+  min-height: 96px;
+  padding: 15px;
+}
+
+.pdf-edney__brand-card {
+  min-height: 122px;
+}
+
+.pdf-scope .pdf-page__body,
+.pdf-investment .pdf-page__body,
+.pdf-closing .pdf-page__body {
+  padding-top: 24px;
+}
+
+.pdf-scope__grid,
+.pdf-investment__grid,
+.pdf-closing__grid {
+  gap: 22px;
+}
+
+.pdf-scope__card,
+.pdf-investment__panel,
+.pdf-closing__contact {
+  padding: 24px;
+  border-radius: 9px;
+}
+
+.pdf-scope__card li,
+.pdf-investment__item,
+.pdf-closing__item {
+  margin-top: 13px;
+  line-height: 1.48;
 }
