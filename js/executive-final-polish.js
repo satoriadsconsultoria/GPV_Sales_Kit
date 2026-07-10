@@ -6,6 +6,12 @@ const COVER_PILLARS = [
 
 const INVESTMENT_INCLUDES = ["Planejamento", "Operação", "Acompanhamento"];
 
+const EDNEY_STRATEGY_ITEMS = [
+  ["Marketing", "posicionamento e demanda"],
+  ["Operação", "ritmo, equipe e método"],
+  ["Vendas", "conversão e resultado"],
+];
+
 function enhancePdfTemplate(root = document) {
   root.querySelectorAll(".pdf-cover").forEach((cover) => {
     if (cover.querySelector(".pdf-cover__pillars")) return;
@@ -27,6 +33,52 @@ function enhancePdfTemplate(root = document) {
     includes.innerHTML = INVESTMENT_INCLUDES.map((item) => `<div><span></span>${item}</div>`).join("");
     hero.appendChild(includes);
   });
+}
+
+function refineCoverLayout(root = document) {
+  root.querySelectorAll(".pdf-cover").forEach((cover) => {
+    cover.querySelector(".pdf-cover__group-logo")?.remove();
+
+    const content = cover.querySelector(".pdf-cover__content");
+    const logos = cover.querySelector(".pdf-cover__logos");
+    if (!content || !logos || content.querySelector(".pdf-cover__copy")) return;
+
+    const copy = document.createElement("div");
+    copy.className = "pdf-cover__copy";
+    [".pdf-cover__eyebrow", ".pdf-cover__title", ".pdf-cover__client", ".pdf-cover__pillars"].forEach((selector) => {
+      const element = content.querySelector(`:scope > ${selector}`);
+      if (element) copy.appendChild(element);
+    });
+
+    content.insertBefore(copy, logos);
+  });
+}
+
+function refineEdneyPages(root = document) {
+  const edneyPages = Array.from(root.querySelectorAll(".pdf-edney"));
+  const edneyOne = edneyPages[0];
+  const edneyTwo = edneyPages[1];
+
+  if (edneyOne && !edneyOne.querySelector(".pdf-edney__strategy-strip")) {
+    const subtitle = edneyOne.querySelector(".pdf-page__subtitle");
+    const strip = document.createElement("div");
+    strip.className = "pdf-edney__strategy-strip";
+    strip.innerHTML = EDNEY_STRATEGY_ITEMS.map(([title, text]) => `
+      <div><span>${title}</span><strong>${text}</strong></div>
+    `).join("");
+    subtitle?.insertAdjacentElement("afterend", strip);
+  }
+
+  if (edneyTwo && !edneyTwo.querySelector(".pdf-edney__quote")) {
+    const lead = edneyTwo.querySelector(".pdf-page__lead");
+    const quote = document.createElement("div");
+    quote.className = "pdf-edney__quote";
+    quote.innerHTML = `
+      <span></span>
+      <strong>Método, tecnologia e presença comercial trabalhando juntos para acelerar decisões e transformar planejamento em vendas.</strong>
+    `;
+    lead?.insertAdjacentElement("afterend", quote);
+  }
 }
 
 function enhanceProposalPreview(root = document) {
@@ -61,6 +113,8 @@ function enhanceProposalPreview(root = document) {
 
 function runExecutivePolish() {
   enhancePdfTemplate();
+  refineCoverLayout();
+  refineEdneyPages();
   enhanceProposalPreview();
 }
 
