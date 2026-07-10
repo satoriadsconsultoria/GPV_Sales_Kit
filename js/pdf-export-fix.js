@@ -39,16 +39,14 @@ function loadScript(src) {
 
 async function ensureGlobal(check, urls, label) {
   if (check()) return;
-
   for (const url of urls) {
     try {
       await loadScript(url);
       if (check()) return;
-    } catch (err) {
-      console.warn(err);
+    } catch (error) {
+      console.warn(error);
     }
   }
-
   throw new Error(`${label} nao foi carregado.`);
 }
 
@@ -76,42 +74,35 @@ async function ensurePdfLibraries() {
 
 function waitForImages(root) {
   const images = Array.from(root.querySelectorAll("img"));
-  return Promise.all(
-    images.map((img) => {
-      if (img.complete) return Promise.resolve();
-      return new Promise((resolve) => {
-        img.addEventListener("load", resolve, { once: true });
-        img.addEventListener("error", resolve, { once: true });
-      });
-    })
-  );
+  return Promise.all(images.map((img) => {
+    if (img.complete) return Promise.resolve();
+    return new Promise((resolve) => {
+      img.addEventListener("load", resolve, { once: true });
+      img.addEventListener("error", resolve, { once: true });
+    });
+  }));
 }
 
 function getBackgroundUrls(root) {
   const urls = new Set();
-  const elements = [root, ...root.querySelectorAll("*")];
-
-  elements.forEach((el) => {
-    const value = `${el.style.backgroundImage || ""} ${getComputedStyle(el).backgroundImage || ""}`;
+  [root, ...root.querySelectorAll("*")].forEach((element) => {
+    const value = `${element.style.backgroundImage || ""} ${getComputedStyle(element).backgroundImage || ""}`;
     value.replace(/url\(["']?([^"')]+)["']?\)/g, (_, url) => {
       urls.add(url);
       return url;
     });
   });
-
   return Array.from(urls);
 }
 
 function waitForBackgroundImages(root) {
-  return Promise.all(
-    getBackgroundUrls(root).map((src) => new Promise((resolve) => {
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.onload = resolve;
-      img.onerror = resolve;
-      img.src = src;
-    }))
-  );
+  return Promise.all(getBackgroundUrls(root).map((src) => new Promise((resolve) => {
+    const image = new Image();
+    image.crossOrigin = "anonymous";
+    image.onload = resolve;
+    image.onerror = resolve;
+    image.src = src;
+  })));
 }
 
 function nextFrame() {
@@ -120,7 +111,6 @@ function nextFrame() {
 
 async function withCanvasSafeStyles(action) {
   const disabledLinks = [];
-
   document.querySelectorAll('link[rel="stylesheet"]').forEach((link) => {
     const href = link.getAttribute("href") || "";
     if (UNSAFE_CAPTURE_STYLESHEETS.some((name) => href.includes(name))) {
@@ -130,29 +120,36 @@ async function withCanvasSafeStyles(action) {
   });
 
   await nextFrame();
-
   try {
     return await action();
   } finally {
-    disabledLinks.forEach((link) => {
-      link.disabled = false;
-    });
+    disabledLinks.forEach((link) => { link.disabled = false; });
     await nextFrame();
   }
 }
 
 function getFilename() {
   const company = document.querySelector(".pdf-topmark__logo")?.alt || "gpv";
-  const client = document.querySelector(".pdf-cover__client")?.textContent || "cliente";
-  return `proposta-${slugify(company)}-${slugify(client)}.pdf`;
+  const client = document.querySelector(".pdf-cover__client")?.textContent?.replace(/^Preparada para\s*/i, "") || "cliente";
+  return `Proposta_Comercial_${slugify(company)}_${slugify(client)}.pdf`;
+}
+
+function validatePdfPages(pages) {
+  pages.forEach((page, index) => {
+    const width = page.offsetWidth;
+    const height = page.offsetHeight;
+    if (width !== PDF_PAGE_WIDTH || height !== PDF_PAGE_HEIGHT) {
+      throw new Error(`Pagina ${index + 1} fora do formato esperado (${width}x${height}).`);
+    }
+  });
 }
 
 async function exportPdf(button) {
   if (button.dataset.exporting === "true") return;
 
   const pdfRoot = document.getElementById("pdf-template-root");
-  const pageElements = Array.from(pdfRoot?.querySelectorAll(".pdf-page") || []);
-  if (!pageElements.length) {
+  const pages = Array.from(pdfRoot?.querySelectorAll(".pdf-page") || []);
+  if (!pages.length) {
     showToast("Gere a proposta final antes de baixar o PDF.");
     return;
   }
@@ -160,39 +157,58 @@ async function exportPdf(button) {
   const originalLabel = button.textContent;
   button.dataset.exporting = "true";
   button.disabled = true;
-  button.textContent = "Gerando PDF...";
+  button.textContent = "Preparando PDF...";
 
   try {
     await ensurePdfLibraries();
     await waitForImages(pdfRoot);
     await waitForBackgroundImages(pdfRoot);
+    await nextFrame();
+    validatePdfPages(pages);
 
     const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({ unit: "px", format: [PDF_PAGE_WIDTH, PDF_PAGE_HEIGHT], orientation: "landscape" });
+    const pdf = new jsPDF({
+      unit: "px",
+      format: [PDF_PAGE_WIDTH, PDF_PAGE_HEIGHT],
+      orientation: "landscape",
+      compress: true,
+    });
+    pdf.setProperties({
+      title: "Proposta Comercial GPV",
+      subject: "Proposta comercial executiva",
+      author: "Grupo GPV",
+      creator: "GPV Sales Kit",
+    });
 
     await withCanvasSafeStyles(async () => {
-      for (let i = 0; i < pageElements.length; i += 1) {
-        const canvas = await window.html2canvas(pageElements[i], {
+      for (let index = 0; index < pages.length; index += 1) {
+        button.textContent = `Gerando ${index + 1}/${pages.length}`;
+        const canvas = await window.html2canvas(pages[index], {
           scale: 2,
           useCORS: true,
-          allowTaint: true,
+          allowTaint: false,
           backgroundColor: null,
           width: PDF_PAGE_WIDTH,
           height: PDF_PAGE_HEIGHT,
           windowWidth: PDF_PAGE_WIDTH,
           windowHeight: PDF_PAGE_HEIGHT,
+          scrollX: 0,
+          scrollY: 0,
+          logging: false,
         });
 
-        const imgData = canvas.toDataURL("image/jpeg", 0.95);
-        if (i > 0) pdf.addPage([PDF_PAGE_WIDTH, PDF_PAGE_HEIGHT], "landscape");
-        pdf.addImage(imgData, "JPEG", 0, 0, PDF_PAGE_WIDTH, PDF_PAGE_HEIGHT);
+        if (!canvas.width || !canvas.height) throw new Error(`Falha ao renderizar a pagina ${index + 1}.`);
+        const imageData = canvas.toDataURL("image/jpeg", 0.96);
+        if (index > 0) pdf.addPage([PDF_PAGE_WIDTH, PDF_PAGE_HEIGHT], "landscape");
+        pdf.addImage(imageData, "JPEG", 0, 0, PDF_PAGE_WIDTH, PDF_PAGE_HEIGHT, undefined, "FAST");
+        await nextFrame();
       }
     });
 
     pdf.save(getFilename());
-    showToast("PDF gerado com sucesso.");
-  } catch (err) {
-    console.error("Falha ao gerar PDF:", err);
+    showToast("PDF executivo gerado com sucesso.");
+  } catch (error) {
+    console.error("Falha ao gerar PDF:", error);
     showToast("Não foi possível gerar o PDF. Recarregue a página e tente novamente.");
   } finally {
     button.dataset.exporting = "false";
@@ -204,7 +220,6 @@ async function exportPdf(button) {
 document.addEventListener("click", (event) => {
   const button = event.target.closest?.("#download-pdf-btn");
   if (!button) return;
-
   event.preventDefault();
   event.stopPropagation();
   event.stopImmediatePropagation();
