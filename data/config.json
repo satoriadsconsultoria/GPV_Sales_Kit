@@ -100,7 +100,7 @@
     "quality": 1,
     "useDedicatedPdfTemplate": true,
     "templatePolicy": "O PDF deve ser gerado a partir de template dedicado, separado da proposta interativa. Não exportar diretamente a tela animada.",
-    "layout": "executive-five-page-deck",
+    "layout": "executive-clean-five-page-deck",
     "fixedPageCount": 5,
     "dynamicScopePagination": false,
     "previewMatchesExport": true
@@ -108,6 +108,6 @@
   "system": {
     "projectName": "GPV Sales Kit",
     "repository": "GPV_Sales_Kit",
-    "version": "1.3.0"
+    "version": "1.4.0"
   }
 }
