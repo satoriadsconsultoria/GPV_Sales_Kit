@@ -8,7 +8,7 @@
     :root { --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; --executive-border: rgba(255,255,255,.14); --color-text:#fff; --color-muted:#b9bdc1; --color-accent:#fa0115; --color-on-accent:#fff; }
     * { box-sizing: border-box; }
     body { margin:0; background:#090a0c; color:#fff; font-family:var(--font-family); }
-    img { display:block; max-width:100%; }
+    img { display:block; max-width:100%; object-fit:contain; object-position:center; }
     h1,h2,h3,p,ul { margin:0; padding:0; }
     ul { list-style:none; }
     .preview-shell { width:min(calc(100% - 36px),1220px); margin:0 auto; padding:32px 0 72px; }
@@ -30,15 +30,16 @@
     .proposal-preview__sheet-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0 2px 11px; color:#b9bdc1; font-size:.68rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
     .proposal-preview__stage { position:relative; width:100%; overflow:hidden; border-radius:5px; background:#0d0f11; }
     .proposal-preview__canvas { position:absolute; top:0; left:0; width:1123px; height:794px; transform-origin:top left; }
+    @media (max-width:760px){ .preview-top{align-items:flex-start; flex-direction:column;} .proposal-preview__intro{grid-template-columns:1fr;} .proposal-preview__status{justify-self:start;} }
   </style>
-  <link rel="stylesheet" href="css/pdf.css?v=1.3.0" />
-  <link rel="stylesheet" href="css/executive-final-polish.css?v=1.3.0" />
+  <link rel="stylesheet" href="css/pdf.css?v=1.4.0" />
+  <link rel="stylesheet" href="css/executive-final-polish.css?v=1.4.0" />
 </head>
 <body>
   <div class="preview-shell">
     <header class="preview-top">
-      <div><h1>GPV Sales Kit - PDF executivo em 5 páginas</h1><p>Prévia cache-busted da versão 1.3.0.</p></div>
-      <span class="preview-chip">Versão 1.3.0</span>
+      <div><h1>GPV Sales Kit - PDF executivo em 5 páginas</h1><p>Prévia cache-busted da versão limpa 1.4.0.</p></div>
+      <span class="preview-chip">Versão 1.4.0</span>
     </header>
     <div class="proposal-preview">
       <div class="proposal-preview__intro">
@@ -51,8 +52,9 @@
   </div>
   <div id="pdf-template-root" class="pdf-template" aria-hidden="true"></div>
   <script type="module">
-    import { buildPdfTemplate } from './js/pages/page6.js?v=1.3.0';
-    import './js/executive-final-polish.js?v=1.3.0';
+    import { buildPdfTemplate } from './js/pages/page6.js?v=1.4.0';
+    import './js/executive-final-polish.js?v=1.4.0';
+    import './js/executive-clean-polish.js?v=1.4.0';
     const host = './';
     const ctx = {
       company: { id:'grand-prix', name:'Grand Prix de Vendas', logo:host+'assets/logos/grand-prix.png', positioning:'Sistema proprietário de aceleração comercial para o setor automotivo, baseado em metodologia, operação, marketing, experiência, dados e conversão.', theme:{ primaryColor:'#FA0115', secondaryColor:'#A5A09C', accentColor:'#FA0115', textColor:'#FFFFFF', backgroundColor:'#17191b' } },
@@ -78,7 +80,7 @@
     const stack = document.querySelector('.proposal-preview__stack');
     pdfRoot.appendChild(buildPdfTemplate(ctx));
     function render(){
-      const pages = Array.from(pdfRoot.querySelectorAll('.pdf-page'));
+      const pages = Array.from(pdfRoot.querySelectorAll(':scope > .pdf-page'));
       stack.innerHTML = '';
       document.getElementById('preview-description').textContent = `${pages.length} páginas diagramadas para ${ctx.client.name}.`;
       pages.forEach((page,index) => {
