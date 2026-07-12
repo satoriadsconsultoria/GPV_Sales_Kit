@@ -1,5 +1,5 @@
 import "./pdf-export-fix.js";
-import "./executive-clean-polish.js";
+import "./executive-clean-polish.js?v=1.4.1";
 import { loadData } from "./data.js";
 import { applyGroupTheme } from "./theme.js";
 import { bindBackButtons } from "./navigation.js";
